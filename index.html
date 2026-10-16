@@ -386,15 +386,6 @@ body > header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.94);
 .tmlink:hover{background:var(--brand-d)}
 @media (min-width:700px){ .tm{align-items:center;padding:24px} .tmbox{border-radius:20px} }
 
-.dept{display:flex;gap:14px;align-items:flex-start;padding:17px 0;border-top:1px solid var(--line)}
-.dept:first-of-type{border-top:0}
-.dept .no{flex:0 0 auto;width:auto;height:auto;line-height:1.6;text-align:left;border-radius:0;
-  background:transparent;color:var(--muted);font-weight:700;font-size:calc(var(--fs) - 1px);margin-top:0;
-  font-variant-numeric:tabular-nums}
-.dept .dc{flex:1;min-width:0}
-.dept .dc b{display:block;font-size:calc(var(--fs) + 1px);margin-bottom:4px;line-height:1.5;font-weight:800;
-  letter-spacing:-.2px}
-.dept .dc .dw{display:block;color:var(--muted);font-size:calc(var(--fs) - 3px);line-height:1.72}
 /* ---------- 结果页：左侧常驻目录 + 右侧内容（可收起） ---------- */
 body.wide-view .wrap{max-width:1120px}
 body.wide-view .hd,body.wide-view .tabs,body.wide-view .nv{max-width:1120px}
@@ -640,7 +631,7 @@ body.toc-top.hd-compact .hd{padding-top:7px;padding-bottom:6px}
 <header>
   <div class="hd">
     <svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lgMark" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#13926f"/><stop offset="1" stop-color="#0a6049"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="#12352b"/><path d="M28 13h8v15h15v8H36v15h-8V36H13v-8h15z" fill="#fff"/></svg>
-    <h1><button type="button" class="ttlbtn" onclick="goHome()" title="返回首页（回到第一页，已填内容不会丢失）"><span class="ttl"><span class="ttlfull">体检项目参考工具</span><span class="ttlshort">体检参考工具</span></span><span class="homechip">🏠<span class="hcl"> 返回首页</span></span></button><span class="tag"><span class="tglong">依据国家卫健委 2025 版体检指引 · </span>v0.9.5</span></h1>
+    <h1><button type="button" class="ttlbtn" onclick="goHome()" title="返回首页（回到第一页，已填内容不会丢失）"><span class="ttl"><span class="ttlfull">体检项目参考工具</span><span class="ttlshort">体检参考工具</span></span><span class="homechip">🏠<span class="hcl"> 返回首页</span></span></button><span class="tag"><span class="tglong">依据国家卫健委 2025 版体检指引 · </span>v0.9.6</span></h1>
     <div class="fsbtn" role="group" aria-label="调整整页文字大小">
       <span class="fslab">字号</span>
       <button type="button" data-fs="0" class="on" title="标准字号" aria-label="标准字号" aria-pressed="true">A</button>
@@ -651,7 +642,7 @@ body.toc-top.hd-compact .hd{padding-top:7px;padding-bottom:6px}
   
   <div class="tabs"><div class="seg" role="tablist">
     <button type="button" id="tabApp" class="on" role="tab" aria-selected="true" aria-controls="app" onclick="setView('app')">📝 填写问卷</button>
-    <button type="button" id="tabDocs" role="tab" aria-selected="false" aria-controls="app" onclick="setView('docs')">📖 依据文件<span class="cnt">14</span></button>
+    <button type="button" id="tabDocs" role="tab" aria-selected="false" aria-controls="app" onclick="setView('docs')">📖 依据文件<span class="cnt" id="tabDocsCnt">14</span></button>
     <button type="button" id="tabAbout" role="tab" aria-selected="false" aria-controls="app" onclick="setView('about')">💡 关于/开源</button>
   </div></div>
   <div class="bar"><i id="pbar" style="width:0%"></i></div>
@@ -666,7 +657,7 @@ body.toc-top.hd-compact .hd{padding-top:7px;padding-bottom:6px}
 
 <div id="toast" class="toast hide" role="status" aria-live="polite"></div>
 
-<div class="tm hide" id="tm" onclick="if(event.target===this)hideTerm()">
+<div class="tm hide" id="tm" role="dialog" aria-modal="true" aria-labelledby="tmtitle" onclick="if(event.target===this)hideTerm()">
   <div class="tmbox">
     <div class="tmhd"><b id="tmtitle">词语</b><button type="button" onclick="hideTerm()" aria-label="关闭这个解释弹窗">✕ 关闭</button></div>
     <div class="tmbd" id="tmbd"></div>
@@ -702,7 +693,7 @@ body.toc-top.hd-compact .hd{padding-top:7px;padding-bottom:6px}
    设计原则：零采集、零上传、纯本地计算；不适老之处一律简化。
    ========================================================================= */
 
-var VERSION = "2026.10 原型 v0.9.5（AI 生成）";
+var VERSION = "2026.10 原型 v0.9.6（AI 生成）";
 /* 一句话介绍（首页标语、关于页、README 三处保持一致） */
 var TAGLINE = "用 3–5 分钟回答几个问题，生成一份逐项标注依据的体检项目清单 —— 帮普通人、尤其是子女帮长辈，搞清楚「体检到底该查什么」。";
 /* 开源仓库地址：页面上的「GitHub 仓库」链接与许可说明统一用这一个常量 */
@@ -1325,7 +1316,7 @@ function assess(){
   if(has(a.diet,"hot")||has(a.diet,"pickled")||has(a.diet,"salty")) es.push("热烫/高盐/腌制饮食");
   if(has(a.dx,"barrett")) es.push("巴雷特食管或反流性食管炎");
   if(a.smoke==="current"||a.alcohol==="l4") es.push("吸烟或重度饮酒");
-  var eStrong = has(a.fam_cancer,"食管癌")||has(a.dx,"barrett")||a.highrisk_area==="y";
+  var eStrong = has(a.fam_cancer,"食管癌")||has(a.dx,"barrett")||isHighArea();
   if(age>=45&&es.length) add("esophageal", es.join("；"), eStrong?"high":"watch");
 
   /* --- 甲状腺癌 --- */
@@ -2210,6 +2201,7 @@ function saveBytes(bytes,name,mime){
 }
 function dlDoc(pos){
   var d=DOCS[pos-1];
+  if(!d) return;                                   /* 防御：编号越界时不要抛错 */
   if(DOCFILES[d.n]&&DOCFILES[d.n].data) return;
   saveBytes(docxFor(pos), (DOC_SHORT[d.n]||("依据文件"+d.n))+".docx",
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document");
@@ -2720,6 +2712,10 @@ function saveImage(mode){
     ctx.fillStyle="#ffffff"; ctx.fillRect(0,0,W,L.h+20);
     drawOps(ctx,L.ops);
     var url=cv.toDataURL("image/png");
+    if(!url || url.length<200){
+      alert("图片生成失败：这台设备可用内存不足（图太长）。\n请先试「⚡ 精简长图」，那里只有基础项目汇总，短很多；\n也可以直接对结果页截图。");
+      return;
+    }
     var d=new Date(), stamp=""+d.getFullYear()+("0"+(d.getMonth()+1)).slice(-2)+("0"+d.getDate()).slice(-2);
     var img=document.getElementById("ovimg");
     img.src=url; img.dataset.name="体检项目参考"+(mode==="brief"?"_精简版":"_完整版")+"_"+stamp+".png";
@@ -2827,6 +2823,8 @@ function syncInputs(k){
 /* ---------- 菜单视图切换 ---------- */
 var VIEW="app";
 var TABID={app:"tabApp", docs:"tabDocs", about:"tabAbout"};
+/* 页签上的份数别写死，跟着 DOCS 走 */
+(function(){ try{ var c=document.getElementById("tabDocsCnt"); if(c) c.textContent=DOCS.length; }catch(e){} })();
 function setView(v){
   VIEW=v;
   for(var k in TABID){
@@ -3018,6 +3016,7 @@ document.addEventListener("change",function(ev){
   if(t==="radio"){ A[k]=el.value; }
   else if(t==="check"){
     A[k]=A[k]||[];
+    if(Object.prototype.toString.call(A[k])!=="[object Array]") A[k]=[A[k]];   /* 兼容历史/损坏的本地数据 */
     var idx=A[k].indexOf(el.value);
     if(el.checked){ if(idx<0) A[k].push(el.value); } else if(idx>=0) A[k].splice(idx,1);
     /* “无/都没有/不清楚”与其它选项互斥 */
