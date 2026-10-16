@@ -207,6 +207,14 @@
 | `docsHtml()` / `dlBlock()` | 依据文件栏目 |
 | `goHome()` / `setView()` / `renderAbout()` | 视图切换 / 「关于·开源」页 |
 | `REPO_URL` / `LICENSE_NAME` | 开源仓库地址与许可名称（页面上所有链接统一用这两个常量改） |
+| `TAGLINE` | 一句话介绍（首页标语、关于页、`<meta name="description">` 三处保持一致） |
+
+> ⚠️ **改 CSS 时注意：不要用裸元素选择器。**
+> 页面里会动态注入 HTML（结果页、关于页、依据文件页），裸元素选择器会把这些注入内容一起命中。
+> 例如原来底部导航写的是 `nav{position:fixed;bottom:0;background:#fff}`，
+> 结果把结果页左侧目录的 `<nav class="rsidelist">` 也变成了「固定在屏幕底部、整屏宽、白底」的一整块，
+> 直接盖住结果内容（v0.7–v0.9 的线上 bug）。
+> 现在这类规则都写成了 `#nav` / `body > header`；`.rsidelist` 也加了显式复位做双保险。
 
 **附件原文是注入进去的。** 页面里有一段被标记包裹的区域：
 

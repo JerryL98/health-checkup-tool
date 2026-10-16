@@ -45,7 +45,7 @@ body{
 button{font-family:inherit;-webkit-user-select:none;user-select:none}
 .wrap{max-width:760px;margin:0 auto;padding:0 22px 142px}
 
-header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.94);
+body > header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.94);
   -webkit-backdrop-filter:saturate(180%) blur(12px);backdrop-filter:saturate(180%) blur(12px);
   border-bottom:1px solid var(--line);box-shadow:none}
 .hd{max-width:760px;margin:0 auto;padding:15px 22px 9px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
@@ -160,7 +160,10 @@ header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.94);
 .sec{margin:32px 0 10px;font-weight:800;font-size:calc(var(--fs) + 1px);color:var(--brand);
   border-bottom:1px solid var(--line);padding-bottom:9px;letter-spacing:-.3px}
 
-nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,255,.96);
+/* 注意：这里必须用 #nav（而不是元素选择器 nav）——
+   结果页左侧目录是 <nav class="rsidelist">，元素选择器会把「固定在底部、整屏宽、白底」的错误样式
+   套到它身上，导致目录盖住结果内容。 */
+#nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,255,.96);
   -webkit-backdrop-filter:saturate(180%) blur(12px);backdrop-filter:saturate(180%) blur(12px);
   border-top:1px solid var(--line);box-shadow:none;
   padding:10px 22px calc(12px + env(safe-area-inset-bottom))}
@@ -411,7 +414,9 @@ body.wide-view .seg{max-width:600px}
 .tgico{flex:0 0 auto;font-size:calc(var(--fs) - 1px);line-height:1}
 .tgtx{flex:1;text-align:left;white-space:nowrap}
 .tgarrow{flex:0 0 auto;color:var(--muted);font-weight:800}
-.rsidelist{margin-top:10px;display:flex;flex-direction:column;gap:7px}
+.rsidelist{position:static;left:auto;right:auto;top:auto;bottom:auto;z-index:auto;
+  background:transparent;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;
+  padding:0;margin-top:10px;display:flex;flex-direction:column;gap:7px}
 .rsidetip{color:var(--muted);font-size:calc(var(--fs) - 5px);line-height:1.6;padding:0 2px 2px}
 .tocb{display:flex;align-items:center;gap:9px;width:100%;text-align:left;background:#fff;
   border:1.5px solid var(--ctl);border-radius:12px;padding:10px 12px;font:inherit;font-weight:700;
@@ -587,7 +592,7 @@ body.wide-view .seg{max-width:600px}
   .fsbtn button{min-width:36px;height:38px;font-size:13.5px;padding:0 6px}
   .seg button{font-size:calc(var(--fs) - 4px);padding:11px 5px;min-height:45px}
   .seg .cnt{margin-left:4px}
-  nav{padding:9px 18px calc(11px + env(safe-area-inset-bottom))}
+  #nav{padding:9px 18px calc(11px + env(safe-area-inset-bottom))}
   .nv{gap:10px}
   .nv button{padding:14px 16px;min-height:52px}
   .top{right:16px;bottom:calc(88px + env(safe-area-inset-bottom))}
@@ -616,7 +621,7 @@ body.wide-view .seg{max-width:600px}
 <header>
   <div class="hd">
     <svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lgMark" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#13926f"/><stop offset="1" stop-color="#0a6049"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="#12352b"/><path d="M28 13h8v15h15v8H36v15h-8V36H13v-8h15z" fill="#fff"/></svg>
-    <h1><button type="button" class="ttlbtn" onclick="goHome()" title="返回首页（回到第一页，已填内容不会丢失）"><span class="ttl">体检项目参考工具</span><span class="homechip">🏠<span class="hcl"> 返回首页</span></span></button><span class="tag">依据国家卫健委 2025 版体检指引 · v0.9</span></h1>
+    <h1><button type="button" class="ttlbtn" onclick="goHome()" title="返回首页（回到第一页，已填内容不会丢失）"><span class="ttl">体检项目参考工具</span><span class="homechip">🏠<span class="hcl"> 返回首页</span></span></button><span class="tag">依据国家卫健委 2025 版体检指引 · v0.9.1</span></h1>
     <div class="fsbtn" role="group" aria-label="调整整页文字大小">
       <span class="fslab">字号</span>
       <button type="button" data-fs="0" class="on" title="标准字号" aria-label="标准字号" aria-pressed="true">A</button>
@@ -678,7 +683,7 @@ body.wide-view .seg{max-width:600px}
    设计原则：零采集、零上传、纯本地计算；不适老之处一律简化。
    ========================================================================= */
 
-var VERSION = "2026.10 原型 v0.9（AI 生成）";
+var VERSION = "2026.10 原型 v0.9.1（AI 生成）";
 /* 一句话介绍（首页标语、关于页、README 三处保持一致） */
 var TAGLINE = "用 3–5 分钟回答几个问题，生成一份逐项标注依据的体检项目清单 —— 帮普通人、尤其是子女帮父母，搞清楚「体检到底该查什么」。";
 /* 开源仓库地址：页面上的「GitHub 仓库」链接与许可说明统一用这一个常量 */
