@@ -8,7 +8,7 @@ from PIL import Image
 sys.stdout.reconfigure(encoding='utf-8')
 
 BASE = r"D:\AI\healthy"
-HTMLF = os.path.join(BASE, "build", "体检参考工具.html")
+HTMLF = os.path.join(BASE, "index.html")   # 主程序已移到仓库根目录
 FILES = {2:"1.健康体检自测问卷（2025年版）.docx",3:"2.基本体检项目（2025年版）.docx",
          4:"3.慢性病风险筛查项目（2025年版）.docx",5:"4.成人健康体检工作流程图（2025年版）.docx",
          6:"5.常见慢性病风险评估指标（2025年版）.docx"}

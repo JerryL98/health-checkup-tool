@@ -1,0 +1,4 @@
+# 网站只需要 index.html；下面这些不发布到 Vercel
+build/
+*.docx
+*.md

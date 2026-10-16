@@ -20,6 +20,7 @@
 - [目录结构](#目录结构)
 - [二次开发](#二次开发)
 - [上传到 GitHub](#上传到-github)
+- [部署成网站](#部署成网站)
 - [版权与许可](#版权与许可)
 
 ---
@@ -83,7 +84,7 @@
 
 **方式一：直接用（推荐）**
 
-下载 `build/体检参考工具.html`，双击用浏览器打开。就这样，没有第二步。
+下载 `index.html`，双击用浏览器打开。就这样，没有第二步。（文件名可以随你改，只要以 `.html` 结尾）
 
 - 建议 Chrome / Edge / Safari 的较新版本
 - 生成的图片会以 PNG 下载到本地
@@ -138,7 +139,9 @@
 
 - **全部计算在本机完成。** 风险判定、评分、长图生成全在浏览器里跑，没有任何后端。
 - **不采集**姓名、电话、证件号、地址。
-- **不上传**任何信息，页面不发起任何网络请求（文件里没有一行外部资源引用，可以断网使用）。
+- **不上传**任何信息。页面里**没有一行外部资源引用** —— 没有外部字体、没有 CDN、没有统计脚本、没有埋点。
+- **断网可用**：从本地双击打开时确实**不发起任何网络请求**；从网站上打开时，页面会自动改显示另一段说明 —— 服务器会记录常规访问日志（IP、访问时间、浏览器类型），但**不会记录您填写的内容**。
+- **技术级保证**：部署配置里的 CSP 设了 `connect-src 'none'`，浏览器会**直接拦掉**页面发起的一切网络连接。这不只是承诺。
 - 已填内容存在浏览器 localStorage，可随时用「重新开始」清空。
 - 长图在本地 Canvas 上绘制，不经过任何服务器。
 
@@ -162,7 +165,9 @@
 | `5.常见慢性病风险评估指标（2025年版）.docx` | 官方原件 · 附件5 |
 | `老年人健康体检_规范与共识_检索报告.md` | 老年体检规范与共识的检索整理 |
 | `国际老年预防筛查框架对照报告.md` | 与国际老年预防筛查框架的对照 |
-| **`build/体检参考工具.html`** | ★ **主程序。单文件、零依赖，只上传这一个也能用** |
+| **`index.html`** | ★ **主程序。单文件、零依赖。Vercel / GitHub Pages / 本地双击 都直接可用** |
+| `vercel.json` | Vercel 部署配置（CSP、安全头、缓存） |
+| `.vercelignore` | 指定只把 `index.html` 发布到网站 |
 | `build/生成附件原文.py` | 构建脚本：把附件原文注入 HTML |
 | `build/guideline_items.json` | 官方指引结构化后的条目 |
 | `build/指引评估报告.md` | 对官方指引本身的评估 |
@@ -172,7 +177,7 @@
 
 ## 二次开发
 
-整个项目**只有一个文件**——`build/体检参考工具.html`。没有框架、没有构建步骤、没有依赖。想改什么直接改，改完刷新浏览器就行。
+整个项目**只有一个文件**——根目录的 `index.html`。没有框架、没有构建步骤、没有依赖。想改什么直接改，改完刷新浏览器就行。
 
 内部结构大致是这样：
 
@@ -197,7 +202,7 @@
 里面是 `DOCS_HTML`（带排版的附件 HTML）和 `DOCFILES`（原件的 base64）。更新了官方 .docx 之后，重新跑一次构建脚本即可重新注入，**不会动到其它代码**：
 
 ```bash
-python build/生成附件原文.py
+python build/生成附件原文.py      # 就地更新根目录的 index.html
 ```
 
 脚本用到的库：`python-docx`、`Pillow`。
@@ -216,23 +221,46 @@ git remote add origin https://github.com/<你的用户名>/<仓库名>.git
 git push -u origin main
 ```
 
-**想让它变成能直接打开访问的网站（GitHub Pages）：**
-
-把主程序复制成仓库根目录的 `index.html`：
-
-```bash
-cp build/体检参考工具.html index.html
-git add index.html && git commit -m "添加 index.html 以便 GitHub Pages 直接访问" && git push
-```
-
-然后到仓库 **Settings → Pages**，Source 选 `main` 分支 / `/(root)`，保存。等一两分钟就能在 `https://<你的用户名>.github.io/<仓库名>/` 打开。
-
-> 单文件 806 KB，远低于 GitHub 的单文件限制，也不需要 Git LFS。
-> 文件里的 zip / docx 生成用的是 `Blob` 与 `data:` URI，在 HTTPS 下同样可用。
+> 主程序就在仓库根目录，文件名是 `index.html`，所以部署时**不需要任何构建步骤**。具体做法见下面的「部署成网站」。
 
 **建议在仓库设置里补充**：
 - Description：`依据国家卫健委 2025 版体检指引的体检项目参考工具｜单文件、纯离线、逐项标注依据`
 - Topics：`healthcare` `health-checkup` `china` `offline-first` `single-file` `elderly-care` `no-dependencies`
+
+## 部署成网站
+
+主程序是仓库根目录的 `index.html`，因此 **Vercel / GitHub Pages / Netlify 全都是零配置**：不需要构建命令、不需要输出目录、不需要框架。
+
+### Vercel（推荐）
+
+1. 用 GitHub 账号登录 [vercel.com](https://vercel.com)
+2. **Add New → Project → Import Git Repository**，选这个仓库
+3. **Framework Preset 选 `Other`**，Build Command 与 Output Directory 都**留空**
+4. 点 **Deploy**
+
+之后每次 `git push` 都会自动重新部署（PR 还会生成预览部署）。
+
+仓库里的 [`vercel.json`](./vercel.json) 已经配好这些：
+
+| 设置 | 作用 |
+|---|---|
+| `Content-Security-Policy: … connect-src 'none'` | **从技术层面禁止页面发起任何网络连接** —— "不上传您的信息"不只是承诺，浏览器会直接拦掉 |
+| `X-Content-Type-Options` / `Referrer-Policy: no-referrer` / `X-Frame-Options` | 常规安全加固 |
+| `Cache-Control: public, max-age=0, must-revalidate` | 每次访问都校验：改了立刻生效，没改走 304 不重复下载 806 KB |
+
+[`.vercelignore`](./.vercelignore) 让网站**只发布 `index.html`**，5 个 .docx 和几份工作笔记不会被挂到公网。
+
+### GitHub Pages
+
+仓库 **Settings → Pages**，Source 选 `main` 分支 / `/(root)`，保存。访问 `https://<用户名>.github.io/<仓库名>/`。
+
+### ⚠️ 关于中国大陆访问
+
+**Vercel 和 GitHub Pages 都没有中国大陆节点**，大陆访问可能慢或打不开。这是托管地点的合规问题（境内托管需要 ICP 备案），换平台解决不了。
+
+Vercel 官方的说明写得很直白：[Accessing Vercel-hosted sites from mainland China](https://vercel.com/kb/guide/accessing-vercel-hosted-sites-from-mainland-china) —— *"Vercel can't guarantee availability or performance within mainland China."*
+
+**所以国内用户请直接下载 `index.html` 本地打开** —— 功能完全一样，而且断网也能用、不产生任何访问日志。
 
 ## 版权与许可
 
