@@ -165,9 +165,8 @@
 | `5.常见慢性病风险评估指标（2025年版）.docx` | 官方原件 · 附件5 |
 | `老年人健康体检_规范与共识_检索报告.md` | 老年体检规范与共识的检索整理 |
 | `国际老年预防筛查框架对照报告.md` | 与国际老年预防筛查框架的对照 |
-| **`index.html`** | ★ **主程序。单文件、零依赖。Vercel / GitHub Pages / 本地双击 都直接可用** |
-| `vercel.json` | Vercel 部署配置（CSP、安全头、缓存） |
-| `.vercelignore` | 指定只把 `index.html` 发布到网站 |
+| **`index.html`** | ★ **主程序。单文件、零依赖。Netlify / Vercel / GitHub Pages / 本地双击 都直接可用** |
+| `netlify.toml` | Netlify 部署配置（发布目录、CSP、安全头、缓存） |
 | `build/生成附件原文.py` | 构建脚本：把附件原文注入 HTML |
 | `build/guideline_items.json` | 官方指引结构化后的条目 |
 | `build/指引评估报告.md` | 对官方指引本身的评估 |
@@ -229,36 +228,63 @@ git push -u origin main
 
 ## 部署成网站
 
-主程序是仓库根目录的 `index.html`，因此 **Vercel / GitHub Pages / Netlify 全都是零配置**：不需要构建命令、不需要输出目录、不需要框架。
+主程序是仓库根目录的 `index.html`。仓库里带了 [`netlify.toml`](./netlify.toml)，**导入后什么都不用配**。
 
-### Vercel（推荐）
+### Netlify（推荐）
 
-1. 用 GitHub 账号登录 [vercel.com](https://vercel.com)
-2. **Add New → Project → Import Git Repository**，选这个仓库
-3. **Framework Preset 选 `Other`**，Build Command 与 Output Directory 都**留空**
+1. 用 GitHub 账号登录 [netlify.com](https://www.netlify.com)
+2. **Add new site → Import an existing project** → 选 GitHub → 选这个仓库
+3. 构建设置**不用改**（`netlify.toml` 已经写好）
 4. 点 **Deploy**
 
-之后每次 `git push` 都会自动重新部署（PR 还会生成预览部署）。
+之后每次 `git push` 自动重新部署。
 
-仓库里的 [`vercel.json`](./vercel.json) 已经配好这些：
+`netlify.toml` 做了三件事：
 
 | 设置 | 作用 |
 |---|---|
-| `Content-Security-Policy: … connect-src 'none'` | **从技术层面禁止页面发起任何网络连接** —— "不上传您的信息"不只是承诺，浏览器会直接拦掉 |
-| `X-Content-Type-Options` / `Referrer-Policy: no-referrer` / `X-Frame-Options` | 常规安全加固 |
-| `Cache-Control: public, max-age=0, must-revalidate` | 每次访问都校验：改了立刻生效，没改走 304 不重复下载 806 KB |
+| `command` + `publish = "dist"` | 构建时只把 `index.html` 拷进 `dist/` —— **5 个 .docx、研究报告、`build/` 都不上公网** |
+| `Content-Security-Policy: … connect-src 'none'` | **从浏览器层面禁止页面发起任何网络连接**。"不上传您的信息"不只是承诺，浏览器会直接拦掉 |
+| `Cache-Control: public, max-age=0, must-revalidate` | 每次访问都校验：改了立刻生效，没改走 304，不重复下载 806 KB |
 
-[`.vercelignore`](./.vercelignore) 让网站**只发布 `index.html`**，5 个 .docx 和几份工作笔记不会被挂到公网。
+另外还配了 `X-Content-Type-Options`、`Referrer-Policy: no-referrer`、`X-Frame-Options`、`Permissions-Policy` 等常规加固头。
 
-### GitHub Pages
+> 如果构建那一步将来出问题：把 `netlify.toml` 里的 `command` 删掉、`publish` 改成 `"."`，就能变成零构建直接发布（代价是仓库文件都会公开）。
 
-仓库 **Settings → Pages**，Source 选 `main` 分支 / `/(root)`，保存。访问 `https://<用户名>.github.io/<仓库名>/`。
+### ⚠️ Netlify 有两个特有的坑
+
+**① 新站点默认「私有」，要手动发布一次**
+
+Netlify 已改为 credits 计费，官方说明：*"On new credit-based pricing accounts, new projects start **private by default** and become publicly accessible only when you choose to publish."*
+
+所以部署完如果**别人打不开**，回项目里点一下 **Publish**。
+
+**② 免费额度按 credits 算，比 Vercel 紧得多**
+
+免费版 **300 credits / 月**，各项**共用同一个池**：
+
+| 项目 | 消耗 | 300 credits 能换到 |
+|---|---|---|
+| 生产部署 | 15 credits / 次 | 约 **20 次** |
+| 带宽 | 20 credits / GB | 约 **15 GB** |
+| Web 请求 | 2 credits / 万次 | 约 150 万次 |
+
+举个实际例子：
+
+> 一个月推 5 次代码（75 credits），剩 225 credits 全给带宽 ≈ 11 GB ≈ **2.4 万次访问**。
+
+对这个体量的非营利工具够用，但**别频繁推送** —— 改一次推一次的话，20 次就把额度用光了。
+
+### GitHub Pages（备用）
+
+仓库 **Settings → Pages**，Source 选 `main` / `/(root)`，保存 → `https://<用户名>.github.io/<仓库名>/`。
+（这条路径没有 `publish` 目录的概念，会把仓库所有文件都公开。）
 
 ### ⚠️ 关于中国大陆访问
 
-**Vercel 和 GitHub Pages 都没有中国大陆节点**，大陆访问可能慢或打不开。这是托管地点的合规问题（境内托管需要 ICP 备案），换平台解决不了。
+**Netlify 与 Vercel、GitHub Pages 一样，都没有中国大陆节点**，大陆访问可能慢或打不开。这是托管地点的合规问题（境内托管需要 ICP 备案），**换平台解决不了**。
 
-Vercel 官方的说明写得很直白：[Accessing Vercel-hosted sites from mainland China](https://vercel.com/kb/guide/accessing-vercel-hosted-sites-from-mainland-china) —— *"Vercel can't guarantee availability or performance within mainland China."*
+Vercel 官方对这件事的说明对 Netlify 同样适用：[Accessing Vercel-hosted sites from mainland China](https://vercel.com/kb/guide/accessing-vercel-hosted-sites-from-mainland-china) —— *"can't guarantee availability or performance within mainland China."*
 
 **所以国内用户请直接下载 `index.html` 本地打开** —— 功能完全一样，而且断网也能用、不产生任何访问日志。
 
