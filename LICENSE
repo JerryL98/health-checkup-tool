@@ -1,0 +1,168 @@
+署名—非商业性使用 1.0（本项目许可）
+Attribution-NonCommercial License 1.0
+SPDX 参考标识：CC-BY-NC-4.0
+
+版权所有 (c) 2026 JerryL98
+项目：体检项目参考工具（health-checkup-tool）
+仓库：https://github.com/JerryL98/health-checkup-tool
+
+一句话概括：
+    随便用、随便改、随便转、随便自己部署，
+    但必须写明原作者和出处，并且不能拿来赚钱。
+
+════════════════════════════════════════════════════════════════════
+0. 术语说明：这算不算「开源协议」
+════════════════════════════════════════════════════════════════════
+严格按开放源代码促进会（OSI）的定义，「禁止商业使用」不属于开源许可
+（OSI 要求不得限制使用领域）。所以对这份许可更准确的说法是：
+
+    「源码公开 + 署名非商业许可（source-available）」
+
+中文口语里常说的「开源协议」，在本项目里指的就是下面这些条款。
+
+════════════════════════════════════════════════════════════════════
+1. 你可以（本许可授予你的权利，全球范围、免费、非排他）
+════════════════════════════════════════════════════════════════════
+1.1 使用：为任何**非商业**目的运行、使用本作品，包括个人自用、
+    给家人用、给患者或居民用。
+1.2 复制与分发：复制、下载、转载、转发本作品（含原样转发 index.html）。
+1.3 修改：修改、改编、翻译、拆分、与其他材料组合，并分发你的修改版。
+1.4 部署：把本作品（或其修改版）部署到你自己的服务器、内网、
+    静态托管平台，或打包进 App／小程序／公众号，供他人**免费**使用。
+1.5 教学、研究与报道：用于课堂教学、学术研究、新闻报道、科普转载。
+1.6 公益与医疗场景：医院、社区卫生服务中心、疾控机构、养老机构、
+    公益组织、学校等，**免费**提供给就诊者、居民、员工或学生使用。
+
+以上权利不因你是否修改、是否商用失败而改变；也无需事先征得作者同意。
+
+════════════════════════════════════════════════════════════════════
+2. 你必须（署名要求，这是使用本许可的前提条件）
+════════════════════════════════════════════════════════════════════
+2.1 保留署名：在显著位置（例如网页底部、「关于」页、README、App 的
+    关于页）注明原作者与出处。
+2.2 保留许可声明：同时注明本作品采用「署名—非商业性使用」许可，
+    并尽量给出许可链接。
+2.3 标明修改：如果你做了修改，请说明「本作品基于原作修改」，
+    不要让人误以为修改版就是原作者发布的版本。
+2.4 不要暗示背书：不得声称原作者为你或你的机构背书、认证或背书你的
+    产品或服务。
+
+可以直接照抄这一句作为署名（把方括号里的内容换成你的情况即可）：
+
+    本作品《体检项目参考工具》原作者为 JerryL98，
+    来源 https://github.com/JerryL98/health-checkup-tool ，
+    采用「署名—非商业性使用」许可（CC BY-NC 4.0）。
+    本页面/本应用基于原作修改，修改内容：[说明你改了什么]。
+    原许可：https://creativecommons.org/licenses/by-nc/4.0/
+
+如果你只是原样转发 index.html 而没有改动，署上作者和出处即可，
+不需要逐个文件添加版权头。
+
+════════════════════════════════════════════════════════════════════
+3. 你不可以（非商业限制）
+════════════════════════════════════════════════════════════════════
+「商业使用」是指以获取商业利益或金钱报酬为主要目的的使用。包括但不限于：
+
+3.1 收费：对本作品或其修改版本身收费，或设置付费门槛、付费会员、
+    付费解锁才能使用。
+3.2 打包销售：把本作品（或其修改版、或其输出结果）作为收费产品、
+    收费服务、收费课程、收费套餐的一部分提供给他人。
+3.3 引流变现：用本作品为商品、保险、保健品、体检套餐、私立医疗
+    等导流、促销或收集销售线索。
+3.4 转售：出售本作品的源码、编译产物、内嵌文件或数据。
+3.5 商业 SaaS：把本作品或其修改版做成对外收费的在线服务
+    （含以广告收入为主要盈利模式的公开站点）。
+3.6 去掉署名：删除、遮挡、篡改原作者署名、许可声明或出处链接。
+3.7 附加限制：对本作品或其修改版再施加法律条款或技术措施
+    （如 DRM、额外许可限制），限制他人行使本许可已授予的权利。
+
+关于边界情况，作者的态度是宽而不是严：
+    · 公司、机构**内部**非营利使用（例如给本单位员工做健康科普，
+      不向使用者收费、不用于推销）——视为允许。
+    · 非营利组织、公益项目、政府或公立医疗机构免费提供服务——允许。
+    · 拿不准算不算商业？来仓库提一个 Issue 说明用途即可，
+      非营利用途作者基本都会同意。
+    · 确实想商用？同样提 Issue 申请，作者保留单独授予商业许可的权利
+      （即本许可之外可另行授权）。
+
+════════════════════════════════════════════════════════════════════
+4. 本许可不覆盖的内容（第三方材料）
+════════════════════════════════════════════════════════════════════
+4.1 依据文件原文：本作品中内嵌或引用的国家文件与国家标准原文、摘录
+    （例如《成人健康体检项目推荐指引（2025年版）》及附件 1–5、
+    《老年人健康管理服务规范（2026年）》、WS/T 888-2026 等卫生行业
+    标准、国卫通〔2026〕2号 等），其著作权属于原发布机构
+    （国家卫生健康委员会等），**不适用本许可**。
+    本项目只是出于非营利目的、以便利离线阅读与核对出处的方式收录与摘录。
+    如需使用这些原文，请自行遵守原发布机构的要求。
+4.2 第三方引用的文献与报道（如央广网报道、USPSTF 推荐、
+    《中国前列腺癌筛查与早诊早治指南》等），版权归各自权利人所有，
+    本项目仅作引用与出处说明。
+4.3 如果任何权利人认为本项目的收录方式不妥，请在仓库提 Issue，
+    作者会尽快删除相关内容。
+
+════════════════════════════════════════════════════════════════════
+5. 免责声明（与许可条款同等重要）
+════════════════════════════════════════════════════════════════════
+5.1 本作品按「现状」提供，不附带任何形式的明示或默示担保，
+    包括但不限于对适销性、特定用途适用性和不侵权的担保。
+5.2 本作品是**信息整理与体检项目参考工具**，不是医疗器械，
+    不构成医疗建议、诊断或处方，不能替代执业医师面诊。
+5.3 本作品的全部内容由人工智能依据公开文件生成与整理，
+    可能存在错误、遗漏或版本滞后，且未经医学专业人员审核。
+5.4 是否做某项检查、何时做、要不要复查，请务必咨询执业医师。
+    作者不对因使用本作品而产生的任何直接或间接后果承担责任。
+5.5 在法律允许的最大范围内，作者对你使用本作品所产生的
+    任何损失不承担赔偿责任。
+
+════════════════════════════════════════════════════════════════════
+6. 正式条款（法律文本）
+════════════════════════════════════════════════════════════════════
+本许可的名称与条款，与 Creative Commons「署名—非商业性使用 4.0 国际」
+（CC BY-NC 4.0）一致。发生争议时，以下面这份正式法律文本为准：
+
+    · 法律文本（英文，具法律效力）：
+      https://creativecommons.org/licenses/by-nc/4.0/legalcode
+    · 法律文本（简体中文官方译本）：
+      https://creativecommons.org/licenses/by-nc/4.0/legalcode.zh-Hans
+    · 通俗摘要（非法律文本，仅帮助理解）：
+      https://creativecommons.org/licenses/by-nc/4.0/deed.zh-Hans
+
+上面第 1–5 节是本项目对 CC BY-NC 4.0 的中文通俗说明与具体化，
+方便普通读者理解；如果它与第 6 节的正式法律文本有任何冲突，
+以正式法律文本为准。
+
+────────────────────────────────────────────────────────────────────
+English summary (the legally binding terms are CC BY-NC 4.0)
+────────────────────────────────────────────────────────────────────
+Copyright (c) 2026 JerryL98. Project: health-checkup-tool
+https://github.com/JerryL98/health-checkup-tool
+
+You are free to:
+  Share — copy and redistribute the material in any medium or format.
+  Adapt — remix, transform, and build upon the material, and deploy it
+          (including on your own servers) for others to use for free.
+
+Under the following terms:
+  Attribution — You must give appropriate credit to the original author
+      (JerryL98) and the source repository, provide a link to the license,
+      and indicate if changes were made. You may do so in any reasonable
+      manner, but not in any way that suggests the author endorses you or
+      your use.
+  NonCommercial — You may not use the material for commercial purposes.
+      Charging for it, bundling it into a paid product or service, or using
+      it to promote or sell goods and services is not allowed. Internal,
+      non-profit use inside an organization is generally fine. If you are
+      unsure, or you do want a commercial license, please open an Issue in
+      the repository — the author is happy to grant permission case by case
+      and reserves the right to grant separate commercial licenses.
+
+Not covered by this license: the embedded or quoted official documents and
+national standards (published by the National Health Commission of the PRC
+and others). Their copyright belongs to their respective publishers.
+
+No warranty; not a medical device; not medical advice. Content is
+AI-generated and not reviewed by medical professionals. Consult a licensed
+physician.
+
+Full legal text: https://creativecommons.org/licenses/by-nc/4.0/legalcode

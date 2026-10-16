@@ -442,6 +442,39 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,25
 
 .fsline{margin:10px 0 0}
 .fshint{margin:16px 0 0}
+/* ---------- 首页的 GitHub / 许可行 ---------- */
+.ghline{margin:14px 0 0;font-size:calc(var(--fs) - 3px);line-height:1.85;color:var(--muted)}
+.ghline b{color:var(--ink)}
+.gha{color:var(--brand-d);font-weight:800;text-decoration:underline;text-underline-offset:3px}
+.ghmore{background:none;border:0;padding:0;font:inherit;font-size:calc(var(--fs) - 3px);font-weight:800;
+  color:var(--brand-d);text-decoration:underline;text-underline-offset:3px;cursor:pointer;text-align:left}
+
+/* ---------- 关于 / 许可页面 ---------- */
+.ghbox{border:1.5px solid var(--ctl);border-radius:14px;padding:16px;margin:12px 0 4px;background:#fff}
+.ghbtn{display:inline-flex;align-items:center;gap:8px;background:var(--brand);color:#fff;text-decoration:none;
+  border-radius:12px;padding:14px 20px;font-weight:800;font-size:calc(var(--fs) - 2px);min-height:52px;line-height:1.4}
+.ghbtn:link,.ghbtn:visited{color:#fff}
+.ghbtn:hover{background:var(--brand-d)}
+.ghurl{margin:10px 0 0;color:var(--muted);font-size:calc(var(--fs) - 4px);line-height:1.75;word-break:break-all}
+.ghurl b{color:var(--ink)}
+.lic{display:flex;flex-direction:column;gap:10px;margin:12px 0 0}
+.lice{border-radius:12px;padding:14px 16px;font-size:calc(var(--fs) - 3px);line-height:1.78}
+.lice b{display:block;margin-bottom:6px;font-size:calc(var(--fs) - 2px);font-weight:800}
+.lice ul{margin:0;padding-left:20px}
+.lice li{margin:5px 0}
+.lice.yes{background:var(--brand-l);color:var(--brand-ink)}
+.lice.yes b{color:var(--brand-d)}
+.lice.must{background:var(--amber-l);color:var(--amber-ink)}
+.lice.must b{color:var(--amber)}
+.lice.no{background:var(--danger-l);color:var(--danger-ink)}
+.lice.no b{color:var(--danger)}
+.codebox{background:var(--gray-l);border:1px solid var(--line-2);border-radius:12px;padding:13px 15px;margin:10px 0 0;
+  font-size:calc(var(--fs) - 4px);line-height:1.85;color:var(--ink-2);word-break:break-all}
+.codebox b{color:var(--brand-d)}
+.linklist{margin:10px 0 0;padding-left:20px;font-size:calc(var(--fs) - 3px);line-height:1.95}
+.linklist li{margin:7px 0}
+.linklist a{color:var(--brand-d);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+
 
 .hide{display:none !important}
 .top{position:fixed;right:22px;bottom:calc(96px + env(safe-area-inset-bottom));z-index:35;
@@ -506,7 +539,8 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,25
   .hd h1{font-size:calc(var(--fs) - 1px)}
   .fsbtn{gap:6px}
   .fsbtn button{min-width:36px;height:38px;font-size:13.5px;padding:0 6px}
-  .seg button{font-size:calc(var(--fs) - 3px);padding:11px 6px;min-height:45px}
+  .seg button{font-size:calc(var(--fs) - 4px);padding:11px 5px;min-height:45px}
+  .seg .cnt{margin-left:4px}
   nav{padding:9px 18px calc(11px + env(safe-area-inset-bottom))}
   .nv{gap:10px}
   .nv button{padding:14px 16px;min-height:52px}
@@ -524,6 +558,8 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,25
   .card > h2{font-size:calc(var(--fs) + 7px)}
   .opts{gap:8px}
   .opt > span{padding:13px 15px;font-size:calc(var(--fs) - 1px)}
+  .seg button{font-size:calc(var(--fs) - 5px);padding:11px 3px}
+  .seg .cnt{margin-left:3px}
   .rdbtn,.rdzip{width:100%;text-align:center}
   .ovbar button{flex:1 1 100%}
   .big{gap:16px}
@@ -534,7 +570,7 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,25
 <header>
   <div class="hd">
     <svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lgMark" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#13926f"/><stop offset="1" stop-color="#0a6049"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="#12352b"/><path d="M28 13h8v15h15v8H36v15h-8V36H13v-8h15z" fill="#fff"/></svg>
-    <h1><button type="button" class="ttlbtn" onclick="goHome()" title="返回首页（回到第一页，已填内容不会丢失）"><span class="ttl">体检项目参考工具</span><span class="homechip">🏠<span class="hcl"> 返回首页</span></span></button><span class="tag">依据国家卫健委 2025 版体检指引 · v0.5</span></h1>
+    <h1><button type="button" class="ttlbtn" onclick="goHome()" title="返回首页（回到第一页，已填内容不会丢失）"><span class="ttl">体检项目参考工具</span><span class="homechip">🏠<span class="hcl"> 返回首页</span></span></button><span class="tag">依据国家卫健委 2025 版体检指引 · v0.6</span></h1>
     <div class="fsbtn" role="group" aria-label="调整整页文字大小">
       <span class="fslab">字号</span>
       <button type="button" data-fs="0" class="on" title="标准字号" aria-label="标准字号" aria-pressed="true">A</button>
@@ -546,6 +582,7 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,25
   <div class="tabs"><div class="seg" role="tablist">
     <button type="button" id="tabApp" class="on" role="tab" aria-selected="true" aria-controls="app" onclick="setView('app')">📝 填写问卷</button>
     <button type="button" id="tabDocs" role="tab" aria-selected="false" aria-controls="app" onclick="setView('docs')">📖 依据文件<span class="cnt">14</span></button>
+    <button type="button" id="tabAbout" role="tab" aria-selected="false" aria-controls="app" onclick="setView('about')">💡 关于/开源</button>
   </div></div>
   <div class="bar"><i id="pbar" style="width:0%"></i></div>
 </header>
@@ -595,7 +632,10 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,25
    设计原则：零采集、零上传、纯本地计算；不适老之处一律简化。
    ========================================================================= */
 
-var VERSION = "2026.10 原型 v0.5（AI 生成）";
+var VERSION = "2026.10 原型 v0.6（AI 生成）";
+/* 开源仓库地址：页面上的「GitHub 仓库」链接与许可说明统一用这一个常量 */
+var REPO_URL = "https://github.com/JerryL98/health-checkup-tool";
+var LICENSE_NAME = "署名—非商业性使用（CC BY-NC 4.0）";
 
 /* ---------- 本地打开 vs 网站托管：隐私说明必须分开写，不能含糊 ---------- */
 var IS_LOCAL=(function(){ try{ return location.protocol==="file:"; }catch(e){ return true; } })();
@@ -1521,7 +1561,11 @@ function renderResult(){
    + '<b>2. 不能替代医生。</b>结果仅供与医生沟通时参考，不构成医疗建议、诊断或处方。是否做某项检查、何时做，请以医生面诊意见为准。<br><br>'
    + '<b>3. 证据说明。</b>对于国家指引中证据不足或存在过度诊断风险的项目（如甲状腺超声普筛、ApoE 基因检测、PSA 在 70 岁以上人群、肿瘤标志物筛查等），本工具已按现行国内外指南做了降级或不推荐处理，并在相应位置说明原因。<br><br>'
    + '<b>4. 隐私。</b>所有计算都在您的手机或电脑本地完成，<b>不采集、不上传任何个人信息</b>；关闭页面即清除。'+HOST_LINE+'<br><br>'
-   + '<b>5. 版本。</b>'+VERSION+'。医学指南会更新，请以国家卫健委和医疗机构的最新版本为准。</div>';
+   + '<b>5. 版本。</b>'+VERSION+'。医学指南会更新，请以国家卫健委和医疗机构的最新版本为准。<br><br>'
+   + '<b>6. 许可。</b>本项目<b>公开源代码、免费使用</b>，可自由复制、修改、转发和自行部署，'
+   + '但必须<b>署名原作者并注明出处</b>，且<b>不得用于商业用途</b>（正式条款为 CC BY-NC 4.0）。'
+   + '<a href="'+REPO_URL+'" target="_blank" rel="noopener noreferrer">GitHub 仓库</a>　'
+   + '<button type="button" class="ghmore" onclick="goAbout()">许可详情 →</button></div>';
   s+='<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">'
    + '<button type="button" onclick="saveImageFull()" style="flex:1 1 170px;background:var(--brand);color:#fff;border:0;border-radius:12px;padding:14px;font:inherit;font-weight:700;cursor:pointer">📷 完整长图</button>'
    + '<button type="button" onclick="saveImageBrief()" style="flex:1 1 170px;background:var(--amber-l);color:var(--amber);border:2px solid var(--amber);border-radius:12px;padding:14px;font:inherit;font-weight:700;cursor:pointer">⚡ 精简长图</button>'
@@ -2596,6 +2640,9 @@ function heroHtml(){
   + '<p class="qerr hide" id="whoerr">还没有选择。请先点上面两个方框中的一个（「我自己填」或「帮家人填」），再点右下角的按钮。</p>'
   + '<div class="legend">💡 页面中<b>带黄色底纹的词</b>可以点击，查看<b>通俗解释</b>与<b>依据来源</b>　例：<span class="term">糖尿病</span> <span class="term">包年</span> <span class="term">林奇综合征</span></div>'
   + '<p class="hint fshint">🔍 <b>字小看不清？</b>点右上角的 <b>字号 A+</b> 可以把整页字放大（A / A+ / A++ 三档，会记住）。</p>'
+  + '<p class="ghline">💡 本项目<b>公开源代码、免费使用</b>（许可：'+LICENSE_NAME+'）：'
+  + '<a class="gha" href="'+REPO_URL+'" target="_blank" rel="noopener noreferrer">GitHub 仓库</a>'
+  + '　·　<button type="button" class="ghmore" onclick="goAbout()">许可协议与使用条件 →</button></p>'
   + '<div class="srcbox"><h3>📚 本工具依据以下 '+SOURCES.length+' 份公开文件设计</h3><ol>'+srcList+'</ol><div class="citenote">'+CITE_NOTE_HTML+'</div>'
   + '<p style="text-align:center;margin:16px 0 0"><button type="button" class="openrd" onclick="openReader()">📖 看原文与下载</button></p></div>'
   + '<div class="note" style="margin-top:20px;text-align:left"><b>🔒 隐私与免责</b>全部计算在本机完成，不采集姓名、电话、证件号，不上传任何信息。'+HOST_LINE+'本工具给出的是<b>体检项目参考</b>，不是诊断，请与医生一起确认。</div>'
@@ -2651,12 +2698,97 @@ function syncInputs(k){
 }
 /* ---------- 菜单视图切换 ---------- */
 var VIEW="app";
+var TABID={app:"tabApp", docs:"tabDocs", about:"tabAbout"};
 function setView(v){
   VIEW=v;
-  var ta=document.getElementById("tabApp"), td=document.getElementById("tabDocs");
-  if(ta){ ta.classList.toggle("on", v==="app"); ta.setAttribute("aria-selected", v==="app"?"true":"false"); }
-  if(td){ td.classList.toggle("on", v==="docs"); td.setAttribute("aria-selected", v==="docs"?"true":"false"); }
+  for(var k in TABID){
+    var b=document.getElementById(TABID[k]);
+    if(b){ b.classList.toggle("on", v===k); b.setAttribute("aria-selected", v===k?"true":"false"); }
+  }
   render();
+}
+function goAbout(){ setView("about"); }
+/* =========================== 关于 / 开源许可 =========================== */
+function renderAbout(){
+  document.getElementById("nav").classList.add("hide");
+  document.getElementById("pbar").style.width="0%";
+  document.getElementById("stepTxt").textContent="";
+  var GH=REPO_URL, LICURL="https://creativecommons.org/licenses/by-nc/4.0/";
+  var s='<div class="card"><h2>💡 关于本项目</h2><p class="sub">'+VERSION+' ｜ 单文件、零依赖、纯离线，不采集也不上传任何信息</p>'
+  + '<div class="ai slim">⚠ <b style="display:inline;margin:0">AI 生成声明：</b>'+esc(AI_NOTICE)+'</div>'
+
+  + '<div class="sec">这是什么</div>'
+  + '<p>这是一个<b>非营利的公益工具</b>。它把国家卫生健康委《成人健康体检项目推荐指引（2025年版）》里的风险判定规则，做成普通人能填的问卷，'
+  + '生成一份<b>逐项标注依据</b>的体检项目清单，帮您和医生沟通「到底该查什么」。</p>'
+  + '<p>它<b>不采集姓名、电话、证件号，不上传任何内容</b>，所有计算都在您自己的手机或电脑上完成；关闭页面即清除（除非您自己保存了长图）。</p>'
+
+  + '<div class="sec">📦 源代码</div>'
+  + '<p>整个项目<b>只有一个 index.html 文件</b>：没有框架、没有构建步骤、没有依赖。可以下载、离线使用，也可以自己部署。</p>'
+  + '<div class="ghbox">'
+  + '<a class="ghbtn" href="'+GH+'" target="_blank" rel="noopener noreferrer">在 GitHub 上查看 / 下载源码 →</a>'
+  + '<p class="ghurl">'+GH+'</p>'
+  + '<p class="ghurl">欢迎 fork、欢迎提 Issue 指出错误 —— 尤其是<b>医学内容</b>和<b>依据标注</b>上的错误，这类反馈最有价值。</p>'
+  + '</div>'
+
+  + '<div class="sec">⚖️ 许可协议：'+LICENSE_NAME+'</div>'
+  + '<p>本项目采用<b>「署名—非商业性使用」</b>许可（正式条款为 Creative Commons <b>CC BY-NC 4.0</b>）。'
+  + '一句话说清楚：<b>随便用、随便改、随便转、随便自己部署，但必须写明原作者和出处，并且不能拿来赚钱。</b></p>'
+  + '<div class="lic">'
+  + '<div class="lice yes"><b>✅ 你可以</b><ul>'
+  + '<li>自己用、给家人用、给患者或居民用（非商业目的）</li>'
+  + '<li>复制、转载、转发这个页面或 index.html</li>'
+  + '<li>修改、翻译、拆分，做成你自己的版本并分发</li>'
+  + '<li>部署到你自己的服务器、内网或静态托管平台，免费给别人用</li>'
+  + '<li>医院、社区卫生服务中心、养老机构、学校、公益组织<b>免费</b>提供给他人使用</li>'
+  + '<li>用于教学、研究、新闻报道、科普</li>'
+  + '</ul></div>'
+  + '<div class="lice must"><b>📝 你必须</b><ul>'
+  + '<li>在显著位置写明<b>原作者（JerryL98）和出处链接</b></li>'
+  + '<li>同时写明本作品采用「署名—非商业性使用」许可</li>'
+  + '<li>如果你改过，说明「基于原作修改」以及改了什么</li>'
+  + '<li>不要暗示原作者为你的产品或机构背书</li>'
+  + '</ul></div>'
+  + '<div class="lice no"><b>🚫 你不可以</b><ul>'
+  + '<li>对本工具收费，或设置付费门槛、付费会员</li>'
+  + '<li>打包进收费的产品、服务、课程、体检套餐</li>'
+  + '<li>用来给商品、保险、保健品、私立医疗导流促销</li>'
+  + '<li>转售源码、编译产物或内嵌数据</li>'
+  + '<li>做成对外收费的在线服务（含以广告为主要盈利模式的站点）</li>'
+  + '<li>删除、遮挡或篡改原作者署名与出处链接</li>'
+  + '</ul></div>'
+  + '</div>'
+  + '<p class="hint" style="margin-top:12px">公司、机构<b>内部</b>的非营利使用（例如给本单位员工做健康科普，不收费也不推销）视为允许。'
+  + '拿不准算不算商业，或者想申请商业授权，直接到仓库提一个 Issue 说明用途 —— 非营利用途一般都会同意。</p>'
+
+  + '<div class="sec">📝 怎么写署名（照抄即可）</div>'
+  + '<div class="codebox">本作品《体检项目参考工具》原作者为 <b>JerryL98</b>，来源 '+GH+' ，采用「署名—非商业性使用」许可（CC BY-NC 4.0）。本页面基于原作修改，修改内容：[写明你改了什么]。</div>'
+  + '<p class="hint" style="margin-top:10px">如果只是原样转发 index.html 而没有改动，署上作者和出处就够了，不必逐个文件加版权头。</p>'
+
+  + '<div class="sec">📚 许可不覆盖的内容</div>'
+  + '<p>页面里内嵌或引用的<b>国家文件和卫生行业标准原文、摘录</b>（例如《成人健康体检项目推荐指引（2025年版）》及附件 1–5、'
+  + '《老年人健康管理服务规范（2026年）》、WS/T 888-2026 等卫生行业标准、国卫通〔2026〕2号），'
+  + '<b>著作权属于原发布机构，不适用上面的许可</b>。本项目只是出于非营利目的、以便利离线阅读与核对出处的方式收录与摘录。'
+  + '如果任何权利人认为收录方式不妥，提 Issue 即可删除。</p>'
+
+  + '<div class="sec">⚠️ 免责声明</div>'
+  + '<div class="note warn">'
+  + '· 本工具是<b>信息整理与体检项目参考</b>，<b>不是医疗器械</b>，不构成医疗建议、诊断或处方，不能替代医生面诊。<br>'
+  + '· 全部内容由 AI 依据公开文件生成整理，<b>未经医学专业人员审核</b>，可能有错误、遗漏或版本滞后。<br>'
+  + '· 是否做某项检查、何时做、要不要复查，请咨询执业医师。作者不对使用本项目产生的后果承担责任。<br>'
+  + '· 本页的许可说明是<b>通俗说明，不构成法律意见</b>；有法律问题请咨询专业律师。</div>'
+
+  + '<div class="sec">🔗 相关链接</div>'
+  + '<ul class="linklist">'
+  + '<li><a href="'+GH+'" target="_blank" rel="noopener noreferrer">GitHub 仓库（源码与 Issue）</a></li>'
+  + '<li><a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh-Hans" target="_blank" rel="noopener noreferrer">许可协议通俗摘要（CC BY-NC 4.0，简体中文）</a></li>'
+  + '<li><a href="https://creativecommons.org/licenses/by-nc/4.0/legalcode.zh-Hans" target="_blank" rel="noopener noreferrer">许可协议正式条款（简体中文官方译本）</a></li>'
+  + '<li><a href="https://creativecommons.org/licenses/by-nc/4.0/legalcode" target="_blank" rel="noopener noreferrer">正式法律文本（英文，具法律效力）</a></li>'
+  + '<li><a href="'+LICURL+'" target="_blank" rel="noopener noreferrer">CC BY-NC 4.0 项目主页</a></li>'
+  + '</ul>'
+  + '<p class="hint" style="margin-top:14px">本页是离线单文件：<b>只有您主动点击上面的链接才会跳转到外部网站</b>，页面本身不加载任何外部资源，也不会发起任何网络请求。</p>'
+  + '</div>';
+  document.getElementById("app").innerHTML=linkTerms(s);
+  window.scrollTo(0,0);
 }
 function renderDocs(){
   document.getElementById("nav").classList.add("hide");
@@ -2677,6 +2809,7 @@ function renderDocs(){
 }
 function render(keepScroll){
   if(VIEW==="docs"){ renderDocs(); return; }
+  if(VIEW==="about"){ renderAbout(); return; }
   var list=visibleSteps();
   if(cur>=list.length) cur=list.length;
   var app=document.getElementById("app");
