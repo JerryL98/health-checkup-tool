@@ -640,7 +640,7 @@ body.toc-top.hd-compact .hd{padding-top:7px;padding-bottom:6px}
 <header>
   <div class="hd">
     <svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lgMark" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#13926f"/><stop offset="1" stop-color="#0a6049"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="#12352b"/><path d="M28 13h8v15h15v8H36v15h-8V36H13v-8h15z" fill="#fff"/></svg>
-    <h1><button type="button" class="ttlbtn" onclick="goHome()" title="返回首页（回到第一页，已填内容不会丢失）"><span class="ttl"><span class="ttlfull">体检项目参考工具</span><span class="ttlshort">体检参考工具</span></span><span class="homechip">🏠<span class="hcl"> 返回首页</span></span></button><span class="tag"><span class="tglong">依据国家卫健委 2025 版体检指引 · </span>v0.9.4</span></h1>
+    <h1><button type="button" class="ttlbtn" onclick="goHome()" title="返回首页（回到第一页，已填内容不会丢失）"><span class="ttl"><span class="ttlfull">体检项目参考工具</span><span class="ttlshort">体检参考工具</span></span><span class="homechip">🏠<span class="hcl"> 返回首页</span></span></button><span class="tag"><span class="tglong">依据国家卫健委 2025 版体检指引 · </span>v0.9.5</span></h1>
     <div class="fsbtn" role="group" aria-label="调整整页文字大小">
       <span class="fslab">字号</span>
       <button type="button" data-fs="0" class="on" title="标准字号" aria-label="标准字号" aria-pressed="true">A</button>
@@ -702,7 +702,7 @@ body.toc-top.hd-compact .hd{padding-top:7px;padding-bottom:6px}
    设计原则：零采集、零上传、纯本地计算；不适老之处一律简化。
    ========================================================================= */
 
-var VERSION = "2026.10 原型 v0.9.4（AI 生成）";
+var VERSION = "2026.10 原型 v0.9.5（AI 生成）";
 /* 一句话介绍（首页标语、关于页、README 三处保持一致） */
 var TAGLINE = "用 3–5 分钟回答几个问题，生成一份逐项标注依据的体检项目清单 —— 帮普通人、尤其是子女帮长辈，搞清楚「体检到底该查什么」。";
 /* 开源仓库地址：页面上的「GitHub 仓库」链接与许可说明统一用这一个常量 */
@@ -3060,21 +3060,18 @@ document.getElementById("btnNext").addEventListener("click",function(){
 });
 document.getElementById("btnBack").addEventListener("click",function(){ if(cur>0){cur--; render();} });
 function toTop(){ try{ window.scrollTo({top:0,behavior:"smooth"}); }catch(e){ window.scrollTo(0,0); } }
-/* 下滑隐藏页签行、上滑恢复；只有「顶部目录条」形态（竖屏/窄屏）才启用，
-   宽屏桌面不动。切换后要重新量页头高度，顶部目录条才会跟着上移。 */
-var _lastScrollY=0, _hdCompact=false;
+/* 页签行的收放：**只要一滑动就收起，只有回到最顶部才展开**。
+   为什么不用「判断滑动方向」：手机浏览器在页头高度变化时会自动补偿滚动位置，
+   那个补偿量会被误判成「方向」，于是手指慢慢滑动时页签行来回闪。
+   这里只看当前滚动距离，状态不会自己打架。只有「顶部目录条」形态（竖屏/窄屏）启用，宽屏桌面不动。 */
+var _hdCompact=false, HD_TABS_HIDE_AT=8;
 function updateHeaderCompact(y){
-  var want=_hdCompact;
-  if(!document.body.classList.contains("toc-top")) want=false;
-  else if(y<=24) want=false;
-  else if(y>_lastScrollY+8) want=true;
-  else if(y<_lastScrollY-8) want=false;
+  var want = (y>HD_TABS_HIDE_AT) && document.body.classList.contains("toc-top");
   if(want!==_hdCompact){
     _hdCompact=want;
     document.body.classList.toggle("hd-compact", want);
-    setHdVar();
+    setHdVar();          /* 重新量页头高度，顶部目录条跟着上移补位 */
   }
-  _lastScrollY=y;
 }
 window.addEventListener("scroll",function(){
   var y=window.pageYOffset||document.documentElement.scrollTop||0;
