@@ -616,7 +616,7 @@ body.wide-view .seg{max-width:600px}
 <header>
   <div class="hd">
     <svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lgMark" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#13926f"/><stop offset="1" stop-color="#0a6049"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="#12352b"/><path d="M28 13h8v15h15v8H36v15h-8V36H13v-8h15z" fill="#fff"/></svg>
-    <h1><button type="button" class="ttlbtn" onclick="goHome()" title="返回首页（回到第一页，已填内容不会丢失）"><span class="ttl">体检项目参考工具</span><span class="homechip">🏠<span class="hcl"> 返回首页</span></span></button><span class="tag">依据国家卫健委 2025 版体检指引 · v0.8</span></h1>
+    <h1><button type="button" class="ttlbtn" onclick="goHome()" title="返回首页（回到第一页，已填内容不会丢失）"><span class="ttl">体检项目参考工具</span><span class="homechip">🏠<span class="hcl"> 返回首页</span></span></button><span class="tag">依据国家卫健委 2025 版体检指引 · v0.9</span></h1>
     <div class="fsbtn" role="group" aria-label="调整整页文字大小">
       <span class="fslab">字号</span>
       <button type="button" data-fs="0" class="on" title="标准字号" aria-label="标准字号" aria-pressed="true">A</button>
@@ -678,12 +678,12 @@ body.wide-view .seg{max-width:600px}
    设计原则：零采集、零上传、纯本地计算；不适老之处一律简化。
    ========================================================================= */
 
-var VERSION = "2026.10 原型 v0.8（AI 生成）";
+var VERSION = "2026.10 原型 v0.9（AI 生成）";
 /* 一句话介绍（首页标语、关于页、README 三处保持一致） */
 var TAGLINE = "用 3–5 分钟回答几个问题，生成一份逐项标注依据的体检项目清单 —— 帮普通人、尤其是子女帮父母，搞清楚「体检到底该查什么」。";
 /* 开源仓库地址：页面上的「GitHub 仓库」链接与许可说明统一用这一个常量 */
 var REPO_URL = "https://github.com/JerryL98/health-checkup-tool";
-var LICENSE_NAME = "署名—非商业性使用（CC BY-NC 4.0）";
+var LICENSE_NAME = "署名—非商业性使用—相同方式共享（CC BY-NC-SA 4.0）";
 
 /* ---------- 本地打开 vs 网站托管：隐私说明必须分开写，不能含糊 ---------- */
 var IS_LOCAL=(function(){ try{ return location.protocol==="file:"; }catch(e){ return true; } })();
@@ -1634,7 +1634,7 @@ function renderResult(){
    + '<b>4. 隐私。</b>所有计算都在您的手机或电脑本地完成，<b>不采集、不上传任何个人信息</b>；关闭页面即清除。'+HOST_LINE+'<br><br>'
    + '<b>5. 版本。</b>'+VERSION+'。医学指南会更新，请以国家卫健委和医疗机构的最新版本为准。<br><br>'
    + '<b>6. 许可。</b>本项目<b>公开源代码、免费使用</b>，可自由复制、修改、转发和自行部署，'
-   + '但必须<b>署名原作者并注明出处</b>，且<b>不得用于商业用途</b>（正式条款为 CC BY-NC 4.0）。'
+   + '但必须<b>署名原作者并注明出处</b>，<b>不得用于商业用途</b>，而且<b>你的修改版必须沿用同样的许可</b>（正式条款为 CC BY-NC-SA 4.0）。'
    + '<button type="button" class="ghmore" onclick="goAbout()">许可详情 →</button><br><br>'
    + '<b>7. 参与贡献。</b>⭐ <b>如果这个工具帮到了你，欢迎 star</b>；发现内容错误，非常欢迎提 Issue —— 医学内容尤其需要专业人士指正。'
    + '<a href="'+REPO_URL+'" target="_blank" rel="noopener noreferrer">GitHub 仓库</a></div>';
@@ -2790,7 +2790,7 @@ function renderAbout(){
   document.getElementById("nav").classList.add("hide");
   document.getElementById("pbar").style.width="0%";
   document.getElementById("stepTxt").textContent="";
-  var GH=REPO_URL, LICURL="https://creativecommons.org/licenses/by-nc/4.0/";
+  var GH=REPO_URL, LICURL="https://creativecommons.org/licenses/by-nc-sa/4.0/";
   var s='<div class="card"><h2>💡 关于本项目</h2><p class="sub">'+VERSION+' ｜ 单文件、零依赖、纯离线，不采集也不上传任何信息</p>'
   + '<div class="ai slim">⚠ <b style="display:inline;margin:0">AI 生成声明：</b>'+esc(AI_NOTICE)+'</div>'
 
@@ -2811,21 +2811,22 @@ function renderAbout(){
   + '</div>'
 
   + '<div class="sec">⚖️ 许可协议：'+LICENSE_NAME+'</div>'
-  + '<p>本项目采用<b>「署名—非商业性使用」</b>许可（正式条款为 Creative Commons <b>CC BY-NC 4.0</b>）。'
-  + '一句话说清楚：<b>随便用、随便改、随便转、随便自己部署，但必须写明原作者和出处，并且不能拿来赚钱。</b></p>'
+  + '<p>本项目采用<b>「署名—非商业性使用—相同方式共享」</b>许可（正式条款为 Creative Commons <b>CC BY-NC-SA 4.0</b>）。'
+  + '一句话说清楚：<b>随便用、随便改、随便转、随便自己部署，但必须写明原作者和出处，不能拿来赚钱，而且改了以后也要用同样的许可分享出去。</b></p>'
   + '<div class="lic">'
   + '<div class="lice yes"><b>✅ 你可以</b><ul>'
   + '<li>自己用、给家人用、给患者或居民用（非商业目的）</li>'
   + '<li>复制、转载、转发这个页面或 index.html</li>'
-  + '<li>修改、翻译、拆分，做成你自己的版本并分发</li>'
+  + '<li>修改、翻译、拆分，做成你自己的版本并分发（<b>但你的版本必须沿用同样的许可，见下</b>）</li>'
   + '<li>部署到你自己的服务器、内网或静态托管平台，免费给别人用</li>'
   + '<li>医院、社区卫生服务中心、养老机构、学校、公益组织<b>免费</b>提供给他人使用</li>'
   + '<li>用于教学、研究、新闻报道、科普</li>'
   + '</ul></div>'
   + '<div class="lice must"><b>📝 你必须</b><ul>'
   + '<li>在显著位置写明<b>原作者（JerryL98）和出处链接</b></li>'
-  + '<li>同时写明本作品采用「署名—非商业性使用」许可</li>'
+  + '<li>同时写明本作品采用「署名—非商业性使用—相同方式共享」许可（CC BY-NC-SA 4.0）</li>'
   + '<li>如果你改过，说明「基于原作修改」以及改了什么</li>'
+  + '<li><b>相同方式共享</b>：你修改、翻译或改编之后对外发布，<b>你的版本也必须用 CC BY-NC-SA 4.0（或兼容的相同许可）</b>，不能换成更宽松的许可</li>'
   + '<li>不要暗示原作者为你的产品或机构背书</li>'
   + '</ul></div>'
   + '<div class="lice no"><b>🚫 你不可以</b><ul>'
@@ -2834,14 +2835,16 @@ function renderAbout(){
   + '<li>用来给商品、保险、保健品、私立医疗导流促销</li>'
   + '<li>转售源码、编译产物或内嵌数据</li>'
   + '<li>做成对外收费的在线服务（含以广告为主要盈利模式的站点）</li>'
+  + '<li><b>给修改版换许可</b>：把基于本作品改出来的版本改成允许商用的、或其他更宽松的许可</li>'
   + '<li>删除、遮挡或篡改原作者署名与出处链接</li>'
+  + '<li>对本作品或修改版<b>附加额外限制</b>（例如 DRM、额外的许可条款），妨碍别人行使本许可已经给的权利</li>'
   + '</ul></div>'
   + '</div>'
   + '<p class="hint" style="margin-top:12px">公司、机构<b>内部</b>的非营利使用（例如给本单位员工做健康科普，不收费也不推销）视为允许。'
   + '拿不准算不算商业，或者想申请商业授权，直接到仓库提一个 Issue 说明用途 —— 非营利用途一般都会同意。</p>'
 
   + '<div class="sec">📝 怎么写署名（照抄即可）</div>'
-  + '<div class="codebox">本作品《体检项目参考工具》原作者为 <b>JerryL98</b>，来源 '+GH+' ，采用「署名—非商业性使用」许可（CC BY-NC 4.0）。本页面基于原作修改，修改内容：[写明你改了什么]。</div>'
+  + '<div class="codebox">本作品《体检项目参考工具》原作者为 <b>JerryL98</b>，来源 '+GH+' ，采用「署名—非商业性使用—相同方式共享 4.0」许可（CC BY-NC-SA 4.0）。本页面基于原作修改，修改内容：[写明你改了什么]；<b>本修改版同样采用 CC BY-NC-SA 4.0 许可发布</b>。</div>'
   + '<p class="hint" style="margin-top:10px">如果只是原样转发 index.html 而没有改动，署上作者和出处就够了，不必逐个文件加版权头。</p>'
 
   + '<div class="sec">📚 许可不覆盖的内容</div>'
@@ -2860,10 +2863,10 @@ function renderAbout(){
   + '<div class="sec">🔗 相关链接</div>'
   + '<ul class="linklist">'
   + '<li><a href="'+GH+'" target="_blank" rel="noopener noreferrer">GitHub 仓库（源码与 Issue）</a></li>'
-  + '<li><a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh-Hans" target="_blank" rel="noopener noreferrer">许可协议通俗摘要（CC BY-NC 4.0，简体中文）</a></li>'
-  + '<li><a href="https://creativecommons.org/licenses/by-nc/4.0/legalcode.zh-Hans" target="_blank" rel="noopener noreferrer">许可协议正式条款（简体中文官方译本）</a></li>'
-  + '<li><a href="https://creativecommons.org/licenses/by-nc/4.0/legalcode" target="_blank" rel="noopener noreferrer">正式法律文本（英文，具法律效力）</a></li>'
-  + '<li><a href="'+LICURL+'" target="_blank" rel="noopener noreferrer">CC BY-NC 4.0 项目主页</a></li>'
+  + '<li><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-Hans" target="_blank" rel="noopener noreferrer">许可协议通俗摘要（CC BY-NC-SA 4.0，简体中文）</a></li>'
+  + '<li><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.zh-Hans" target="_blank" rel="noopener noreferrer">许可协议正式条款（简体中文官方译本）</a></li>'
+  + '<li><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode" target="_blank" rel="noopener noreferrer">正式法律文本（英文，具法律效力）</a></li>'
+  + '<li><a href="'+LICURL+'" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0 项目主页</a></li>'
   + '</ul>'
   + '<p class="hint" style="margin-top:14px">本页是离线单文件：<b>只有您主动点击上面的链接才会跳转到外部网站</b>，页面本身不加载任何外部资源，也不会发起任何网络请求。</p>'
   + '</div>';
