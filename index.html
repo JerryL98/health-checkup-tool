@@ -142,6 +142,9 @@ header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.94);
   padding:1px 8px;margin-left:8px;vertical-align:2px;white-space:nowrap}
 .multi{color:var(--brand-ink);background:var(--brand-l2)}
 .single{color:var(--muted);background:var(--gray-l2)}
+.qno{display:inline-flex;align-items:center;justify-content:center;min-width:25px;height:25px;padding:0 7px;
+  border-radius:13px;background:var(--brand);color:#fff;font-size:calc(var(--fs) - 5px);font-weight:800;
+  font-style:normal;margin-right:9px;vertical-align:1px;font-variant-numeric:tabular-nums}
 .qerr{color:var(--danger);font-size:calc(var(--fs) - 3px);font-weight:600;line-height:1.65;
   margin:11px 0 0;display:flex;align-items:flex-start;gap:8px}
 .qerr::before{content:"!";display:inline-flex;align-items:center;justify-content:center;
@@ -380,20 +383,53 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,25
 .dept .dc b{display:block;font-size:calc(var(--fs) + 1px);margin-bottom:4px;line-height:1.5;font-weight:800;
   letter-spacing:-.2px}
 .dept .dc .dw{display:block;color:var(--muted);font-size:calc(var(--fs) - 3px);line-height:1.72}
-/* ---------- 结果页目录 ---------- */
-.toc{background:linear-gradient(180deg,var(--wash-2) 0,rgba(240,248,244,0) 70%),var(--card)}
-.toclist{display:flex;flex-direction:column;gap:8px;margin-top:2px}
-.tocb{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:#fff;
-  border:1.5px solid var(--ctl);border-radius:12px;padding:12px 15px;font:inherit;font-weight:700;
-  font-size:calc(var(--fs) - 1px);color:var(--ink);cursor:pointer;min-height:50px;
+/* ---------- 结果页：左侧常驻目录 + 右侧内容（可收起） ---------- */
+body.wide-view .wrap{max-width:1120px}
+body.wide-view .hd,body.wide-view .tabs,body.wide-view .nv{max-width:1120px}
+body.wide-view .seg{max-width:600px}
+.rwrap{display:flex;gap:20px;align-items:flex-start}
+.rmain{flex:1 1 auto;min-width:0}
+.rmain > .card:first-child{margin-top:0}
+.rside{flex:0 0 238px;position:sticky;top:calc(var(--hdh,132px) + 12px);align-self:flex-start;
+  max-height:calc(100vh - var(--hdh,132px) - 26px);overflow:auto;overscroll-behavior:contain;
+  background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px;
+  transition:flex-basis .22s var(--ease)}
+.rsidetg{display:flex;align-items:center;gap:9px;width:100%;background:var(--gray-l2);border:1.5px solid var(--ctl);
+  border-radius:11px;padding:10px 12px;font:inherit;font-weight:800;font-size:calc(var(--fs) - 3px);color:var(--ink);
+  cursor:pointer;min-height:46px;transition:background .15s var(--ease),border-color .15s var(--ease)}
+.rsidetg:hover{background:var(--gray-l);border-color:var(--ctl-h)}
+.tgico{flex:0 0 auto;font-size:calc(var(--fs) - 1px);line-height:1}
+.tgtx{flex:1;text-align:left;white-space:nowrap}
+.tgarrow{flex:0 0 auto;color:var(--muted);font-weight:800}
+.rsidelist{margin-top:10px;display:flex;flex-direction:column;gap:7px}
+.rsidetip{color:var(--muted);font-size:calc(var(--fs) - 5px);line-height:1.6;padding:0 2px 2px}
+.tocb{display:flex;align-items:center;gap:9px;width:100%;text-align:left;background:#fff;
+  border:1.5px solid var(--ctl);border-radius:12px;padding:10px 12px;font:inherit;font-weight:700;
+  font-size:calc(var(--fs) - 3px);color:var(--ink);cursor:pointer;min-height:44px;line-height:1.5;
   transition:background .15s var(--ease),border-color .15s var(--ease)}
 .tocb:hover{background:var(--gray-l);border-color:var(--ctl-h)}
-.tocb .tocn{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;
-  border-radius:50%;background:var(--brand);color:#fff;font-size:calc(var(--fs) - 5px);font-weight:800;font-style:normal}
-.tocb .arr{margin-left:auto;color:var(--muted);font-weight:800;font-size:calc(var(--fs) - 2px)}
-.tocb.sub{margin-left:22px;width:calc(100% - 22px);font-weight:600;font-size:calc(var(--fs) - 2px);
-  color:var(--ink-2);border-color:var(--line-2);min-height:44px;padding:10px 15px}
-.tocb.sub .arr{font-size:calc(var(--fs) - 4px)}
+.tocb .tocn{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;
+  border-radius:50%;background:var(--brand);color:#fff;font-size:calc(var(--fs) - 6px);font-weight:800;font-style:normal}
+.tocb .arr{margin-left:auto;color:var(--muted);font-weight:800;font-size:calc(var(--fs) - 4px)}
+.tocb.sub{margin-left:16px;width:calc(100% - 16px);font-weight:600;font-size:calc(var(--fs) - 4px);
+  color:var(--ink-2);border-color:var(--line-2);min-height:40px;padding:9px 12px}
+.rwrap.tocclosed .rside{flex-basis:66px;padding:12px 10px}
+.rwrap.tocclosed .rsidelist,.rwrap.tocclosed .tgtx{display:none}
+.rwrap.tocclosed .rsidetg{flex-direction:column;gap:5px;padding:11px 4px;min-height:auto}
+.rwrap.tocclosed .tgarrow{font-size:calc(var(--fs) - 5px)}
+@media (max-width:980px){
+  body.wide-view .wrap{max-width:760px}
+  body.wide-view .hd,body.wide-view .tabs,body.wide-view .nv{max-width:760px}
+  body.wide-view .seg{max-width:none}
+  .rwrap{flex-direction:column;gap:16px}
+  .rside{position:static;flex:0 0 auto;width:100%;max-height:none;overflow:visible}
+  .rwrap.tocclosed .rside{flex-basis:auto;width:100%;padding:12px}
+  .rwrap.tocclosed .rsidetg{flex-direction:row;gap:9px;padding:10px 12px;min-height:46px}
+  .rwrap.tocclosed .tgtx{display:inline}
+  .rwrap.tocclosed .tgarrow{font-size:inherit}
+  .tocb{font-size:calc(var(--fs) - 2px);min-height:48px}
+  .tocb.sub{font-size:calc(var(--fs) - 3px);min-height:44px}
+}
 
 /* ---------- 挂号指引：5 步流程 ---------- */
 .flow{margin:4px 0 6px;padding:0;list-style:none;counter-reset:fl}
@@ -570,7 +606,7 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,25
 <header>
   <div class="hd">
     <svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lgMark" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#13926f"/><stop offset="1" stop-color="#0a6049"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="#12352b"/><path d="M28 13h8v15h15v8H36v15h-8V36H13v-8h15z" fill="#fff"/></svg>
-    <h1><button type="button" class="ttlbtn" onclick="goHome()" title="返回首页（回到第一页，已填内容不会丢失）"><span class="ttl">体检项目参考工具</span><span class="homechip">🏠<span class="hcl"> 返回首页</span></span></button><span class="tag">依据国家卫健委 2025 版体检指引 · v0.6</span></h1>
+    <h1><button type="button" class="ttlbtn" onclick="goHome()" title="返回首页（回到第一页，已填内容不会丢失）"><span class="ttl">体检项目参考工具</span><span class="homechip">🏠<span class="hcl"> 返回首页</span></span></button><span class="tag">依据国家卫健委 2025 版体检指引 · v0.7</span></h1>
     <div class="fsbtn" role="group" aria-label="调整整页文字大小">
       <span class="fslab">字号</span>
       <button type="button" data-fs="0" class="on" title="标准字号" aria-label="标准字号" aria-pressed="true">A</button>
@@ -632,7 +668,7 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,25
    设计原则：零采集、零上传、纯本地计算；不适老之处一律简化。
    ========================================================================= */
 
-var VERSION = "2026.10 原型 v0.6（AI 生成）";
+var VERSION = "2026.10 原型 v0.7（AI 生成）";
 /* 开源仓库地址：页面上的「GitHub 仓库」链接与许可说明统一用这一个常量 */
 var REPO_URL = "https://github.com/JerryL98/health-checkup-tool";
 var LICENSE_NAME = "署名—非商业性使用（CC BY-NC 4.0）";
@@ -946,7 +982,6 @@ var STEPS = [
   {k:"occup", type:"radio", label:"是否从事过接触石棉、氡、铍、铬、镉、镍、硅、煤烟尘等的工作，累计 1 年以上？", opts:[["y","有"],["n","没有"],["u","不清楚"]],
    hint:"如矿工、建筑、石棉加工、铸造、油漆等。"},
   {k:"highrisk_area", type:"radio", label:"是否长期居住在胃癌或食管癌高发地区？", opts:[
-    ["n","否，以上都不是"],["u","不清楚"],
     ["hn_lz","河南 林州（原林县）及太行山区一带"],
     ["hb_cx","河北 磁县、涉县"],
     ["sx_yc","山西 阳城、晋城一带"],
@@ -960,9 +995,11 @@ var STEPS = [
     ["sd_lq","山东 临朐"],
     ["ln_zh","辽宁 庄河"],
     ["gs_ww","甘肃 武威"],
-    ["js_yc2","江苏 盐城"]
+    ["js_yc2","江苏 盐城"],
+    ["n","否，以上地区都不是"],
+    ["u","不清楚 / 不确定"]
    ],
-   hint:"食管癌高发区与胃癌高发区名单不同，请对照下方说明选择。"},
+   hint:"先对照下面的地区名单：长期居住在其中之一，就选那一个；都不是，选倒数第二项「否」；拿不准就选最后一项「不清楚」。食管癌高发区与胃癌高发区的名单不一样，请看下方说明。"},
   {k:"", type:"info", html:'<b>食管癌高发地区（常见）</b>：河南林州（原林县）及豫·冀·晋交界的太行山区（林州、磁县、阳城）、陕西丹凤等秦岭东部山区、安徽与河南大别山区、四川盐亭、江苏扬中（苏北）、广东汕头（潮汕）、福建南安、新疆托里。<br><br><b>胃癌高发地区（常见）</b>：山东临朐、辽宁庄河、甘肃武威、江苏盐城、福建长乐。<br><br><b>官方定义</b>：附件5 规定“高发地区”以<b>县级行政区</b>为单位界定，按 2000 年中国人口结构计算的年龄标化发病率，<b>胃癌 &gt;20/10万、食管癌 &gt;15/10万</b>。上表是文献与公开报道中的常见名单，<b>完整、权威的县级名单请以国家癌症中心公布的数据为准</b>；不确定可选“不清楚”。<br><br><span style="color:var(--muted)">来源：央广网《专家共话中国五大胃癌高发地区防控措施》（2021）；河北省胸科医院食管癌科普（引自食管癌流行病学文献）。</span>'},
   {k:"", type:"info", html:'<b>为什么问这个？</b>食管癌与胃癌的发病有强烈的地域聚集性，部分地区发病率可达全国平均的数十倍。若长期居住在这些地区，筛查起始年龄和项目会有所不同。'},
   {k:"hp", type:"radio", label:"幽门螺杆菌检测结果", opts:[["pos","阳性"],["neg","阴性"],["u","没查过 / 不清楚"]]}
@@ -1330,15 +1367,38 @@ function tierHtml(cls, title, groups, id){
 }
 
 /* =========================== 结果页目录 =========================== */
+var TOC_OPEN = (function(){ try{ return localStorage.getItem("tj_toc")!=="0"; }catch(e){ return true; } })();
+/* 结果页的目录在左侧常驻：吸顶偏移要用页头的真实高度，改成 CSS 变量给 .rside 用 */
+function setHdVar(){
+  try{ var hd=document.querySelector("header"); if(hd) document.documentElement.style.setProperty("--hdh", hd.offsetHeight+"px"); }catch(e){}
+}
+function applyToc(){
+  var w=document.getElementById("rwrap"), t=document.getElementById("rsidetg");
+  if(!w) return;
+  w.classList.toggle("tocclosed", !TOC_OPEN);
+  if(t){ t.setAttribute("aria-expanded", TOC_OPEN?"true":"false"); t.title = TOC_OPEN ? "收起目录" : "展开目录"; }
+  setHdVar();
+}
+function toggleToc(){
+  TOC_OPEN=!TOC_OPEN;
+  try{ localStorage.setItem("tj_toc", TOC_OPEN?"1":"0"); }catch(e){}
+  applyToc();
+  toast(TOC_OPEN ? "📑 目录已展开" : "📑 目录已收起。点左侧（手机上在顶部）的「📑 目录」按钮可以随时展开。", 3000);
+}
+window.addEventListener("resize",setHdVar);
+window.addEventListener("orientationchange",function(){ setTimeout(setHdVar,300); });
 function tocHtml(list){
   if(!list.length) return "";
-  var s='<div class="card toc"><h2>📑 目录</h2><p class="sub">点一下就直接跳到那一节，不用一直往下滑。</p><div class="toclist">';
+  var s='<aside class="rside" id="rside" aria-label="本页目录">'
+   + '<button type="button" class="rsidetg" id="rsidetg" onclick="toggleToc()" aria-expanded="true" aria-controls="rsidelist" title="收起目录">'
+   + '<span class="tgico" aria-hidden="true">📑</span><span class="tgtx">目录</span><span class="tgarrow" aria-hidden="true">◀</span></button>'
+   + '<nav class="rsidelist" id="rsidelist"><div class="rsidetip">点一下直接跳到那一节</div>';
   for(var i=0;i<list.length;i++){
     var it=list[i];
     s+='<button type="button" class="tocb'+(it.sub?" sub":"")+'" onclick="jumpSec(\''+it.id+'\')">'
      + (it.sub?"":'<i class="tocn">'+it.n+'</i>') + esc(it.label) + '<span class="arr">↓</span></button>';
   }
-  return s+'</div></div>';
+  return s+'</nav></aside>';
 }
 
 /* =========================== 挂号与科室指引 =========================== */
@@ -1463,7 +1523,6 @@ function renderResult(){
 
   if(m.packYears) s+='<p class="hint">吸烟量折算约 '+(Math.round(m.packYears*10)/10)+' 包年。</p>';
   s+='</div>';
-  s+='<!--TOC-->';
 
   /* 高风险人群 */
   sec("sec-risk","命中的高风险人群");
@@ -1573,8 +1632,7 @@ function renderResult(){
    + '<button type="button" onclick="restart()" style="flex:0 0 auto;background:#fff;border:2px solid var(--line);color:var(--gray);border-radius:12px;padding:14px 18px;font:inherit;font-weight:700;cursor:pointer">重新填写</button>'
    + '</div></div>';
 
-  s=s.replace("<!--TOC-->", tocHtml(TOC));
-  return s;
+  return '<div class="rwrap" id="rwrap">'+tocHtml(TOC)+'<div class="rmain">'+s+'</div></div>';
 }
 
 
@@ -1813,7 +1871,7 @@ var GLOSSARY_MORE3 = {
  "磁共振脑血管成像":{t:"磁共振脑血管成像（MRA）",d:"用磁共振看脑部血管，不用造影剂也能大致看出血管狭窄、闭塞或动脉瘤。",q:"…比值、经颅多普勒、踝肱指数、脉搏波传导速度、冠状动脉CTA、头颅CT/MRI、磁共振脑血管成像、睡眠呼吸监测、动态心电图、超敏C反应蛋白、肾动脉超声、血钾、血钠、血浆肾素浓度、血醛固酮、醛固酮/肾素浓…",ref:"附件3·心血管疾病·可选项目",doc:4},
  "前列腺特异性抗原":{t:"前列腺特异性抗原（PSA）",d:"前列腺产生的一种蛋白质。血里升高可能提示前列腺癌，也可能只是前列腺增生或炎症，所以必须和医生共同决策后再查，不能当成确诊指标。",q:"■ 前列腺癌　优先推荐：前列腺超声、总前列腺特异性抗原、游离前列腺特异性抗原、游离前列腺特异性抗原与总前列腺特异性抗原比值；可选项目：前列腺MRI",ref:"附件3·前列腺癌·优先推荐",doc:4},
  "结肠癌":{t:"结肠癌",d:"大肠（结肠）的恶性肿瘤，多数由肠息肉慢慢演变而来，所以做肠镜切掉息肉就能起到预防作用。",q:"■ 结肠癌　优先推荐：结肠镜；可选项目：乙状结肠镜、结肠CT、多靶点粪便DNA检测",ref:"附件3·结肠癌",doc:4},
- "肿瘤标志物":{t:"肿瘤标志物",d:"血液里与肿瘤相关的一类蛋白质等物质（如 CEA、CA19-9、CA125、AFP 等）。<b>它们不能用来给普通人筛癌</b>：正常人也可能升高，早期癌症又常常不升高，容易造成误判和过度检查。",ref:"本工具补充：多数肿瘤标志物在早期癌症并不升高、在良性疾病也会升高，因此国内外指南都不推荐用它给无症状普通人筛癌。"},
+ "肿瘤标志物":{t:"肿瘤标志物",d:"血液里与肿瘤相关的一类蛋白质等物质（如 CEA、CA19-9、CA125、AFP 等）。【它们不能用来给普通人筛癌】：正常人也可能升高，早期癌症又常常不升高，容易造成误判和过度检查。",ref:"本工具补充：多数肿瘤标志物在早期癌症并不升高、在良性疾病也会升高，因此国内外指南都不推荐用它给无症状普通人筛癌。"},
  "甲状腺超声":{t:"甲状腺超声",d:"用超声看甲状腺结节的大小、形态和性质。不推荐给普通人群做普筛，只针对明确高危者——很多被查出的微小癌一辈子不会造成问题，反而带来焦虑和过度手术。",ref:"本工具补充：国家指引附件3 仅针对明确高危人群，不推荐对普通人群做甲状腺超声普筛。"},
  "肝脏超声":{t:"肝脏超声",d:"用超声看肝脏形态、有无结节或脂肪肝。它是肝癌高风险人群（乙肝、丙肝、肝硬化等）的常规随访项目，通常每 6 个月做一次，配合甲胎蛋白。",ref:"本工具补充：国家指引附件3 中，肝癌高风险人群的优先推荐项目为「甲胎蛋白 + 肝脏超声」，通常每 6 个月一次。"},
  "肾脏超声":{t:"肾脏超声",d:"用超声看肾脏的大小、形态，有没有结石、囊肿或积水。",ref:"本工具补充：通用医学常识解释，不属于某一份依据文件的原文术语。"},
@@ -1863,7 +1921,8 @@ var GLOSSARY_MORE3 = {
  "抗精神病药":{t:"抗精神病药 / 抗抑郁药",d:"治疗精神疾病的药物。部分药物会引起体重增加、血糖升高，并增加跌倒风险，老年人需要定期评估是否还适合继续用。",q:"…十四）接受抗病毒治疗的艾滋病患者；（十五）有类固醇类药物使用史；（十六）长期接受抗精神病药物或抗抑郁症药物治疗；（十七）中国糖尿病风险评分总分≥25分。…",ref:"附件5·二、糖尿病风险人群",doc:6},
  "乙肝":{t:"乙肝（乙型肝炎）",d:"乙型肝炎病毒感染。慢性乙肝是肝硬化和肝癌最主要的危险因素，需要定期查肝功能和甲胎蛋白，并做肝脏超声随访。",q:"肝癌高危人群主要包括：具有乙型肝炎病毒和/或丙型肝炎病毒感染、过度饮酒、肝脂肪变性或代谢功能障碍相关性肝病、饮食中黄曲霉毒素B1的暴露、其他各种原因引起的肝硬化及有肝癌家族史等人群，尤其年龄＞40岁的男性。",ref:"附件5·三、肝癌风险人群",doc:6},
  "丙肝":{t:"丙肝（丙型肝炎）",d:"丙型肝炎病毒感染。现在已有可以治愈的口服药，治愈后肝癌风险明显下降，建议查出后尽快到专科治疗。",q:"肝癌高危人群主要包括：具有乙型肝炎病毒和/或丙型肝炎病毒感染、过度饮酒、肝脂肪变性或代谢功能障碍相关性肝病、饮食中黄曲霉毒素B1的暴露、其他各种原因引起的肝硬化及有肝癌家族史等人群，尤其年龄＞40岁的男性。",ref:"附件5·三、肝癌风险人群",doc:6},
- "淋巴结":{t:"淋巴结（浅表淋巴结）",d:"身体各处像“过滤器”一样的小结。感染时会肿大、疼痛；如果无痛、质地硬、还在逐渐变大，就需要查清原因。",q:"外科：皮肤、浅表淋巴结、头颈、甲状腺、乳腺（女性）、脊柱、四肢、关节、肛诊、外生殖器（男性）",ref:"附件2·体格检查—物理检查·外科",doc:3}
+ "淋巴结":{t:"淋巴结（浅表淋巴结）",d:"身体各处像“过滤器”一样的小结。感染时会肿大、疼痛；如果无痛、质地硬、还在逐渐变大，就需要查清原因。",q:"外科：皮肤、浅表淋巴结、头颈、甲状腺、乳腺（女性）、脊柱、四肢、关节、肛诊、外生殖器（男性）",ref:"附件2·体格检查—物理检查·外科",doc:3},
+ "气促":{t:"气促（气短、喘不上气）",d:"呼吸比平时费力、感觉气不够用。剧烈运动后短暂气促是正常的；如果【走平路或爬小坡就明显气促】，可能提示心脏或肺部问题（慢阻肺、心功能不全、贫血等），建议做肺功能、心电图和血常规。如果突然出现气促，并伴有胸痛、口唇发紫、说不出完整句子，要立刻就医。",q:"5.您平时是否感觉有气促：没有气促（0）／在平地急行或爬小坡时感觉气促（3）／平地正常行走时感觉气促（6）",ref:"附件5·七、慢性阻塞性肺疾病风险人群",doc:6}
 };
 for(var _gk3 in GLOSSARY_MORE3){ GLOSSARY[_gk3]=GLOSSARY_MORE3[_gk3]; }
 TERMS = Object.keys(GLOSSARY).sort(function(a,b){ return b.length-a.length; });
@@ -2651,16 +2710,17 @@ function heroHtml(){
 }
 
 function qsHtml(step){
-  var s="";
+  var s="", QN=0;
   if(isFamily() && step.ask) s+='<div class="ask"><b>家属协助提示</b><p>'+esc(step.ask)+'</p></div>';
   for(var i=0;i<step.qs.length;i++){
     var q=step.qs[i];
     if(q.show && !q.show(A)) continue;
     if(q.type==="sec"){ s+='<div class="sec">'+esc(q.label)+'</div>'; continue; }
     if(q.type==="info"){ s+='<div class="infobox">'+q.html+'</div>'; continue; }
+    QN++;
     var badge="";
     if(q.opts && q.opts.length>1){ badge = q.type==="check" ? '<span class="multi">可多选</span>' : (q.type==="radio" ? '<span class="single">单选</span>' : ""); }
-    s+='<div class="q" id="q-'+q.k+'"><span class="lab">'+esc(q.label)+badge+(q.req?'<span class="req">必填</span>':'')+'</span>';
+    s+='<div class="q" id="q-'+q.k+'"><span class="lab"><i class="qno" title="本页第 '+QN+' 题">'+QN+'</i>'+esc(q.label)+badge+(q.req?'<span class="req">必填</span>':'')+'</span>';
     if(q.hint) s+='<p class="hint">'+esc(q.hint)+'</p>';
     if(q.type==="radio"||q.type==="check"){
       s+='<div class="opts">';
@@ -2808,13 +2868,18 @@ function renderDocs(){
   window.scrollTo(0,0);
 }
 function render(keepScroll){
-  if(VIEW==="docs"){ renderDocs(); return; }
-  if(VIEW==="about"){ renderAbout(); return; }
+  var app=document.getElementById("app"), nav=document.getElementById("nav");
+  if(VIEW==="docs"){ document.body.classList.remove("wide-view"); renderDocs(); return; }
+  if(VIEW==="about"){ document.body.classList.remove("wide-view"); renderAbout(); return; }
   var list=visibleSteps();
   if(cur>=list.length) cur=list.length;
-  var app=document.getElementById("app");
-  var nav=document.getElementById("nav");
-  if(cur>=list.length){ document.getElementById("pbar").style.width="100%"; app.innerHTML=linkTerms(renderResult()); nav.classList.add("hide"); window.scrollTo(0,0); LAST_SIG=""; return; }
+  if(cur>=list.length){
+    document.getElementById("pbar").style.width="100%";
+    document.body.classList.add("wide-view");
+    app.innerHTML=linkTerms(renderResult());
+    nav.classList.add("hide"); window.scrollTo(0,0); LAST_SIG=""; applyToc(); return;
+  }
+  document.body.classList.remove("wide-view");
   var step=list[cur];
   nav.classList.remove("hide");
   var sy = window.pageYOffset || document.documentElement.scrollTop || 0;
@@ -2858,8 +2923,14 @@ function heroErr(){
 function readPage(){
   try{
     var list=visibleSteps(), step=list[cur]; if(!step||!step.qs) return;
-    var txt=step.title+"。";
-    for(var i=0;i<step.qs.length;i++){ var q=step.qs[i]; if(q.show&&!q.show(A)) continue; txt+=q.label+"。"; if(q.opts) for(var j=0;j<q.opts.length;j++) txt+=q.opts[j][1]+"，"; }
+    var txt=step.title+"。", qn=0;
+    for(var i=0;i<step.qs.length;i++){
+      var q=step.qs[i]; if(q.show&&!q.show(A)) continue;
+      if(q.type==="sec"){ txt+=q.label+"。"; continue; }
+      if(q.type==="info") continue;
+      qn++; txt+="第"+qn+"题，"+q.label+"。";
+      if(q.opts) for(var j=0;j<q.opts.length;j++) txt+=q.opts[j][1]+"，";
+    }
     speechSynthesis.cancel();
     var u=new SpeechSynthesisUtterance(txt); u.lang="zh-CN"; u.rate=0.9; speechSynthesis.speak(u);
   }catch(e){ alert("当前浏览器不支持朗读"); }
@@ -2927,6 +2998,7 @@ document.querySelectorAll(".fsbtn button").forEach(function(b){
     document.querySelectorAll(".fsbtn button").forEach(function(x){x.classList.remove("on"); x.setAttribute("aria-pressed","false");});
     b.classList.add("on"); b.setAttribute("aria-pressed","true");
     try{ localStorage.setItem("tj_fs",String(i)); }catch(e){}
+    setHdVar();
     toast("🔍 已切换为 <b>"+FS_NAME[i]+"</b>（"+FS[i]+"px）。整页文字都会跟着变大，这个选择会记住，下次打开还是这么大。");
   });
 });
