@@ -7,7 +7,7 @@ from docx.oxml.ns import qn
 from PIL import Image
 sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = r"D:\AI\healthy"
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))   # 仓库根目录（本脚本在 build/ 下）
 HTMLF = os.path.join(BASE, "index.html")   # 主程序已移到仓库根目录
 FILES = {2:"1.健康体检自测问卷（2025年版）.docx",3:"2.基本体检项目（2025年版）.docx",
          4:"3.慢性病风险筛查项目（2025年版）.docx",5:"4.成人健康体检工作流程图（2025年版）.docx",
