@@ -13,7 +13,7 @@
    ============================================================ */
 :root{
   --fs:17px;
-  --bg:#ffffff; --card:#ffffff; --ink:#0d1a16; --muted:#6b7570;
+  --bg:#f2f6f4; --card:#ffffff; --ink:#0d1a16; --muted:#6b7570;
   --line:#eef1f0; --line-2:#e2e7e5;
   --brand:#12352b; --brand-d:#0a231c; --brand-2:#1d5a48;
   --brand-l:#f2f7f5; --brand-l2:#e6efeb;
@@ -30,7 +30,8 @@
 html,body{margin:0;padding:0}
 body{
   font:var(--fs)/1.78 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
-  background:var(--bg);color:var(--ink);-webkit-text-size-adjust:100%;
+  background:linear-gradient(180deg,#e8f3ee 0,rgba(232,243,238,0) 340px),var(--bg);
+  color:var(--ink);-webkit-text-size-adjust:100%;
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 ::selection{background:var(--brand-l2);color:var(--brand)}
 :focus-visible{outline:2.5px solid var(--brand-2);outline-offset:2px}
@@ -74,7 +75,8 @@ header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.94);
 .bar i{display:block;height:100%;width:0;border-radius:0;
   background:var(--brand);transition:width .34s var(--ease)}
 
-.card{background:transparent;border:0;border-radius:0;box-shadow:none;padding:6px 0;margin:26px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:none;
+  padding:24px 26px;margin:20px 0}
 .card > h2{font-size:calc(var(--fs) + 9px);margin:0 0 8px;line-height:1.24;letter-spacing:-1.1px;font-weight:800}
 .card > .sub{color:var(--muted);font-size:calc(var(--fs) - 1px);margin:0 0 18px;line-height:1.7}
 
@@ -129,7 +131,7 @@ header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.94);
   min-height:52px;width:100%;transition:background .15s var(--ease),box-shadow .15s var(--ease)}
 .num input:focus{outline:none;background:#fff;box-shadow:0 0 0 2.5px var(--brand)}
 .num .u{color:var(--muted);font-size:calc(var(--fs) - 2px);flex:0 0 auto}
-.sec{margin:32px 0 10px;font-weight:800;font-size:calc(var(--fs) + 1px);color:var(--ink);
+.sec{margin:32px 0 10px;font-weight:800;font-size:calc(var(--fs) + 1px);color:var(--brand);
   border-bottom:1px solid var(--line);padding-bottom:9px;letter-spacing:-.3px}
 
 nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,255,.96);
@@ -183,7 +185,8 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,25
 .disc{font-size:calc(var(--fs) - 4px);color:var(--muted);line-height:1.84;border-top:1px solid var(--line);
   margin-top:26px;padding-top:18px}
 
-.hero{text-align:left;padding:8px 0 0;background:none;margin-top:18px}
+.hero{text-align:left;padding:34px 26px 12px;margin-top:20px;
+  background:linear-gradient(180deg,#f0f8f4 0,rgba(240,248,244,0) 68%),var(--card)}
 .hero .ic{font-size:34px;line-height:1;display:block;width:auto;height:auto;border-radius:0;
   background:transparent;box-shadow:none}
 .hero h2{font-size:calc(var(--fs) + 13px);margin:18px 0 13px;letter-spacing:-1.4px;line-height:1.22;
@@ -245,7 +248,7 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,25
 .doclist details[open] summary{background:transparent;color:var(--ink);border-bottom:0}
 .doclist summary .meta{display:block;font-weight:400;color:var(--muted);font-size:calc(var(--fs) - 5px);
   margin-top:7px;line-height:1.62}
-.rdtxt{padding:4px 0 18px;font-size:calc(var(--fs) - 3px);line-height:1.88;color:var(--ink)}
+.rdtxt{padding:6px 2px 18px;font-size:calc(var(--fs) - 3px);line-height:1.88;color:var(--ink)}
 .rdtxt.pre{white-space:pre-wrap;word-break:break-word;line-height:1.92}
 .rdtxt h4{margin:24px 0 9px;font-size:calc(var(--fs) - 1px);color:var(--ink);line-height:1.5;font-weight:800;
   letter-spacing:-.2px}
@@ -361,11 +364,14 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,25
   header,nav,.fsbtn,.tabs,.top{display:none !important}
   body{background:#fff;font-size:12pt}
   .wrap{padding:0;max-width:none}
-  .card{box-shadow:none;border:0;page-break-inside:avoid;margin:12px 0}
+  .card{box-shadow:none;border:1px solid #ddd;page-break-inside:avoid;margin:12px 0}
+  .hero{background:#fff !important}
   .grp{page-break-inside:avoid;background:#fff;border:1px solid #ddd}
 }
 @media (max-width:430px){
-  .wrap{padding-left:18px;padding-right:18px}
+  .wrap{padding-left:16px;padding-right:16px}
+  .card{padding:20px 18px;border-radius:16px;margin:15px 0}
+  .hero{padding:26px 18px 8px}
   .hd{padding:13px 18px 8px;gap:9px}
   .tabs{padding:0 18px}
   .logo{width:24px;height:24px}
@@ -379,6 +385,8 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,25
   .top{right:16px;bottom:calc(88px + env(safe-area-inset-bottom))}
 }
 @media (max-width:380px){
+  .card{padding:18px 15px}
+  .hero{padding:22px 15px 6px}
   .hd .tag{display:none}
   .hd h1{font-size:calc(var(--fs) - 2px)}
   .fsbtn{gap:8px}
