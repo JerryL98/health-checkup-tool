@@ -133,6 +133,16 @@ header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.94);
   min-height:52px;width:100%;transition:background .15s var(--ease),box-shadow .15s var(--ease)}
 .num input:focus{outline:none;background:#fff;box-shadow:0 0 0 2.5px var(--brand)}
 .num .u{color:var(--muted);font-size:calc(var(--fs) - 2px);flex:0 0 auto}
+.req{display:inline-block;font-size:calc(var(--fs) - 5px);font-weight:700;color:var(--danger);
+  background:var(--danger-l);border-radius:7px;padding:1px 8px;margin-left:8px;vertical-align:2px}
+.qerr{color:var(--danger);font-size:calc(var(--fs) - 3px);font-weight:600;line-height:1.65;
+  margin:11px 0 0;display:flex;align-items:flex-start;gap:8px}
+.qerr::before{content:"!";display:inline-flex;align-items:center;justify-content:center;
+  width:20px;height:20px;border-radius:50%;background:var(--danger);color:#fff;font-size:13px;
+  font-weight:800;flex:0 0 auto;margin-top:2px}
+.q.err > .lab{color:var(--danger)}
+.q.err > .num input{box-shadow:0 0 0 2.5px var(--danger)}
+.q.err .opt > span{box-shadow:0 0 0 2.5px var(--danger)}
 .sec{margin:32px 0 10px;font-weight:800;font-size:calc(var(--fs) + 1px);color:var(--brand);
   border-bottom:1px solid var(--line);padding-bottom:9px;letter-spacing:-.3px}
 
@@ -717,10 +727,12 @@ var STEPS = [
 {id:"intro", title:"开始之前", kind:"hero"},
 {id:"base", title:"基本情况", ask:"可以先问长辈：今年多大年纪？身高体重大概多少？家里有软尺的话，帮忙量一下腰围（肚脐上方 1 厘米处水平一圈）。如果家里有血压计，最好量一次血压。",
  qs:[
-  {k:"who", type:"radio", label:"这份问卷是给谁填的？", opts:[["self","我自己"],["family","我的家人（父母等）"]],
+  {k:"who", req:true, show:function(a){ return !a.who; }, type:"radio", label:"这份问卷是给谁填的？", opts:[["self","我自己"],["family","我的家人（父母等）"]],
    hint:"选“家人”后，每一步都会给出向长辈提问的提示。"},
-  {k:"age", type:"num", label:"年龄", unit:"岁", min:18, max:120},
-  {k:"sex", type:"radio", label:"性别", opts:[["m","男"],["f","女"]]},
+  {k:"age", req:true, type:"num", label:"年龄", unit:"岁", min:18, max:120,
+   hint:"年龄几乎影响全部风险判断，这一项是必填的。"},
+  {k:"sex", req:true, type:"radio", label:"性别", opts:[["m","男"],["f","女"]],
+   hint:"男女的筛查项目不同，这一项是必填的。"},
   {k:"height", type:"num", label:"身高", unit:"cm", min:120, max:220, hint:"不确定可以留空，我们会跳过 BMI 计算。"},
   {k:"weight", type:"num", label:"体重", unit:"kg", min:25, max:200},
   {k:"waist", type:"num", label:"腰围", unit:"cm", min:40, max:160, hint:"肚脐上方 1 厘米处，水平绕一圈。"},
@@ -2203,6 +2215,7 @@ function heroHtml(){
   + '<label><input type="radio" name="who" value="self" data-k="who" data-t="radio"'+(A.who==="self"?" checked":"")+'><span class="box"><span class="e">🙋</span><b>我自己填</b><small>适合成年人自己评估</small></span></label>'
   + '<label><input type="radio" name="who" value="family" data-k="who" data-t="radio"'+(A.who==="family"?" checked":"")+'><span class="box"><span class="e">👨‍👩‍👧</span><b>帮家人填</b><small>适合子女帮父母填写，每一步都会提示该问什么</small></span></label>'
   + '</div>'
+  + '<p class="qerr hide" id="whoerr">请先选择「我自己填」或「帮家人填」</p>'
   + '<div class="srcbox"><h3>📚 本工具依据以下 '+SOURCES.length+' 份公开文件设计</h3><ol>'+srcList+'<div class="citenote">'+CITE_NOTE_HTML+'</div>'
   + '<p style="text-align:center;margin:16px 0 0"><button type="button" class="openrd" onclick="openReader()">📖 看原文与下载</button></p></div>'
   + '<div class="note" style="margin-top:20px;text-align:left"><b>🔒 隐私与免责</b>全部计算在本机完成，不采集姓名、电话、证件号，不上传任何信息。'+HOST_LINE+'本工具给出的是<b>体检项目参考</b>，不是诊断，请与医生一起确认。</div>'
@@ -2218,7 +2231,7 @@ function qsHtml(step){
     if(q.show && !q.show(A)) continue;
     if(q.type==="sec"){ s+='<div class="sec">'+esc(q.label)+'</div>'; continue; }
     if(q.type==="info"){ s+='<div class="infobox">'+q.html+'</div>'; continue; }
-    s+='<div class="q"><span class="lab">'+esc(q.label)+'</span>';
+    s+='<div class="q" id="q-'+q.k+'"><span class="lab">'+esc(q.label)+(q.req?'<span class="req">必填</span>':'')+'</span>';
     if(q.hint) s+='<p class="hint">'+esc(q.hint)+'</p>';
     if(q.type==="radio"||q.type==="check"){
       s+='<div class="opts">';
@@ -2231,7 +2244,7 @@ function qsHtml(step){
       s+='</div>';
     } else if(q.type==="num"){
       s+='<div class="num"><input type="number" inputmode="decimal" data-k="'+q.k+'" data-t="num" value="'+(A[q.k]!==undefined&&A[q.k]!==""?A[q.k]:"")+'"'
-       + (q.min!==undefined?" min='"+q.min+"'":"") + (q.max!==undefined?" max='"+q.max+"'":"") + ' step="'+(q.step?q.step:"1")+'" placeholder="可不填">'
+       + (q.min!==undefined?" min='"+q.min+"'":"") + (q.max!==undefined?" max='"+q.max+"'":"") + ' step="'+(q.step?q.step:"1")+'" placeholder="'+(q.req?"请填写":"可不填")+'">'
        + (q.unit?'<span class="u">'+esc(q.unit)+'</span>':"") + '</div>';
     }
     s+='</div>';
@@ -2305,6 +2318,25 @@ function render(keepScroll){
   if(keepScroll) window.scrollTo(0,sy); else window.scrollTo(0,0);
 }
 
+function fieldErr(q,msg){
+  var box=document.getElementById("q-"+q.k); if(!box) return;
+  box.classList.add("err");
+  var old=box.querySelector(".qerr"); if(old && old.parentNode) old.parentNode.removeChild(old);
+  var p=document.createElement("p"); p.className="qerr"; p.textContent=msg||"这一项是必填的";
+  box.appendChild(p);
+  try{ box.scrollIntoView({behavior:"smooth",block:"center"}); }catch(e){ try{ box.scrollIntoView(); }catch(e2){} }
+  var inp=box.querySelector("input"); if(inp){ try{ inp.focus({preventScroll:true}); }catch(e){} }
+}
+function clearFieldErr(k){
+  var box=document.getElementById("q-"+k); if(!box) return;
+  box.classList.remove("err");
+  var e=box.querySelector(".qerr"); if(e && e.parentNode) e.parentNode.removeChild(e);
+}
+function heroErr(){
+  var p=document.getElementById("whoerr"); if(!p) return;
+  p.classList.remove("hide");
+  try{ p.scrollIntoView({behavior:"smooth",block:"center"}); }catch(e){}
+}
 function readPage(){
   try{
     var list=visibleSteps(), step=list[cur]; if(!step||!step.qs) return;
@@ -2331,21 +2363,35 @@ document.addEventListener("change",function(ev){
   } else { return; }          /* 数字输入由 input 事件处理，避免重复 */
   save();
   syncInputs(k);
+  clearFieldErr(k);
+  if(k==="who"){ var we=document.getElementById("whoerr"); if(we) we.classList.add("hide"); }
   var list=visibleSteps(), step=list[cur];
   /* 只有“可见题目集合”发生变化时才重绘（例如选了吸烟后出现支数/年数） */
   if(step && stepSig(step)!==LAST_SIG) render(true);
 });
 document.addEventListener("input",function(ev){
   var el=ev.target; if(!el.dataset||el.dataset.t!=="num") return;
-  A[el.dataset.k]=el.value; save();
+  A[el.dataset.k]=el.value; save(); clearFieldErr(el.dataset.k);
 });
 document.getElementById("btnNext").addEventListener("click",function(){
   var list=visibleSteps();
   var st=list[cur];
-  if(st && st.kind==="hero" && !A.who){ alert("请先选择“我自己填”或“帮家人填”"); return; }
-  if(st && st.id==="base"){
-    if(!num(A.age)){ alert("请先填写年龄。\n年龄会影响几乎所有风险判断，是必填项。"); return; }
-    if(!A.sex){ alert("请先选择性别。\n男女的筛查项目不同，是必填项。"); return; }
+  if(st && st.kind==="hero" && !A.who){ heroErr(); return; }
+  if(st && st.qs){
+    for(var qi=0;qi<st.qs.length;qi++){
+      var q=st.qs[qi];
+      if(q.show && !q.show(A)) continue;
+      if(q.type==="num"){
+        var nv=num(A[q.k]);
+        if(q.req && nv===null){ fieldErr(q,"这一项是必填的，请填写"); return; }
+        if(nv!==null && ((q.min!==undefined && nv<q.min)||(q.max!==undefined && nv>q.max))){
+          fieldErr(q,"这个数值看起来不对，请检查（允许范围 "+q.min+" - "+q.max+(q.unit?"，单位"+q.unit:"")+"）；不确定可以直接清空留白。"); return;
+        }
+      } else if(q.req){
+        var ok = q.type==="check" ? has(A[q.k]) : !!A[q.k];
+        if(!ok){ fieldErr(q,"这一项是必填的，请选择"); return; }
+      }
+    }
   }
   cur++; if(cur>list.length) cur=list.length; render();
 });
