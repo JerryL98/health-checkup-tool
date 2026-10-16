@@ -56,12 +56,13 @@ header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.94);
   background:transparent;border:0;border-radius:0;padding:0;color:var(--muted);transition:color .16s var(--ease)}
 .hd h1 .ttlbtn:hover .homechip,.hd h1 .ttlbtn:focus-visible .homechip{background:transparent;color:var(--brand)}
 .hd h1 .ttlbtn:focus-visible{outline:2.5px solid var(--brand-2);outline-offset:4px;border-radius:6px}
-.fsbtn{display:flex;gap:14px;flex:0 0 auto;background:transparent;border:0;padding:0}
-.fsbtn button{background:transparent;color:var(--muted);border:0;border-radius:9px;
-  min-width:34px;height:38px;padding:0;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;
-  transition:color .16s var(--ease)}
-.fsbtn button:hover{color:var(--ink)}
-.fsbtn button.on{background:var(--gray-l2);color:var(--brand);box-shadow:none}
+.fsbtn{display:flex;align-items:center;gap:8px;flex:0 0 auto;background:transparent;border:0;padding:0}
+.fslab{font-size:calc(var(--fs) - 5px);font-weight:800;color:var(--muted);letter-spacing:.5px;white-space:nowrap}
+.fsbtn button{background:#fff;color:var(--ink-2);border:1.5px solid var(--ctl);border-radius:10px;
+  min-width:42px;height:40px;padding:0 8px;font-size:14.5px;font-weight:800;cursor:pointer;font-family:inherit;
+  transition:background .16s var(--ease),border-color .16s var(--ease),color .16s var(--ease)}
+.fsbtn button:hover{border-color:var(--ctl-h);background:var(--gray-l)}
+.fsbtn button.on{background:var(--brand);border-color:var(--brand);color:#fff;box-shadow:none}
 .tabs{max-width:760px;margin:0 auto;padding:0 22px}
 .seg{display:flex;background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:0;gap:0}
 .seg button{flex:1;font-family:inherit;font-size:calc(var(--fs) - 2px);font-weight:700;cursor:pointer;
@@ -342,9 +343,22 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,25
   display:flex;flex-direction:column;box-shadow:var(--shadow-lg)}
 .tmhd{display:flex;align-items:center;gap:10px;padding:18px 20px;border-bottom:1px solid var(--line)}
 .tmhd b{flex:1;font-size:calc(var(--fs) + 2px);line-height:1.4;letter-spacing:-.4px;font-weight:800}
-.tmhd button{background:transparent;border:0;border-radius:11px;padding:10px 6px;font:inherit;
-  font-weight:700;cursor:pointer;color:var(--muted);min-height:44px;transition:color .15s var(--ease)}
-.tmhd button:hover{color:var(--ink)}
+.tmhd button{background:var(--gray-l2);border:1.5px solid var(--ctl);border-radius:11px;padding:9px 15px;font:inherit;
+  font-weight:800;font-size:calc(var(--fs) - 3px);cursor:pointer;color:var(--ink);min-height:46px;white-space:nowrap;
+  transition:background .15s var(--ease),border-color .15s var(--ease)}
+.tmhd button:hover{background:var(--gray-l);border-color:var(--ctl-h)}
+.tmfoot{padding:4px 20px 22px}
+.tmfoot button{width:100%;background:#fff;border:1.5px solid var(--ctl);border-radius:13px;padding:15px;font:inherit;
+  font-weight:800;font-size:var(--fs);cursor:pointer;color:var(--ink);min-height:54px;transition:background .15s var(--ease)}
+.tmfoot button:hover{background:var(--gray-l)}
+
+/* 轻提示（字号切换 / 长图生成等反馈） */
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(104px + env(safe-area-inset-bottom));
+  z-index:120;max-width:min(560px,calc(100vw - 28px));background:var(--brand-d);color:#fff;
+  border-radius:14px;padding:14px 18px;font-size:calc(var(--fs) - 2px);font-weight:700;line-height:1.65;text-align:left}
+.toast b{color:#ffe9a8}
+@keyframes toasts{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
+@media (prefers-reduced-motion:no-preference){ .toast{animation:toasts .22s var(--ease) 1} }
 .tmbd{padding:20px;overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;font-size:calc(var(--fs) - 1px);line-height:1.88}
 .tmbd p{margin:0 0 13px}
 .tmq{background:var(--brand-l);border:0;border-radius:12px;padding:14px 16px;margin:16px 0;
@@ -366,6 +380,69 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,25
 .dept .dc b{display:block;font-size:calc(var(--fs) + 1px);margin-bottom:4px;line-height:1.5;font-weight:800;
   letter-spacing:-.2px}
 .dept .dc .dw{display:block;color:var(--muted);font-size:calc(var(--fs) - 3px);line-height:1.72}
+/* ---------- 结果页目录 ---------- */
+.toc{background:linear-gradient(180deg,var(--wash-2) 0,rgba(240,248,244,0) 70%),var(--card)}
+.toclist{display:flex;flex-direction:column;gap:8px;margin-top:2px}
+.tocb{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:#fff;
+  border:1.5px solid var(--ctl);border-radius:12px;padding:12px 15px;font:inherit;font-weight:700;
+  font-size:calc(var(--fs) - 1px);color:var(--ink);cursor:pointer;min-height:50px;
+  transition:background .15s var(--ease),border-color .15s var(--ease)}
+.tocb:hover{background:var(--gray-l);border-color:var(--ctl-h)}
+.tocb .tocn{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;
+  border-radius:50%;background:var(--brand);color:#fff;font-size:calc(var(--fs) - 5px);font-weight:800;font-style:normal}
+.tocb .arr{margin-left:auto;color:var(--muted);font-weight:800;font-size:calc(var(--fs) - 2px)}
+.tocb.sub{margin-left:22px;width:calc(100% - 22px);font-weight:600;font-size:calc(var(--fs) - 2px);
+  color:var(--ink-2);border-color:var(--line-2);min-height:44px;padding:10px 15px}
+.tocb.sub .arr{font-size:calc(var(--fs) - 4px)}
+
+/* ---------- 挂号指引：5 步流程 ---------- */
+.flow{margin:4px 0 6px;padding:0;list-style:none;counter-reset:fl}
+.flow li{counter-increment:fl;position:relative;padding:2px 0 20px 42px;margin-left:13px;
+  border-left:2px solid var(--line-2)}
+.flow li:last-child{border-left-color:transparent;padding-bottom:2px}
+.flow li::before{content:counter(fl);position:absolute;left:-15px;top:0;width:28px;height:28px;border-radius:50%;
+  background:var(--brand);color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;
+  font-variant-numeric:tabular-nums}
+.flow b{display:block;font-size:calc(var(--fs) + 1px);font-weight:800;color:var(--ink);line-height:1.5;margin-bottom:1px}
+.flow span{display:block;color:var(--muted);font-size:calc(var(--fs) - 3px);line-height:1.72}
+
+/* ---------- 挂号指引：科室卡片 ---------- */
+.dcard{border:1.5px solid var(--ctl);border-radius:14px;padding:15px 16px;margin:11px 0;background:#fff}
+.dcard .dh{display:flex;gap:11px;align-items:flex-start}
+.dcard .dn{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;
+  border-radius:50%;background:var(--brand);color:#fff;font-size:13px;font-weight:800;font-style:normal;
+  font-variant-numeric:tabular-nums}
+.dcard .dt{flex:1;min-width:0}
+.dcard .dt b{display:block;font-size:calc(var(--fs) + 1px);font-weight:800;line-height:1.5;letter-spacing:-.2px}
+.dcard .dt i{display:block;font-style:normal;color:var(--muted);font-size:calc(var(--fs) - 4px);line-height:1.66;margin-top:3px}
+.dcard .dwhy{margin-top:10px;font-size:calc(var(--fs) - 3px);color:var(--ink-2);line-height:1.74}
+.dcard .dwhy b{color:var(--ink)}
+.dcard .dsay{margin-top:9px;background:var(--brand-l);border-radius:10px;padding:11px 13px;
+  font-size:calc(var(--fs) - 3px);color:var(--brand-ink);line-height:1.74}
+.dcard .dsay b{color:var(--brand-d)}
+.dcard .dnote{margin-top:9px;background:var(--amber-l);border-radius:10px;padding:11px 13px;
+  font-size:calc(var(--fs) - 3px);color:var(--amber-ink);line-height:1.74}
+
+/* ---------- 挂号指引：检查前准备表 ---------- */
+.ptab{width:100%;border-collapse:collapse;font-size:calc(var(--fs) - 3px);min-width:520px}
+.ptab th,.ptab td{border-top:1px solid var(--line);padding:11px 10px;text-align:left;vertical-align:top;line-height:1.66}
+.ptab th{background:transparent;color:var(--ink);font-weight:800;border-top:0;border-bottom:1.5px solid var(--line-2);white-space:nowrap}
+.ptab td:first-child{font-weight:700;color:var(--ink);min-width:118px}
+.ptab .preq{color:var(--danger);font-weight:800;white-space:nowrap}
+
+/* ---------- 挂号指引：常见问题（可折叠） ---------- */
+.faq{border-top:1px solid var(--line)}
+.faq summary{cursor:pointer;padding:14px 0;font-weight:700;font-size:calc(var(--fs) - 1px);line-height:1.6;
+  list-style:none;display:flex;gap:10px;align-items:flex-start;color:var(--ink);min-height:50px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:"＋";flex:0 0 auto;color:var(--brand);font-weight:800;font-size:calc(var(--fs) + 1px);line-height:1.4}
+.faq[open] summary::before{content:"－"}
+.faq summary:focus-visible{outline:2.5px solid var(--brand-2);outline-offset:2px;border-radius:6px}
+.faq p{margin:0 0 15px;padding-left:28px;color:var(--ink-2);font-size:calc(var(--fs) - 3px);line-height:1.82}
+
+.fsline{margin:10px 0 0}
+.fshint{margin:16px 0 0}
+
 .hide{display:none !important}
 .top{position:fixed;right:22px;bottom:calc(96px + env(safe-area-inset-bottom));z-index:35;
   width:46px;height:46px;padding:0;border-radius:50%;border:1px solid var(--line-2);
@@ -379,17 +456,29 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,25
 .top:hover{background:#fff;transform:translateY(-2px)}
 .top:active{transform:none}
 
-.ov{position:fixed;inset:0;z-index:60;background:rgba(9,20,17,.94);padding:16px;overflow:auto;overscroll-behavior:contain;
-  -webkit-overflow-scrolling:touch}
-.ovt{color:#fff;text-align:center;font-size:15px;margin:6px 0 12px;opacity:.85;letter-spacing:.2px}
-.ov img{width:100%;max-width:700px;margin:0 auto;display:block;border-radius:14px;background:#fff;
-  box-shadow:0 40px 80px -40px rgba(0,0,0,.7)}
-.ov .hint{color:#fff;text-align:center;font-size:14px;line-height:1.65;margin:14px auto 0;max-width:700px;opacity:.85}
-.ov .hint b{color:#7fe3c2}
-.ovbar{max-width:700px;margin:18px auto 0;display:flex;gap:10px;flex-wrap:wrap}
-.ovbar button{flex:1 1 140px;font:inherit;font-weight:700;border:0;border-radius:13px;padding:15px;cursor:pointer;
-  min-height:54px;transition:filter .16s var(--ease),transform .1s var(--ease)}
+.ov{position:fixed;inset:0;z-index:60;background:rgba(9,20,17,.94);display:flex;justify-content:center;
+  overscroll-behavior:contain}
+.ovbox{display:flex;flex-direction:column;width:100%;max-width:760px;min-height:0;padding:12px 14px 0}
+.ovhd{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.ovt{color:#fff;flex:1;font-size:calc(var(--fs) - 1px);margin:0;font-weight:800;letter-spacing:.2px;line-height:1.4}
+.ovx{flex:0 0 auto;background:rgba(255,255,255,.16);border:1.5px solid rgba(255,255,255,.55);color:#fff;
+  border-radius:11px;min-width:46px;min-height:46px;font:inherit;font-size:19px;font-weight:800;cursor:pointer;line-height:1}
+.ovx:hover{background:rgba(255,255,255,.28)}
+.ovhow{flex:0 0 auto;background:#fff8e6;border-radius:14px;padding:13px 15px;margin-top:10px}
+.ovhow p{margin:0;color:#4a3a12;font-size:calc(var(--fs) - 3px);line-height:1.68}
+.ovhow p+p{margin-top:7px}
+.ovhow b{color:#7a4a00}
+.ovhow1{font-size:calc(var(--fs) - 1px) !important;font-weight:700}
+.ovscroll{flex:1 1 auto;min-height:0;overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+  margin-top:10px;border-radius:14px 14px 0 0;background:#fff}
+.ov img{width:100%;display:block;border-radius:14px;background:#fff}
+.ovbar{flex:0 0 auto;display:flex;gap:10px;flex-wrap:wrap;padding:10px 0 calc(12px + env(safe-area-inset-bottom))}
+.ovbar button{flex:1 1 220px;font:inherit;font-weight:800;border:0;border-radius:13px;padding:15px;cursor:pointer;
+  min-height:56px;font-size:calc(var(--fs) - 2px);transition:filter .16s var(--ease),transform .1s var(--ease)}
 .ovbar button:active{transform:translateY(1px)}
+.ovdl{background:var(--brand);color:#fff}
+.ovdl:hover{background:var(--brand-d)}
+.ovcl{background:#fff;color:var(--gray);border:2px solid rgba(255,255,255,.5)}
 
 @media (max-width:460px){ .hd h1 .hcl{display:none} }
 @media (prefers-reduced-motion:reduce){
@@ -415,8 +504,8 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,25
   .tabs{padding:0 18px}
   .logo{width:24px;height:24px}
   .hd h1{font-size:calc(var(--fs) - 1px)}
-  .fsbtn{gap:10px}
-  .fsbtn button{min-width:31px;height:36px;font-size:12px}
+  .fsbtn{gap:6px}
+  .fsbtn button{min-width:36px;height:38px;font-size:13.5px;padding:0 6px}
   .seg button{font-size:calc(var(--fs) - 3px);padding:11px 6px;min-height:45px}
   nav{padding:9px 18px calc(11px + env(safe-area-inset-bottom))}
   .nv{gap:10px}
@@ -428,8 +517,9 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,25
   .hero{padding:22px 15px 6px}
   .hd .tag{display:none}
   .hd h1{font-size:calc(var(--fs) - 2px)}
-  .fsbtn{gap:8px}
-  .fsbtn button{min-width:28px;font-size:12px}
+  .fsbtn{gap:5px}
+  .fslab{font-size:11px;letter-spacing:0}
+  .fsbtn button{min-width:33px;height:36px;font-size:12.5px;padding:0 5px}
   .hero h2{font-size:calc(var(--fs) + 10px);letter-spacing:-1px}
   .card > h2{font-size:calc(var(--fs) + 7px)}
   .opts{gap:8px}
@@ -444,11 +534,12 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,25
 <header>
   <div class="hd">
     <svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lgMark" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#13926f"/><stop offset="1" stop-color="#0a6049"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="#12352b"/><path d="M28 13h8v15h15v8H36v15h-8V36H13v-8h15z" fill="#fff"/></svg>
-    <h1><button type="button" class="ttlbtn" onclick="goHome()" title="返回首页（回到第一页，已填内容不会丢失）"><span class="ttl">体检项目参考工具</span><span class="homechip">🏠<span class="hcl"> 返回首页</span></span></button><span class="tag">依据国家卫健委 2025 版体检指引 · v0.4</span></h1>
-    <div class="fsbtn">
-      <button type="button" data-fs="0" class="on" title="标准字号" aria-label="标准字号">A</button>
-      <button type="button" data-fs="1" title="大号字" aria-label="大号字">A+</button>
-      <button type="button" data-fs="2" title="特大字" aria-label="特大字">A++</button>
+    <h1><button type="button" class="ttlbtn" onclick="goHome()" title="返回首页（回到第一页，已填内容不会丢失）"><span class="ttl">体检项目参考工具</span><span class="homechip">🏠<span class="hcl"> 返回首页</span></span></button><span class="tag">依据国家卫健委 2025 版体检指引 · v0.5</span></h1>
+    <div class="fsbtn" role="group" aria-label="调整整页文字大小">
+      <span class="fslab">字号</span>
+      <button type="button" data-fs="0" class="on" title="标准字号" aria-label="标准字号" aria-pressed="true">A</button>
+      <button type="button" data-fs="1" title="大号字（放大）" aria-label="大号字" aria-pressed="false">A+</button>
+      <button type="button" data-fs="2" title="特大字（最大）" aria-label="特大字" aria-pressed="false">A++</button>
     </div>
   </div>
   
@@ -466,20 +557,31 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,25
   <button type="button" class="next" id="btnNext">下一步</button>
 </div></nav>
 
+<div id="toast" class="toast hide" role="status" aria-live="polite"></div>
+
 <div class="tm hide" id="tm" onclick="if(event.target===this)hideTerm()">
   <div class="tmbox">
-    <div class="tmhd"><b id="tmtitle">词语</b><button type="button" onclick="hideTerm()">关闭</button></div>
+    <div class="tmhd"><b id="tmtitle">词语</b><button type="button" onclick="hideTerm()" aria-label="关闭这个解释弹窗">✕ 关闭</button></div>
     <div class="tmbd" id="tmbd"></div>
   </div>
 </div>
 
 <div class="ov hide" id="ov">
-  <p class="ovt" id="ovt">长图已生成</p>
-  <img id="ovimg" alt="体检项目参考长图">
-  <p class="hint">手机上<b>长按图片</b>即可保存到相册；电脑上点下面的“下载图片”。</p>
-  <div class="ovbar">
-    <button type="button" onclick="dlImage()" style="background:var(--brand);color:#fff">下载图片</button>
-    <button type="button" onclick="closeOv()" style="background:#fff;color:var(--gray)">关闭</button>
+  <div class="ovbox">
+    <div class="ovhd">
+      <p class="ovt" id="ovt">长图已生成</p>
+      <button type="button" class="ovx" onclick="closeOv()" aria-label="关闭">✕</button>
+    </div>
+    <div class="ovhow">
+      <p class="ovhow1">📱 <b>手机上：用手指长按下面的图片</b>，在弹出的菜单里选「保存图片 / 添加到相册」。</p>
+      <p>长按没反应（部分浏览器不支持）就点最下面的「⬇ 下载图片到相册」；也可以直接截图。</p>
+      <p>💻 <b>电脑上：点最下面的「⬇ 下载图片到相册」。</b>图片按手机屏宽排版，可直接发给医生或家人。</p>
+    </div>
+    <div class="ovscroll"><img id="ovimg" alt="体检项目参考长图"></div>
+    <div class="ovbar">
+      <button type="button" class="ovdl" onclick="dlImage()">⬇ 下载图片到相册</button>
+      <button type="button" class="ovcl" onclick="closeOv()">✕ 关闭</button>
+    </div>
   </div>
 </div>
 
@@ -493,7 +595,7 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,25
    设计原则：零采集、零上传、纯本地计算；不适老之处一律简化。
    ========================================================================= */
 
-var VERSION = "2026.10 原型 v0.4（AI 生成）";
+var VERSION = "2026.10 原型 v0.5（AI 生成）";
 
 /* ---------- 本地打开 vs 网站托管：隐私说明必须分开写，不能含糊 ---------- */
 var IS_LOCAL=(function(){ try{ return location.protocol==="file:"; }catch(e){ return true; } })();
@@ -935,6 +1037,7 @@ var STEPS = [
 var A = {};            // 答案
 var cur = 0;           // 当前步
 var FS = [17,20,23];   // 字号档位
+var FS_NAME = ["标准字号","大号字","特大字"];   // 与 FS 一一对应
 
 function num(x){ var n=parseFloat(x); return isNaN(n)?null:n; }
 function has(arr,k){ return Object.prototype.toString.call(arr)==='[object Array]' && arr.indexOf(k)>=0; }
@@ -1172,9 +1275,9 @@ function assess(){
 }
 
 /* =========================== 结果渲染 =========================== */
-function tierHtml(cls, title, groups){
+function tierHtml(cls, title, groups, id){
   if(!groups.length) return "";
-  var s='<div class="tier '+cls+'"><h3><span class="dot"></span>'+title+'</h3>';
+  var s='<div class="tier '+cls+'"'+(id?' id="'+id+'"':"")+'><h3><span class="dot"></span>'+title+'</h3>';
   for(var i=0;i<groups.length;i++){
     var g=groups[i];
     s+='<div class="grp"><h4>'+esc(g.g)+'</h4>';
@@ -1186,8 +1289,115 @@ function tierHtml(cls, title, groups){
   return s+'</div>';
 }
 
+/* =========================== 结果页目录 =========================== */
+function tocHtml(list){
+  if(!list.length) return "";
+  var s='<div class="card toc"><h2>📑 目录</h2><p class="sub">点一下就直接跳到那一节，不用一直往下滑。</p><div class="toclist">';
+  for(var i=0;i<list.length;i++){
+    var it=list[i];
+    s+='<button type="button" class="tocb'+(it.sub?" sub":"")+'" onclick="jumpSec(\''+it.id+'\')">'
+     + (it.sub?"":'<i class="tocn">'+it.n+'</i>') + esc(it.label) + '<span class="arr">↓</span></button>';
+  }
+  return s+'</div></div>';
+}
+
+/* =========================== 挂号与科室指引 =========================== */
+/* 每个科室：别名（不同医院的叫法）、进门怎么说、一句提醒 */
+var DEPT_INFO = {
+ "健康体检中心":{alias:"也叫 健康管理中心、体检部、预防保健科",say:"请按这份清单帮我开体检单，能一次配齐的项目就一起开。",note:"多数医院最省事的第一步。很多医院设有「检前咨询门诊 / 健康管理门诊」，直接去那里更省时间。"},
+ "老年医学科":{alias:"也叫 老年病科、综合内科、老年医学中心",say:"老人 60 岁以上，想做衰弱、肌少症、跌倒、营养、多重用药、认知和情绪这几方面的评估。",note:"能一次把老年综合评估做全的科室。这些项目普通体检套餐里通常没有，但对老人最关键。"},
+ "心血管内科":{alias:"也叫 心内科",say:"体检发现血压、血脂或心电图有问题，想做心血管风险评估，以及颈动脉超声、动态心电图这些检查。",note:"如果医生要算 10 年心血管风险，可以提一下国家心血管病中心的官方评估工具（China-PAR 模型）。"},
+ "内分泌科":{alias:"也叫 内分泌代谢科",say:"想查血糖、糖化血红蛋白、甲状腺功能和骨密度。",note:"糖尿病、甲状腺、骨质疏松、肥胖都归这里管。"},
+ "呼吸内科":{alias:"也叫 呼吸与危重症医学科",say:"长期吸烟、长期咳嗽，想做肺功能和胸部低剂量 CT。",note:"低剂量 CT 需要预约，通常当天做不上。"},
+ "消化内科":{alias:"也叫 消化科；胃镜肠镜在「内镜中心 / 内镜室」",say:"想预约胃镜和肠镜，另外查一下幽门螺杆菌。",note:"胃肠镜一般要单独预约，还要做麻醉评估和肠道准备，通常需要家属陪同。"},
+ "乳腺外科":{alias:"也叫 甲乳外科、乳腺病中心",say:"想开乳腺 X 线（钼靶）和乳腺超声；如果家里得乳腺癌的人多，想咨询要不要做 BRCA 基因检测。",note:"基因检测必须配合遗传咨询，不建议自己去外面的机构单独做。"},
+ "泌尿外科":{alias:"也叫 泌尿科",say:"想查 PSA（前列腺特异性抗原）和前列腺超声。",note:"PSA 要不要查、查出来偏高怎么办，需要和医生一起决定，不要只看数字。"},
+ "甲状腺外科":{alias:"也叫 甲乳外科、头颈外科",say:"想复查甲状腺结节。",note:"普通人群不建议做甲状腺超声普筛，只有明确高危或已经有结节的人需要复查。"},
+ "妇科":{alias:"也叫 妇产科",say:"想做宫颈癌筛查（TCT + HPV）和妇科超声。",note:"已切除子宫、或没有性生活史，要提前告诉医生，检查项目会不一样。"},
+ "神经内科":{alias:"也叫 记忆门诊 / 认知障碍门诊（部分医院单设）",say:"近一年记性明显变差，想做认知筛查（MMSE / MoCA / AD8）和头颅磁共振。",note:"记忆门诊通常要提前预约，最好由最了解老人日常的家属陪同、一起回答医生的问题。"},
+ "骨科":{alias:"也叫 骨外科",say:"想评估骨质疏松和骨折风险，需要做骨密度（DXA）和 FRAX 评估。",note:"骨密度在部分医院由内分泌科开单。"},
+ "肾内科":{alias:"也叫 肾脏内科",say:"想查尿微量白蛋白／肌酐比值、肾功能和肾脏超声。",note:"糖尿病、高血压患者建议每年查一次尿蛋白，早期发现还能逆转。"},
+ "血管外科":{alias:"也叫 介入血管科",say:"想做腹主动脉瘤超声和下肢动脉检查。",note:"吸烟的老年男性建议至少查一次腹主动脉瘤超声。"},
+ "临床药学门诊":{alias:"也叫 药学门诊、用药咨询门诊",say:"正在吃 5 种以上药物，想做一次用药核查。",note:"把全部药盒（含中药、保健品）带去，比口头说更准。"},
+ "临床心理科":{alias:"也叫 心理科、精神科、心身医学科",say:"近两周情绪低落、紧张，想做抑郁（GDS-15）和焦虑（GAD-7）评估。",note:"这不是“想不开”，和高血压一样是需要治疗的问题。"},
+ "耳鼻咽喉科":{alias:"也叫 耳鼻喉科、五官科",say:"听力下降，想做听力检查和耳道检查。",note:"听力下降会影响交流、增加认知下降风险，需要配助听器要尽早。"},
+ "眼科":{alias:"也叫 眼科／眼底病门诊",say:"想查视力、眼压和眼底。",note:"糖尿病患者每年都要查眼底。眼底检查要散瞳，之后 4–6 小时怕光、看近处模糊，最好有人陪同、不要自己开车。"},
+ "康复医学科":{alias:"也叫 康复科、老年康复科",say:"有吞咽困难、容易呛咳或走路不稳，想做吞咽功能评估和平衡训练。",note:"吞咽评估在部分医院由耳鼻咽喉科做。"},
+ "临床营养科":{alias:"也叫 营养科、营养门诊",say:"近半年体重下降、吃得少，想做营养筛查（MNA-SF）和饮食指导。",note:"老年人营养不良很常见，但常被当成“年纪大了变瘦很正常”。"}
+};
+function deptKey(d){ return String(d).split("/")[0].replace(/（[^）]*）/g,"").trim(); }
+function deptInfo(d){
+  var k=deptKey(d); if(DEPT_INFO[k]) return DEPT_INFO[k];
+  var parts=String(d).split("/");
+  for(var i=0;i<parts.length;i++){ var p=parts[i].replace(/（[^）]*）/g,"").trim(); if(DEPT_INFO[p]) return DEPT_INFO[p]; }
+  return {alias:"",say:"把这份清单给医生看，请他判断在哪个科开单。",note:""};
+}
+var DEPT_FLOW=[
+ ["挂号","先挂「健康体检中心 / 体检科」。需要专科开单的，再挂对应的专科号；拿不准就问导诊台。"],
+ ["开单","把这份清单（或保存下来的长图）给医生看，请他按清单开检查单。"],
+ ["预约","胃镜、肠镜、CT、磁共振、动态心电图这些要单独预约，当天一般做不上，要留出时间。"],
+ ["检查","按下面第 ② 步「检查前准备」做。带齐身份证、医保卡、既往报告和全部药盒。"],
+ ["复诊","拿到报告后回到开单的科室看结果，按医生定的时间复查。"]
+ ];
+function flowBlock(){
+  var s='<ol class="flow">';
+  for(var i=0;i<DEPT_FLOW.length;i++) s+='<li><b>'+esc(DEPT_FLOW[i][0])+'</b><span>'+esc(DEPT_FLOW[i][1])+'</span></li>';
+  return s+'</ol>';
+}
+function deptBlock(depts){
+  var s='';
+  for(var i=0;i<depts.length;i++){
+    var d=depts[i], info=deptInfo(d.d);
+    s+='<div class="dcard"><div class="dh"><i class="dn">'+(i+1)+'</i><div class="dt"><b>'+esc(d.d)+'</b>'
+     + (info.alias?'<i>'+esc(info.alias)+'</i>':'')
+     + '</div></div>'
+     + '<div class="dwhy"><b>为什么挂这个科：</b>'+esc(d.why.length?d.why.join("；"):"开具体检单、完成全部基础项目")+'</div>'
+     + '<div class="dsay"><b>进门可以这么说：</b>「'+esc(info.say)+'」</div>'
+     + (info.note?'<div class="dnote">💡 '+esc(info.note)+'</div>':'')
+     + '</div>';
+  }
+  return s;
+}
+var DEPT_PREP=[
+ ["抽血 / 生化 / 血糖 / 血脂","空腹 8–12 小时","前一天晚饭后就不再吃东西，可以少量喝白水。平时吃的降压药一般照常服，但请先问医生。"],
+ ["腹部超声（肝胆胰脾）","空腹","尽量和抽血安排在同一天早上，一起空腹做完。"],
+ ["泌尿系 / 前列腺 / 妇科超声","憋尿","检查前 1 小时喝 500–800ml 水，有小便感但先不要排掉。"],
+ ["胃镜","空腹 6–8 小时 · 需预约","要提前预约。长期吃抗凝、抗血小板药（阿司匹林、华法林等）必须提前告知医生。"],
+ ["肠镜","肠道准备 · 需预约","提前 1 天吃低渣饮食，按医嘱分次喝清肠药；检查当天通常需要家属陪同。"],
+ ["胸部低剂量 CT","不用空腹","摘掉项链等金属物品；如果可能怀孕，请提前说明。"],
+ ["增强 CT / 磁共振（MRI）","空腹 4–6 小时","要评估肾功能。体内有心脏支架、起搏器或其他金属植入物、或怕密闭空间，务必提前说明。"],
+ ["动态血压 / 动态心电图","预留 24 小时","佩戴期间正常生活、正常吃药；把不舒服的时间和当时在做什么记下来交给医生。"],
+ ["尿常规","晨起第一次尿 · 取中段","避开月经期；留尿前先清洁外阴。"],
+ ["粪便隐血试验","避开月经期和痔疮出血期","检查前 3 天不吃大量动物血、肝脏，具体按医院说明。"],
+ ["骨密度（DXA）","不用空腹","检查前 24 小时不要服钙片；穿没有金属拉链和纽扣的衣服。"],
+ ["听力 / 视力 / 眼底","不用空腹","眼底检查要散瞳，之后 4–6 小时怕光、看近处模糊，建议有人陪同、不要自己开车。"]
+ ];
+function prepTable(){
+  var s='<div class="tw"><table class="ptab"><tr><th>要做的检查</th><th>要求</th><th>具体怎么做</th></tr>';
+  for(var i=0;i<DEPT_PREP.length;i++)
+    s+='<tr><td>'+esc(DEPT_PREP[i][0])+'</td><td class="preq">'+esc(DEPT_PREP[i][1])+'</td><td>'+esc(DEPT_PREP[i][2])+'</td></tr>';
+  return s+'</table></div>';
+}
+var DEPT_FAQ=[
+ ["医生说其中几项不用做，可以吗？","可以，而且应该听医生的。这份清单是按国家指引的风险规则生成的参考，医生会结合您的症状、既往报告和身体情况调整。医生说不用做，通常是因为对您来说收益不大、或者风险更高。"],
+ ["清单上的项目我们医院没有，怎么办？","请医生用同类项目替代。比如没有低剂量 CT，可以问能不能用常规胸部 CT；没有某种化验，可以问有没有等价的指标。尽量不要整项放弃。"],
+ ["一天做不完怎么办？","分两次做。先做基础和抽血，胃肠镜、CT、磁共振这些需要预约的排到第二次。空腹项目尽量集中在同一天早上，少饿几次。"],
+ ["报告上写着异常，是不是就得病了？","不一定。筛查本来就是用来“挑出需要进一步检查的人”，阳性只代表要进一步查，真正确诊要靠病理或专科检查。"],
+ ["多久复查一次？","按医生给的时间，也要看项目：血压、血糖、血脂一般每年一次；胃肠镜如果这次没问题，通常隔几年再复查；骨密度一般 1–2 年。请把医生说的间隔记在报告上。"],
+ ["老人行动不便，有优先通道吗？","很多医院对高龄、行动不便的老人有优先窗口或“一站式”体检通道，挂号时可以问导诊台。社区卫生服务中心也能做一部分基础检查和随访。"]
+ ];
+function faqBlock(){
+  var s='';
+  for(var i=0;i<DEPT_FAQ.length;i++)
+    s+='<details class="faq"><summary>'+esc(DEPT_FAQ[i][0])+'</summary><p>'+esc(DEPT_FAQ[i][1])+'</p></details>';
+  return s;
+}
+
 function renderResult(){
   var R=assess(), a=A, m=R.metrics;
+  var TOC=[], TOCN=0;
+  function sec(id,label){ TOCN++; TOC.push({id:id,label:label,n:TOCN}); }
+  function sub(id,label){ TOC.push({id:id,label:label,sub:true}); }
   var s='<div class="card"><h2>为您整理的体检项目参考</h2><p class="sub">'+VERSION+' ｜ '+PRIVACY_SUB+'</p>'
    + '<div class="ai slim">⚠ <b style="display:inline;margin:0">本内容由 AI 生成整理，未经医学专业人员审核，不能作为医疗依据。</b>请以原始文件原文与医生意见为准。</div>'
    + '<div class="legend" style="margin:0 0 14px">💡 <b>带黄色底纹的词</b>可点击，查看<b>解释</b>与<b>依据来源</b></div>'
@@ -1195,10 +1405,13 @@ function renderResult(){
    + '<button type="button" onclick="editAgain()" style="background:var(--brand-l);border:0;color:var(--brand-d);border-radius:10px;padding:9px 14px;font:inherit;font-size:calc(var(--fs) - 3px);font-weight:700;cursor:pointer">← 返回修改答案</button>'
    + '<button type="button" onclick="saveImageFull()" style="background:var(--brand);border:0;color:#fff;border-radius:10px;padding:9px 14px;font:inherit;font-size:calc(var(--fs) - 3px);font-weight:700;cursor:pointer">📷 完整长图</button>'
    + '<button type="button" onclick="saveImageBrief()" style="background:var(--amber-l);border:0;color:var(--amber);border-radius:10px;padding:9px 14px;font:inherit;font-size:calc(var(--fs) - 3px);font-weight:700;cursor:pointer">⚡ 精简长图</button>'
-   + '</div>';
+   + '</div>'
+   + '<p class="hint fsline">🔍 <b>字太小看不清？</b>点右上角的 <b>字号 A+</b> 可以把整页文字放大（A / A+ / A++ 三档，会记住）。</p>'
+   + '<p class="hint fsline">📷 点上面的「完整长图 / 精简长图」会生成<b>一张图片</b>：手机上长按图片就能保存到相册，不用打印。</p>';
 
   /* 概要指标 */
-  s+='<div class="big">';
+  sec("sec-metric","指标概览");
+  s+='<div class="big" id="sec-metric">';
   if(m.bmi!==null){ var bc=m.bmi>=28?"bad":m.bmi>=24?"warn":"ok";
     s+='<div class="metric '+bc+'"><div class="v">'+(Math.round(m.bmi*10)/10)+'</div><div class="k">BMI'+(m.bmi>=28?" 肥胖":m.bmi>=24?" 超重":" 正常")+'</div></div>'; }
   if(num(a.waist)!==null) s+='<div class="metric '+(R.central?"warn":"ok")+'"><div class="v">'+a.waist+'</div><div class="k">腰围 cm'+(R.central?" 超标":"")+'</div></div>';
@@ -1210,9 +1423,11 @@ function renderResult(){
 
   if(m.packYears) s+='<p class="hint">吸烟量折算约 '+(Math.round(m.packYears*10)/10)+' 包年。</p>';
   s+='</div>';
+  s+='<!--TOC-->';
 
   /* 高风险人群 */
-  s+='<div class="card"><h2>您命中的高风险人群</h2>';
+  sec("sec-risk","命中的高风险人群");
+  s+='<div class="card" id="sec-risk"><h2>您命中的高风险人群</h2>';
   var hiList=R.risks.filter(function(x){return x.lvl==="high";});
   var waList=R.risks.filter(function(x){return x.lvl!=="high";});
   if(!R.risks.length) s+='<p class="sub">未发现明确的高风险条件。仍建议完成基础项目，并按年龄、性别做常规筛查。</p>';
@@ -1229,11 +1444,15 @@ function renderResult(){
   s+='</div>';
 
   /* 三档项目 */
-  s+='<div class="card"><h2>建议的体检项目</h2><p class="sub">分三档：基础必查、因风险而重点加查、可选。可保存长图后与医生一起确认。</p>';
+  sec("sec-items","建议的体检项目");
+  s+='<div class="card" id="sec-items"><h2>建议的体检项目</h2><p class="sub">分三档：基础必查、因风险而重点加查、可选。可保存长图后与医生一起确认。</p>';
 
   /* 与长图共用 buildPlan()，确保依据／出处两边完全一致 */
   var P=buildPlan();
-  for(var t=0;t<P.tiers.length;t++) s+=tierHtml(P.tiers[t].cls, P.tiers[t].title, P.tiers[t].groups);
+  for(var t=0;t<P.tiers.length;t++){
+    if(P.tiers[t].groups.length) sub("sec-tier-"+t, P.tiers[t].title);
+    s+=tierHtml(P.tiers[t].cls, P.tiers[t].title, P.tiers[t].groups, "sec-tier-"+t);
+  }
 
   /* 年龄与停止提示 */
   var notes=[];
@@ -1242,25 +1461,40 @@ function renderResult(){
   if(R.metrics.frailty>=1&&num(a.age)>=60) notes.push("存在衰弱或衰弱前期：筛查决策应<b>先评估预期寿命与身体耐受能力</b>。国际共识认为预期寿命不足 10 年时，不建议再做癌症筛查。");
   if(has(a.dx,"糖尿病")) notes.push("已确诊糖尿病：重点应放在<b>并发症筛查</b>（眼底、尿微量白蛋白、足部与神经病变、心脑血管），而不是反复做诊断性检查。");
   if(has(a.meds,"none")===false&&num(a.med_count)>=5) notes.push("正在服用 5 种以上药物：建议请医生或药师做一次<b>用药核查</b>，减少不适当用药与跌倒风险。");
-  if(notes.length){ s+='<div class="note warn"><b>关于“做多少”的提醒</b><br>'+notes.join("<br><br>")+'</div>'; }
+  if(notes.length){ sec("sec-stop","“做多少”的提醒"); s+='<div class="note warn" id="sec-stop"><b>关于“做多少”的提醒</b><br>'+notes.join("<br><br>")+'</div>'; }
 
   s+='</div>';
 
-  /* 挂号与科室指引 */
+  /* 挂号与科室指引（详细版） */
+  sec("sec-dept","挂号与科室指引");
   var depts=buildDepts(P);
-  s+='<div class="card"><h2>🏥 下一步：挂号与科室指引</h2><p class="sub">拿到清单后按顺序办理。不同医院科室设置不同，<b>以医院导诊台为准</b>。</p>';
-  for(var di=0;di<depts.length;di++){
-    s+='<div class="dept"><span class="no">'+(di+1)+'</span><div class="dc"><b>'+esc(depts[di].d)+'</b>'
-     + (depts[di].why.length?('<span class="dw">'+esc(depts[di].why.join("、"))+'</span>'):'<span class="dw">开具体检单、完成全部基础项目</span>')
-     + '</div></div>';
-  }
-  s+='<div class="note"><b>办理提示</b><br>';
-  for(var ti=0;ti<DEPT_TIPS.length;ti++) s+='· '+esc(DEPT_TIPS[ti])+'<br>';
-  s+='</div></div>';
+  s+='<div class="card" id="sec-dept"><h2>🏥 下一步：怎么挂号、去哪个科</h2>'
+   + '<p class="sub">拿到清单后按下面 5 步走就行。不同医院的科室名字不一样，<b>以医院导诊台为准</b>；下面每条都标了常见的「别名」，找不到科室时把这几个名字念给导诊台听。</p>'
+   + flowBlock()
+   + '<div class="sec">① 挂哪个科（一般先挂第 1 个，其余按需要）</div>'
+   + '<p class="hint">先把第 1 个挂上，能一起开的检查一起开掉；排在前面的科室通常能覆盖更多项目。</p>'
+   + deptBlock(depts)
+   + '<div class="sec">② 检查前准备（照着做，别白跑一趟）</div>'
+   + '<p class="hint">表格在手机屏幕上可以左右滑动。要求里写了「需预约」的，请提前打电话或到科室问清时间。</p>'
+   + prepTable()
+   + '<div class="sec">③ 去之前一定带上</div>'
+   + '<div class="note"><b>🧳 随身清单</b><br>'
+   + '· 身份证、医保卡（有的医院要先办就诊卡）<br>'
+   + '· 既往体检报告、化验单、出院小结，方便医生对比<br>'
+   + '· <b>全部正在吃的药</b>：西药、中药、保健品，带药盒或写清单（药名 + 剂量 + 吃了多久）<br>'
+   + '· <b>这份清单</b>：把结果页的「完整长图」保存到手机相册，或者截图，直接给医生看<br>'
+   + '· 老年人最好有人陪同；行动不便可以先问导诊台有没有优先通道<br>'
+   + '</div>'
+   + '<div class="sec">④ 常见的几个问题</div>'
+   + faqBlock()
+   + '<div class="note warn" style="margin-top:14px"><b>办理提示</b><br>'
+   + DEPT_TIPS.map(function(x){ return "· "+esc(x); }).join("<br>")
+   + '</div></div>';
 
   /* 老年模块 */
   if(R.elder.length){
-    s+='<div class="card"><h2>老年人专项发现</h2><p class="sub">这部分依据 WS/T 888-2026《医疗机构老年综合评估技术操作标准》、WS/T 887-2026《社区老年人跌倒预防控制技术标准》等国家标准 —— 这些项目通常不在普通体检套餐里，但对老人最关键。</p>';
+    sec("sec-elder","老年人专项发现");
+    s+='<div class="card" id="sec-elder"><h2>老年人专项发现</h2><p class="sub">这部分依据 WS/T 888-2026《医疗机构老年综合评估技术操作标准》、WS/T 887-2026《社区老年人跌倒预防控制技术标准》等国家标准 —— 这些项目通常不在普通体检套餐里，但对老人最关键。</p>';
     for(var e=0;e<R.elder.length;e++){
       if(!R.elder[e].t) continue;
       s+='<div class="rk '+(R.elder[e].lvl==="bad"?"hi":"")+'"><div class="why">'+esc(R.elder[e].t)+'</div></div>';
@@ -1273,13 +1507,15 @@ function renderResult(){
   }
 
   /* 免责 */
-  s+='<div class="card"><h2>📚 本工具依据以下 '+SOURCES.length+' 份文件设计</h2><div class="srcbox" style="margin-top:0;border:0;background:none;padding:0"><ol>';
+  sec("sec-src","依据文件");
+  s+='<div class="card" id="sec-src"><h2>📚 本工具依据以下 '+SOURCES.length+' 份文件设计</h2><div class="srcbox" style="margin-top:0;border:0;background:none;padding:0"><ol>';
   for(var si=0;si<SOURCES.length;si++) s+='<li>'+esc(SOURCES[si])+'</li>';
   s+='</ol><div class="citenote">'+CITE_NOTE_HTML+'</div>'
    + '<button type="button" class="openrd" style="margin-top:12px" onclick="openReader()">📖 查看依据文件完整原文（'+DOCS.length+' 份）</button>'
    + '</div></div>';
 
-  s+='<div class="card"><h2>使用说明与免责声明</h2><div class="disc">'
+  sec("sec-disc","使用说明与免责声明");
+  s+='<div class="card" id="sec-disc"><h2>使用说明与免责声明</h2><div class="disc">'
    + '<div class="ai slim" style="margin:0 0 12px">⚠ <b style="display:inline;margin:0">AI 生成声明:</b>'+esc(AI_NOTICE)+'</div>'
    + '<b>1. 这不是诊断。</b>本工具依据国家卫生健康委员会《成人健康体检项目推荐指引（2025年版）》及其附件 1–5，以及 WS/T 888-2026 等国家标准，把其中的风险判定规则整理成问卷，帮助您理解“自己该重点查什么”。<br><br>'
    + '<b>2. 不能替代医生。</b>结果仅供与医生沟通时参考，不构成医疗建议、诊断或处方。是否做某项检查、何时做，请以医生面诊意见为准。<br><br>'
@@ -1293,6 +1529,7 @@ function renderResult(){
    + '<button type="button" onclick="restart()" style="flex:0 0 auto;background:#fff;border:2px solid var(--line);color:var(--gray);border-radius:12px;padding:14px 18px;font:inherit;font-weight:700;cursor:pointer">重新填写</button>'
    + '</div></div>';
 
+  s=s.replace("<!--TOC-->", tocHtml(TOC));
   return s;
 }
 
@@ -1494,6 +1731,97 @@ var GLOSSARY_MORE2 = {
  "TCT":{"d":"液基薄层细胞检测，是宫颈细胞学检查的常用方法，用于发现宫颈癌及癌前病变。",q:"细胞学检查　子宫颈细胞学检查",ref:"附件2·实验室检查—细胞学检查",doc:3}
 };
 for(var _gk2 in GLOSSARY_MORE2){ GLOSSARY[_gk2]=GLOSSARY_MORE2[_gk2]; }
+/* ---------- 本工具补充的通用名词（让普通人也能看懂） ----------
+   这些条目里凡是带「原文摘录」的，摘录都自动取自上面 DOCS 的正文，
+   可以在弹窗里点「查看该文件原文」逐条核对；没有摘录的会在弹窗里标明「本工具补充」。 */
+var GLOSSARY_MORE3 = {
+ "血脂":{t:"血脂",d:"血液里的脂肪类物质，主要包括总胆固醇、甘油三酯、低密度和高密度脂蛋白。血脂长期偏高会加速血管里长斑块，增加心梗和脑卒中风险。",q:"…查。常规检查包括血常规、尿常规、粪便常规+隐血试验；生化检查包括肝功能、肾功能、血脂、血糖、血尿酸、血同型半胱氨酸；甲状腺功能检查包括促甲状腺激素、游离甲状腺激素；分子检查主要是指高危型HPV核酸检测…",ref:"指引正文·（一）健康体检基本项目·实验室检查",doc:1},
+ "肌酐":{t:"肌酐（肾功能指标）",d:"肌肉代谢产生的废物，靠肾脏排出。血肌酐升高通常提示肾脏排毒能力下降，是评估肾功能最常用的指标。",q:"肾功能：尿素氮、肌酐",ref:"附件2·实验室检查—生化检查·肾功能",doc:3},
+ "尿素氮":{t:"尿素氮",d:"蛋白质代谢产生的废物，同样由肾脏排出，常和肌酐一起用来看肾功能。",q:"肾功能：尿素氮、肌酐",ref:"附件2·实验室检查—生化检查·肾功能",doc:3},
+ "转氨酶":{t:"转氨酶（ALT / AST）",d:"肝细胞里的酶。肝细胞受损时会漏到血液里，所以转氨酶升高常提示肝脏有问题；不过熬夜、饮酒、剧烈运动也可能让它轻度升高。",q:"（三）辅助检查。包括血常规、尿常规、肝功能（血清谷草转氨酶、血清谷丙转氨酶和总胆红素）、肾功能（血清肌酐和血尿素）、空腹血糖、血脂（总胆固醇、甘油三酯、低密度脂蛋白胆固醇、高密度脂蛋白胆固醇）、心电图和腹部B超（肝胆胰脾）检查。",ref:"《老年人健康管理服务规范（2026年）》二、（三）辅助检查",doc:7},
+ "胆红素":{t:"胆红素",d:"红细胞分解后的产物，由肝脏处理。总胆红素升高可能提示肝脏或胆道问题，也可能只是体质性黄疸。",q:"肝功能：丙氨酸氨基转移酶、天门冬氨酸氨基转移酶、总胆红素、直接胆红素、间接胆红素、总蛋白、白蛋白、球蛋白、γ-谷氨酰转肽酶、碱性磷酸酶",ref:"附件2·实验室检查—生化检查·肝功能",doc:3},
+ "白蛋白":{t:"白蛋白",d:"血液中含量最多的蛋白质，由肝脏合成，能反映营养状况和肝脏的合成功能。",q:"肝功能：丙氨酸氨基转移酶、天门冬氨酸氨基转移酶、总胆红素、直接胆红素、间接胆红素、总蛋白、白蛋白、球蛋白、γ-谷氨酰转肽酶、碱性磷酸酶",ref:"附件2·实验室检查—生化检查·肝功能",doc:3},
+ "碱性磷酸酶":{t:"碱性磷酸酶（ALP）",d:"主要来自肝脏和骨骼的酶。升高可能与胆道梗阻或骨骼代谢异常有关，需要结合其他检查判断。",q:"肝功能：丙氨酸氨基转移酶、天门冬氨酸氨基转移酶、总胆红素、直接胆红素、间接胆红素、总蛋白、白蛋白、球蛋白、γ-谷氨酰转肽酶、碱性磷酸酶",ref:"附件2·实验室检查—生化检查·肝功能",doc:3},
+ "电解质":{t:"电解质（钾、钠、氯、钙等）",d:"血液里的带电矿物质。它们负责心跳、肌肉收缩和神经传导，偏高或偏低都会引起心慌、乏力、意识改变。",q:"■ 认知功能障碍　优先推荐：简易精神状态检查量表、蒙特利尔认知评估量表、8条目痴呆筛查问卷、神经精神症状筛查、ApoE基因检测；可选项目：头颅MRI、红细胞沉降率、电解质、维生素B12、叶酸",ref:"附件3·认知功能障碍·可选项目",doc:4},
+ "甲状腺功能":{t:"甲状腺功能（甲功）",d:"检查甲状腺激素水平，判断甲状腺功能是“太活跃”还是“不够活跃”。甲状腺管全身代谢，异常会引起心慌、怕冷、体重变化、记性变差。",q:"实验室检查包括：常规检查、生化检查、甲状腺功能检查、分子检查和细胞学检查。常规检查包括血常规、尿常规、粪便常规+隐血试验；生化检查包括肝功能、肾功能、血脂、血糖、血尿酸、血同型半胱氨酸；甲状腺功能检查…",ref:"指引正文·（一）健康体检基本项目·实验室检查",doc:1},
+ "甲状腺激素":{t:"甲状腺激素（TSH、FT3、FT4）",d:"甲状腺分泌的激素。促甲状腺激素（TSH）是大脑给甲状腺下的“指令”，所以它最敏感，常用来初筛。",q:"…检查包括肝功能、肾功能、血脂、血糖、血尿酸、血同型半胱氨酸；甲状腺功能检查包括促甲状腺激素、游离甲状腺激素；分子检查主要是指高危型HPV核酸检测；细胞学检查主要是指子宫颈细胞学检查。…",ref:"指引正文·（一）健康体检基本项目·实验室检查",doc:1},
+ "超敏C反应蛋白":{t:"超敏C反应蛋白（hs-CRP）",d:"反映体内低水平炎症的指标，与心血管病风险相关。它升高不代表一定有心脏病，要结合其他指标一起看。",q:"…冠状动脉CTA、头颅CT/MRI、磁共振脑血管成像、睡眠呼吸监测、动态心电图、超敏C反应蛋白、肾动脉超声、血钾、血钠、血浆肾素浓度、血醛固酮、醛固酮/肾素浓度比值、24h尿钾、24h尿钠、24h尿醛固…",ref:"附件3·心血管疾病·可选项目",doc:4},
+ "血清胱抑素C":{t:"血清胱抑素C",d:"比肌酐更敏感的肾功能指标。肌肉量少的人（老年人、消瘦者）用肌酐会低估肾功能，这时胱抑素 C 更准。",q:"■ 慢性肾病　优先推荐：尿微量白蛋白/肌酐比值、血清胱抑素C；可选项目：肾小管功能检测（尿β2-微球蛋白、尿视黄醇结合蛋白、尿α1-微球蛋白、尿N-乙酰-β-葡萄糖苷酶）、24h尿蛋白定量",ref:"附件3·慢性肾病",doc:4},
+ "尿蛋白":{t:"尿蛋白 / 尿微量白蛋白",d:"正常尿液里几乎没有蛋白。出现蛋白往往提示肾脏滤过功能受损，是糖尿病、高血压伤肾的早期信号。",q:"■ 慢性肾病　优先推荐：尿微量白蛋白/肌酐比值、血清胱抑素C；可选项目：肾小管功能检测（尿β2-微球蛋白、尿视黄醇结合蛋白、尿α1-微球蛋白、尿N-乙酰-β-葡萄糖苷酶）、24h尿蛋白定量",ref:"附件3·慢性肾病",doc:4},
+ "隐血试验":{t:"粪便隐血试验",d:"检测大便里肉眼看不见的微量血液，用来筛查消化道出血和结直肠癌。阳性不等于癌症，但必须做肠镜查清原因。",q:"…查、甲状腺功能检查、分子检查和细胞学检查。常规检查包括血常规、尿常规、粪便常规+隐血试验；生化检查包括肝功能、肾功能、血脂、血糖、血尿酸、血同型半胱氨酸；甲状腺功能检查包括促甲状腺激素、游离甲状腺激素…",ref:"指引正文·（一）健康体检基本项目·实验室检查",doc:1},
+ "心电图":{t:"心电图",d:"在胸口和四肢贴电极，记录心脏的电活动。用来发现心律失常、心肌缺血、心肌梗死。无创，几分钟就能做完。",q:"辅助检查包括：心电图检查、放射检查、超声检查、人体成分分析。40岁以上人群，增加肺功能检查和骨密度检测。",ref:"指引正文·（一）健康体检基本项目·辅助检查",doc:1},
+ "超声":{t:"超声（B 超）",d:"用超声波给脏器成像，没有辐射。体检常用腹部超声（肝胆胰脾肾）、甲状腺超声、颈动脉超声等。",q:"辅助检查包括：心电图检查、放射检查、超声检查、人体成分分析。40岁以上人群，增加肺功能检查和骨密度检测。",ref:"指引正文·（一）健康体检基本项目·辅助检查",doc:1},
+ "骨密度":{t:"骨密度检测",d:"测量骨骼里的矿物质含量，用来诊断骨质疏松、预测骨折风险。绝经后女性和老年人尤其需要。",q:"辅助检查包括：心电图检查、放射检查、超声检查、人体成分分析。40岁以上人群，增加肺功能检查和骨密度检测。",ref:"指引正文·（一）健康体检基本项目·辅助检查",doc:1},
+ "眼底":{t:"眼底检查",d:"用眼底镜看视网膜和血管。眼底是唯一能直接看到血管的地方，能反映高血压、糖尿病对视网膜的损害。",q:"眼科：视力（裸眼/矫正视力）、眼压、眼附属器、眼前节、眼底检查",ref:"附件2·体格检查—物理检查·眼科",doc:3},
+ "眼压":{t:"眼压",d:"眼球内部的压力。眼压过高是青光眼的主要危险因素，而青光眼造成的视力损害不可逆，所以要早查。",q:"眼科：视力（裸眼/矫正视力）、眼压、眼附属器、眼前节、眼底检查",ref:"附件2·体格检查—物理检查·眼科",doc:3},
+ "体脂率":{t:"体脂率",d:"脂肪占体重的百分比。同样的体重，肌肉少、脂肪多的人代谢风险更高。",q:"人体成分分析：体脂率、肌肉脂肪分布情况",ref:"附件2·辅助检查·人体成分分析",doc:3},
+ "血钙":{t:"血钙",d:"血液里的钙浓度，与骨骼、甲状旁腺和维生素 D 有关。它和骨密度是两件事：血钙正常也可能骨质疏松。",q:"■ 骨质疏松　优先推荐：双能X线骨密度、定量CT；可选项目：血清骨代谢指标（I型前胶原氨基端前肽、I型胶原C端交联肽、抗酒石酸酸性磷酸酶、碱性磷酸酶等）、25羟基维生素D、甲状旁腺素、血钙、血磷、24h尿钙、24h尿钠、血清蛋白电泳",ref:"附件3·骨质疏松·可选项目",doc:4},
+ "血磷":{t:"血磷",d:"血液里的磷浓度，常与血钙一起看，异常可能提示肾脏或骨骼代谢问题。",q:"■ 骨质疏松　优先推荐：双能X线骨密度、定量CT；可选项目：血清骨代谢指标（I型前胶原氨基端前肽、I型胶原C端交联肽、抗酒石酸酸性磷酸酶、碱性磷酸酶等）、25羟基维生素D、甲状旁腺素、血钙、血磷、24h尿钙、24h尿钠、血清蛋白电泳",ref:"附件3·骨质疏松·可选项目",doc:4},
+ "乳酸脱氢酶":{t:"乳酸脱氢酶（LDH）",d:"存在于很多组织里的酶，组织受损时会升高。特异性不高，一般只作为辅助指标。",q:"■ 卵巢癌　优先推荐：阴道超声、糖类抗原125、人附睾蛋白4；可选项目：甲胎蛋白、人绒毛膜促性腺激素、神经元特异性烯醇化酶、乳酸脱氢酶、糖类抗原19-9、癌胚抗原",ref:"附件3·卵巢癌·可选项目",doc:4},
+ "肌酸激酶":{t:"肌酸激酶（CK）",d:"主要存在于肌肉里的酶。剧烈运动、肌肉损伤或心脏损伤时会升高。",q:"可选项目：肌酸激酶、肌酸激酶同工酶、载脂蛋白A1、载脂蛋白B、脂蛋白（a）、超敏C反应蛋白、冠状动脉CTA、踝肱指数、脉搏波传导速度、B型脑钠肽/N末端B型脑钠肽前体",ref:"附件3·冠心病·可选项目",doc:4},
+ "神经元特异性烯醇化酶":{t:"神经元特异性烯醇化酶（NSE）",d:"一种肿瘤标志物，小细胞肺癌时会升高。但它也会因为溶血等原因升高，不能用来确诊，也不适合普筛。",q:"■ 肺癌　优先推荐：胸部低剂量CT；可选项目：胃泌素释放肽前体、神经元特异性烯醇化酶、细胞角蛋白19片段、鳞状细胞癌抗原、肺癌相关自身抗体、异常糖链糖蛋白",ref:"附件3·肺癌·可选项目",doc:4},
+ "异常糖链糖蛋白":{t:"异常糖链糖蛋白（TAP）",d:"一种广谱的肿瘤相关标志物。国家指引只把它列为部分癌症的“可选项目”，不推荐用它给普通人筛癌。",q:"■ 肺癌　优先推荐：胸部低剂量CT；可选项目：胃泌素释放肽前体、神经元特异性烯醇化酶、细胞角蛋白19片段、鳞状细胞癌抗原、肺癌相关自身抗体、异常糖链糖蛋白",ref:"附件3·肺癌·可选项目",doc:4},
+ "普通白光内镜":{t:"普通白光内镜",d:"就是最常用的胃镜／肠镜，用白光直接观察黏膜。食管癌筛查首选它。",q:"■ 食管癌　优先推荐：普通白光内镜；可选项目：色素内镜，对于发现的可疑病灶可采用特殊内镜技术（窄带成像技术结合放大内镜、蓝激光成像放大内镜、激光共聚焦显微内镜、荧光内镜等）、胸部增强CT",ref:"附件3·食管癌·优先推荐",doc:4},
+ "放大内镜":{t:"放大内镜",d:"能把黏膜放大几十到上百倍的内镜，用来仔细观察可疑病灶的微血管和腺管形态，判断要不要取活检。",q:"■ 食管癌　优先推荐：普通白光内镜；可选项目：色素内镜，对于发现的可疑病灶可采用特殊内镜技术（窄带成像技术结合放大内镜、蓝激光成像放大内镜、激光共聚焦显微内镜、荧光内镜等）、胸部增强CT",ref:"附件3·食管癌·可选项目",doc:4},
+ "增强CT":{t:"增强CT",d:"先注射造影剂再做 CT，能更清楚地看病灶的血供和性质。需要评估肾功能，检查前一般要禁食。",q:"■ 肝癌　优先推荐：甲胎蛋白、甲胎蛋白异质体、异常凝血酶原；可选项目：癌胚抗原、糖类抗原19-9、肝脏增强CT或MRI、肝脏瞬时弹性成像、异常糖链糖蛋白",ref:"附件3·肝癌·可选项目",doc:4},
+ "磁共振":{t:"磁共振（MRI）",d:"利用磁场成像，没有电离辐射。看脑、脊髓、关节和软组织比 CT 更清楚。体内有金属植入物要提前告知医生。",q:"…比值、经颅多普勒、踝肱指数、脉搏波传导速度、冠状动脉CTA、头颅CT/MRI、磁共振脑血管成像、睡眠呼吸监测、动态心电图、超敏C反应蛋白、肾动脉超声、血钾、血钠、血浆肾素浓度、血醛固酮、醛固酮/肾素浓…",ref:"附件3·心血管疾病·可选项目",doc:4},
+ "冠状动脉CTA":{t:"冠状动脉CTA",d:"注射造影剂后用 CT 看冠状动脉有没有狭窄和斑块。适合中等风险人群进一步评估，不作为常规普筛。",q:"…项目：眼底照相、尿微量白蛋白/肌酐比值、经颅多普勒、踝肱指数、脉搏波传导速度、冠状动脉CTA、头颅CT/MRI、磁共振脑血管成像、睡眠呼吸监测、动态心电图、超敏C反应蛋白、肾动脉超声、血钾、血钠、血浆…",ref:"附件3·心血管疾病·可选项目",doc:4},
+ "磁共振脑血管成像":{t:"磁共振脑血管成像（MRA）",d:"用磁共振看脑部血管，不用造影剂也能大致看出血管狭窄、闭塞或动脉瘤。",q:"…比值、经颅多普勒、踝肱指数、脉搏波传导速度、冠状动脉CTA、头颅CT/MRI、磁共振脑血管成像、睡眠呼吸监测、动态心电图、超敏C反应蛋白、肾动脉超声、血钾、血钠、血浆肾素浓度、血醛固酮、醛固酮/肾素浓…",ref:"附件3·心血管疾病·可选项目",doc:4},
+ "前列腺特异性抗原":{t:"前列腺特异性抗原（PSA）",d:"前列腺产生的一种蛋白质。血里升高可能提示前列腺癌，也可能只是前列腺增生或炎症，所以必须和医生共同决策后再查，不能当成确诊指标。",q:"■ 前列腺癌　优先推荐：前列腺超声、总前列腺特异性抗原、游离前列腺特异性抗原、游离前列腺特异性抗原与总前列腺特异性抗原比值；可选项目：前列腺MRI",ref:"附件3·前列腺癌·优先推荐",doc:4},
+ "结肠癌":{t:"结肠癌",d:"大肠（结肠）的恶性肿瘤，多数由肠息肉慢慢演变而来，所以做肠镜切掉息肉就能起到预防作用。",q:"■ 结肠癌　优先推荐：结肠镜；可选项目：乙状结肠镜、结肠CT、多靶点粪便DNA检测",ref:"附件3·结肠癌",doc:4},
+ "肿瘤标志物":{t:"肿瘤标志物",d:"血液里与肿瘤相关的一类蛋白质等物质（如 CEA、CA19-9、CA125、AFP 等）。<b>它们不能用来给普通人筛癌</b>：正常人也可能升高，早期癌症又常常不升高，容易造成误判和过度检查。",ref:"本工具补充：多数肿瘤标志物在早期癌症并不升高、在良性疾病也会升高，因此国内外指南都不推荐用它给无症状普通人筛癌。"},
+ "甲状腺超声":{t:"甲状腺超声",d:"用超声看甲状腺结节的大小、形态和性质。不推荐给普通人群做普筛，只针对明确高危者——很多被查出的微小癌一辈子不会造成问题，反而带来焦虑和过度手术。",ref:"本工具补充：国家指引附件3 仅针对明确高危人群，不推荐对普通人群做甲状腺超声普筛。"},
+ "肝脏超声":{t:"肝脏超声",d:"用超声看肝脏形态、有无结节或脂肪肝。它是肝癌高风险人群（乙肝、丙肝、肝硬化等）的常规随访项目，通常每 6 个月做一次，配合甲胎蛋白。",ref:"本工具补充：国家指引附件3 中，肝癌高风险人群的优先推荐项目为「甲胎蛋白 + 肝脏超声」，通常每 6 个月一次。"},
+ "肾脏超声":{t:"肾脏超声",d:"用超声看肾脏的大小、形态，有没有结石、囊肿或积水。",ref:"本工具补充：通用医学常识解释，不属于某一份依据文件的原文术语。"},
+ "维生素D":{t:"维生素 D",d:"帮助肠道吸收钙。缺乏会导致骨量流失、肌力下降和容易跌倒。老年人普遍偏低，可以抽血查 25-羟基维生素 D。",q:"■ 骨质疏松　优先推荐：双能X线骨密度、定量CT；可选项目：血清骨代谢指标（I型前胶原氨基端前肽、I型胶原C端交联肽、抗酒石酸酸性磷酸酶、碱性磷酸酶等）、25羟基维生素D、甲状旁腺素、血钙、血磷、24h尿钙、24h尿钠、血清蛋白电泳",ref:"附件3·骨质疏松·可选项目",doc:4},
+ "活检":{t:"活检（活组织检查）",d:"取一小块组织送到病理科，在显微镜下看细胞形态。它是判断病变良恶性最可靠的方法。",q:"…）具备以下任意一项者：1.月经初潮年龄≤12岁；2.绝经年龄≥55岁；3.有乳腺活检史或乳腺良性疾病手术史，或病理证实的乳腺（小叶或导管）不典型增生病史；4.使用“雌孕激素联合”的激素替代治疗不少于半…",ref:"附件5·八、乳腺癌风险人群",doc:6},
+ "病理":{t:"病理（病理检查）",d:"把取下来的组织做成切片在显微镜下观察，给出“这是什么病、是不是癌”的最终判断。治疗方案常常要靠它定。",q:"…初潮年龄≤12岁；2.绝经年龄≥55岁；3.有乳腺活检史或乳腺良性疾病手术史，或病理证实的乳腺（小叶或导管）不典型增生病史；4.使用“雌孕激素联合”的激素替代治疗不少于半年；5.45岁后乳腺X线检查提…",ref:"附件5·八、乳腺癌风险人群",doc:6},
+ "息肉":{t:"息肉",d:"黏膜表面多长出来的一小块肉。胃息肉、肠息肉多数是良性的，但部分类型会慢慢变成癌，所以发现后常建议切除并按医生定的时间复查。",q:"（二）遗传性结直肠癌高风险人群：具有林奇综合征或患有家族性腺瘤性息肉病等的人群。",ref:"附件5·九、遗传性结直肠癌风险人群",doc:6},
+ "慢阻肺":{t:"慢阻肺（COPD）",d:"“慢性阻塞性肺疾病”的简称。长期吸烟或接触粉尘、柴草烟的人容易得，表现为长期咳嗽、咳痰、活动后气短，肺功能会逐渐下降且不可逆。",q:"7.您的父母、子女以及兄弟姐妹是否有人患支气管哮喘、慢性支气管炎、肺气肿或慢阻肺：是（3）／否（0）",ref:"附件5·七、慢性阻塞性肺疾病风险人群",doc:6},
+ "中风":{t:"中风（脑卒中）",d:"脑血管突然堵住（脑梗死）或破裂（脑出血），会出现口角歪斜、说话不清、半身无力。这是急症，要立刻拨打 120 送医。",ref:"本工具补充：“脑卒中”的俗称，指脑血管突然堵塞或破裂。"},
+ "慢性肾病":{t:"慢性肾病（CKD）",d:"肾脏功能或结构长期受损（一般超过 3 个月）。早期几乎没有症状，靠尿蛋白和肾功能指标发现。糖尿病和高血压是主要病因。",q:"■ 慢性肾病　优先推荐：尿微量白蛋白/肌酐比值、血清胱抑素C；可选项目：肾小管功能检测（尿β2-微球蛋白、尿视黄醇结合蛋白、尿α1-微球蛋白、尿N-乙酰-β-葡萄糖苷酶）、24h尿蛋白定量",ref:"附件3·慢性肾病",doc:4},
+ "2型糖尿病":{t:"2 型糖尿病",d:"最常见的一类糖尿病，与遗传、肥胖、久坐和年龄有关。早期常没有症状，靠空腹血糖、餐后血糖和糖化血红蛋白发现。",q:"■ 2型糖尿病　优先推荐：口服葡萄糖耐量试验；可选项目：眼底照相、尿微量白蛋白/肌酐比值、糖化白蛋白、颈动脉超声、下肢动脉超声、超声心动图、经颅多普勒、踝肱指数、脉搏波传导速度、冠状动脉CTA、头颅CT/MRI、磁共振脑血管成像、脂联素",ref:"附件3·2型糖尿病",doc:4},
+ "肺气肿":{t:"肺气肿",d:"肺泡壁被破坏、肺里残气增多，导致气短。多与长期吸烟或慢阻肺有关。",q:"7.您的父母、子女以及兄弟姐妹是否有人患支气管哮喘、慢性支气管炎、肺气肿或慢阻肺：是（3）／否（0）",ref:"附件5·七、慢性阻塞性肺疾病风险人群",doc:6},
+ "贫血":{t:"贫血",d:"血液里红细胞或血红蛋白低于正常。老年人贫血一定要查原因（消化道出血、营养不良、慢性病等），不能只补铁了事。",q:"（五）患有慢性萎缩性胃炎、胃溃疡、胃息肉、手术后残胃、肥厚性胃炎、恶性贫血等疾病。",ref:"附件5·一、胃癌风险人群",doc:6},
+ "便秘":{t:"便秘",d:"排便次数减少、粪便干硬或排便费力。老年人常见，与饮水少、活动少、膳食纤维不足和部分药物有关。",q:"· 老年综合征（衰弱、肌少症、营养不良、多重用药、尿失禁、便秘、睡眠、疼痛、吞咽、跌倒等）",ref:"WS/T 888-2026·老年综合征（公开摘述）",doc:9},
+ "营养不良":{t:"营养不良",d:"能量或蛋白质摄入不足，或吸收利用障碍。老人常表现为体重下降、肌肉减少、伤口愈合慢、容易感染。",q:"· 老年综合征（衰弱、肌少症、营养不良、多重用药、尿失禁、便秘、睡眠、疼痛、吞咽、跌倒等）",ref:"WS/T 888-2026·老年综合征（公开摘述）",doc:9},
+ "老年综合征":{t:"老年综合征",d:"老年人特有的一组问题，如衰弱、肌少症、跌倒、尿失禁、便秘、睡眠障碍、疼痛、吞咽困难和多重用药。它们互相影响，需要综合评估，而不是一个一个科室分开治。",q:"适用于各级医疗机构。规定了老年综合评估的评估原则、对象、内容和方法（包括躯体功能、精神心理、社会与环境、老年综合征等），并明确了评估流程和质量控制要求。",ref:"WS/T 888-2026·适用范围与内容（公开摘述）",doc:9},
+ "认知功能障碍":{t:"认知功能障碍",d:"记忆力、注意力、语言和判断力下降。轻的称认知障碍，严重到影响日常生活就是痴呆。早期发现可以干预，所以建议定期筛查。",q:"■ 认知功能障碍　优先推荐：简易精神状态检查量表、蒙特利尔认知评估量表、8条目痴呆筛查问卷、神经精神症状筛查、ApoE基因检测；可选项目：头颅MRI、红细胞沉降率、电解质、维生素B12、叶酸",ref:"附件3·认知功能障碍",doc:4},
+ "失能":{t:"失能 / 失能预防",d:"因为身体或认知原因，日常生活（吃饭、穿衣、洗澡、走动、管钱吃药）需要别人帮助。WS/T 878-2026《老年人失能预防服务标准》专门讲怎么预防和延缓。",q:"WS/T 878-2026　老年人失能预防服务标准",ref:"国卫通〔2026〕2号·标准编号与名称",doc:8},
+ "慢性疼痛":{t:"慢性疼痛",d:"持续或反复超过 3 个月的疼痛。老年人常见，会影响睡眠、情绪和活动能力，也是可以治疗的，不必强忍着。",ref:"本工具补充：通用医学常识解释，不属于某一份依据文件的原文术语。"},
+ "吞咽功能":{t:"吞咽功能",d:"把食物和水安全送进食管的能力。老人吞咽功能下降容易呛咳，食物误入气管会引起吸入性肺炎，需要评估和训练。",q:"· 老年综合征（衰弱、肌少症、营养不良、多重用药、尿失禁、便秘、睡眠、疼痛、吞咽、跌倒等）",ref:"WS/T 888-2026·老年综合征（公开摘述）",doc:9},
+ "呛咳":{t:"呛咳",d:"喝水或吃饭时突然剧烈咳嗽，说明可能有少量食物或水误入气管。反复发生要检查吞咽功能。老年人呛咳后容易发生肺炎，要重视。",ref:"本工具补充：通用医学常识解释，不属于某一份依据文件的原文术语。"},
+ "跌倒":{t:"跌倒 / 跌倒风险",d:"老人跌倒常导致骨折、卧床，进而失能。跌倒史、走路不稳、担心跌倒、用药多、视力差都是危险因素，而它们是可以干预的。",q:"4.进行健康生活方式以及疫苗接种、骨质疏松预防、防跌倒措施、意外伤害预防和自救、认知和情感等健康指导。",ref:"《老年人健康管理服务规范（2026年）》二、（四）健康指导",doc:7},
+ "步速":{t:"步速（4 米步速）",d:"走 4 米用的时间。它是衡量老人整体身体功能的简单指标：越慢，提示衰弱、跌倒和失能的风险越高。",q:"■ 本工具据此设计的评估项：跌倒史、走路是否稳、是否担心跌倒、4米步速／计时起立行走（TUG），并给出低／中／高三级风险提示。",ref:"WS/T 887-2026·公开摘述",doc:10},
+ "家族史":{t:"家族史",d:"父母、子女、亲兄弟姐妹（一级亲属）和祖父母、叔伯姑舅姨等（二级亲属）得过什么病。某些癌症有明显遗传倾向，家族史会影响筛查从几岁开始、查什么。",q:"（一）健康体检自测问卷（附件1）。引导受检者如实填写健康体检自测问卷，了解受检者基本健康状况，对疾病风险进行初步评估，合理设置体检项目。健康体检自测问卷包括：个人基本信息、既往史及家族史、生活方式信息和心理健康状况等。",ref:"指引正文·（一）健康体检基本项目·健康体检自测问卷",doc:1},
+ "高发地区":{t:"高发地区（胃癌／食管癌）",d:"某些县市的胃癌或食管癌发病率明显高于全国平均。官方以县级行政区为单位、按年龄标化发病率界定（胃癌 >20/10 万、食管癌 >15/10 万）。长期居住在这些地区，筛查起始年龄会更早。",q:"（一）居住于胃癌高发地区（以县级行政区为单位界定，以2000年中国人口结构为标准的年龄标化发病率>20/10万）；",ref:"附件5·一、胃癌风险人群",doc:6},
+ "标化发病率":{t:"标化发病率",d:"为了能公平比较不同年龄结构地区之间的发病率，先按统一的人口结构（中国 2000 年人口）加权算出的率。不这样做，老年人多的地区数字会虚高。",q:"（一）居住于胃癌高发地区（以县级行政区为单位界定，以2000年中国人口结构为标准的年龄标化发病率>20/10万）；",ref:"附件5·一、胃癌风险人群",doc:6},
+ "高危人群":{t:"高危人群 / 高风险人群",d:"因为年龄、家族史、既往疾病或生活习惯等原因，得某种病的概率明显高于普通人的人群。指南只建议对这类人做针对性筛查，而不是让所有人都查。",q:"肝癌高危人群主要包括：具有乙型肝炎病毒和/或丙型肝炎病毒感染、过度饮酒、肝脂肪变性或代谢功能障碍相关性肝病、饮食中黄曲霉毒素B1的暴露、其他各种原因引起的肝硬化及有肝癌家族史等人群，尤其年龄＞40岁的男性。",ref:"附件5·三、肝癌风险人群",doc:6},
+ "风险分层":{t:"风险分层",d:"先把人群按风险高低分成几档，再决定谁需要查、查什么、隔多久查一次。目的是既不漏掉高风险的人，也不让低风险的人白做检查、白担心。",ref:"本工具补充：把人群按风险高低分档，再决定谁查、查什么、多久查一次，是国家指引附件5 的基本思路。"},
+ "早诊早治":{t:"早诊早治",d:"在癌症还没出现症状、还处于早期时就发现并治疗，治愈率和生存质量都远高于晚期发现。这正是做筛查的目的。",q:"（三）慢性病风险筛查项目（附件3）。在基本体检项目的基础上，结合健康体检自测问卷，对存在心脑血管疾病、常见恶性肿瘤、慢性呼吸系统疾病、糖尿病等疾病风险的人群，根据相应慢性病筛查与早诊早治方案等，增加个性化深度检查项目。",ref:"指引正文·（三）慢性病风险筛查项目",doc:1},
+ "预期寿命":{t:"预期寿命",d:"根据年龄和健康状况估计还能存活多少年。国际共识认为：预期寿命不足 10 年的老人，做癌症筛查的获益很小、负担却很大，一般不建议再做。",ref:"本工具补充：国际老年预防筛查共识（如 USPSTF）主张以预期寿命不足 10 年作为停止癌症筛查的参考。"},
+ "基因检测":{t:"基因检测",d:"抽血或取组织检测 DNA，看有没有与疾病相关的变异。癌症相关的基因检测必须在医生和遗传咨询指导下做，因为结果会影响到子女等全家人的筛查安排。",q:"■ 乳腺癌　优先推荐：乳腺X线检查；可选项目：乳腺MRI、乳腺热层析成像、BRCA基因检测、异常糖链糖蛋白",ref:"附件3·乳腺癌·可选项目",doc:4},
+ "遗传咨询":{t:"遗传咨询",d:"由专业人员评估家族史、解释基因检测结果、说明对本人和亲属意味着什么，并给出随访建议。做基因检测前后都应该有这一步。",ref:"本工具补充：国家指引附件3 在乳腺癌条目中把「BRCA 基因检测」列为可选项目并要求由专科评估，本项目建议配合遗传咨询。"},
+ "致病突变":{t:"致病突变（胚系突变）",d:"从父母那里遗传来的、会显著增加患病风险的基因变异。携带者本人和子女都可能遗传，需要专科长期随访，必要时提前开始筛查。",ref:"本工具补充：通用医学常识解释，不属于某一份依据文件的原文术语。"},
+ "用药核查":{t:"用药核查",d:"医生或药师把您吃的所有西药、中药和保健品列在一起，逐一检查有没有重复用药、相互作用，或者对老年人不合适的药，然后把方案精简。",ref:"本工具补充：国家指引附件5 将「长期接受抗精神病药物或抗抑郁症药物治疗」「类固醇类药物使用史」列为风险条件；WS/T 888-2026 把多重用药列为老年综合征之一。"},
+ "双向转诊":{t:"双向转诊",d:"基层医院发现复杂问题转到上级医院，上级医院确诊、病情稳定后再转回基层继续管理，两边共享信息，避免重复检查。",q:"…视力干预、认知训练、抑郁干预、中医适宜技术等），并要求与有诊断资质的医疗机构建立双向转诊绿色通道。…",ref:"WS/T 875-2026·公开摘述",doc:11},
+ "中医适宜技术":{t:"中医适宜技术",d:"安全、简便、成本较低的中医外治方法，如针灸、推拿、艾灸、穴位贴敷等，常用于缓解疼痛、改善睡眠和情绪。",q:"…益智活动等）和认知障碍干预（每6个月随访，包括听力视力干预、认知训练、抑郁干预、中医适宜技术等），并要求与有诊断资质的医疗机构建立双向转诊绿色通道。…",ref:"WS/T 875-2026·公开摘述",doc:11},
+ "功能评估":{t:"功能评估",d:"评估老人自己完成日常生活的能力，以及体力、平衡、认知、营养、情绪等，用来发现“还没生病但已经在退化”的状态，好及早干预。",q:"适用于基层医疗卫生机构、健康管理机构和医养结合机构。规定了失能预防的服务要求、服务内容（功能评估、健康教育、慢性病管理、身体活动指导、营养指导、视力听力维护、肌肉骨骼疾病防控、衰弱防控、跌倒预防等）及评价改进。",ref:"WS/T 878-2026·公开摘述",doc:12},
+ "居家环境":{t:"居家环境（居家环境改善）",d:"家里的地面、照明、扶手、台阶、卫生间等条件。加装扶手、防滑垫、夜灯，把电线收好，能明显减少老人跌倒。",q:"· 社会与环境（社会支持、居家环境）",ref:"WS/T 888-2026·社会与环境（公开摘述）",doc:9},
+ "疫苗":{t:"疫苗接种",d:"通过打疫苗预防感染性疾病。老年人一般建议接种流感疫苗、肺炎球菌疫苗、带状疱疹疫苗等，具体按当地疾控和医生建议。",q:"4.进行健康生活方式以及疫苗接种、骨质疏松预防、防跌倒措施、意外伤害预防和自救、认知和情感等健康指导。",ref:"《老年人健康管理服务规范（2026年）》二、（四）健康指导",doc:7},
+ "肠道准备":{t:"肠道准备",d:"做肠镜前要按医嘱喝清肠药，把大肠里的粪便排干净。肠子不干净会看不清楚、漏掉息肉，检查就白做了。通常要提前 1 天控制饮食并按时服药。",ref:"本工具补充：通用医学常识解释，不属于某一份依据文件的原文术语。"},
+ "他汀类":{t:"他汀类药物",d:"降低胆固醇、稳定血管斑块的药物，是预防心梗和脑卒中的常用药。是否需要吃、吃哪一种，由医生按您的整体风险决定，不要自行停药。",ref:"本工具补充：通用医学常识解释，不属于某一份依据文件的原文术语。"},
+ "降压药":{t:"降压药",d:"降低血压的药物，需要长期规律服用。不能因为血压量着正常就自行停药——血压正常恰恰说明药在起作用。",ref:"本工具补充：通用医学常识解释，不属于某一份依据文件的原文术语。"},
+ "调脂药":{t:"调脂药",d:"调节血脂的药物（包括他汀等）。用于降低胆固醇或甘油三酯，减少心脑血管事件。",q:"…白胆固醇<0.90mmol/L和（或）甘油三酯>2.22mmol/L，或正在接受调脂药治疗者；（十一）有动脉粥样硬化性心血管疾病史；（十二）有代谢相关脂肪性肝病者；（十三）有胰腺炎病史；（十四）接受抗…",ref:"附件5·二、糖尿病风险人群",doc:6},
+ "降糖药":{t:"降糖药",d:"降低血糖的药物，包括口服药和胰岛素。用哪一种取决于糖尿病类型、血糖水平和肾功能。",ref:"本工具补充：通用医学常识解释，不属于某一份依据文件的原文术语。"},
+ "激素替代治疗":{t:"激素替代治疗（HRT）",d:"补充雌激素或孕激素，用来缓解绝经症状、预防骨质疏松。使用“雌孕激素联合”方案半年以上会略微增加乳腺癌风险，需要和医生一起权衡。",q:"…手术史，或病理证实的乳腺（小叶或导管）不典型增生病史；4.使用“雌孕激素联合”的激素替代治疗不少于半年；5.45岁后乳腺X线检查提示乳腺实质(或乳房密度)类型为不均匀致密型或致密型。…",ref:"附件5·八、乳腺癌风险人群",doc:6},
+ "类固醇":{t:"类固醇类药物（糖皮质激素）",d:"如泼尼松等，用于抗炎和免疫抑制。长期使用会引起血糖升高、骨质疏松、容易感染，所以要定期评估能不能减量。",q:"…肪性肝病者；（十三）有胰腺炎病史；（十四）接受抗病毒治疗的艾滋病患者；（十五）有类固醇类药物使用史；（十六）长期接受抗精神病药物或抗抑郁症药物治疗；（十七）中国糖尿病风险评分总分≥25分。…",ref:"附件5·二、糖尿病风险人群",doc:6},
+ "抗精神病药":{t:"抗精神病药 / 抗抑郁药",d:"治疗精神疾病的药物。部分药物会引起体重增加、血糖升高，并增加跌倒风险，老年人需要定期评估是否还适合继续用。",q:"…十四）接受抗病毒治疗的艾滋病患者；（十五）有类固醇类药物使用史；（十六）长期接受抗精神病药物或抗抑郁症药物治疗；（十七）中国糖尿病风险评分总分≥25分。…",ref:"附件5·二、糖尿病风险人群",doc:6},
+ "乙肝":{t:"乙肝（乙型肝炎）",d:"乙型肝炎病毒感染。慢性乙肝是肝硬化和肝癌最主要的危险因素，需要定期查肝功能和甲胎蛋白，并做肝脏超声随访。",q:"肝癌高危人群主要包括：具有乙型肝炎病毒和/或丙型肝炎病毒感染、过度饮酒、肝脂肪变性或代谢功能障碍相关性肝病、饮食中黄曲霉毒素B1的暴露、其他各种原因引起的肝硬化及有肝癌家族史等人群，尤其年龄＞40岁的男性。",ref:"附件5·三、肝癌风险人群",doc:6},
+ "丙肝":{t:"丙肝（丙型肝炎）",d:"丙型肝炎病毒感染。现在已有可以治愈的口服药，治愈后肝癌风险明显下降，建议查出后尽快到专科治疗。",q:"肝癌高危人群主要包括：具有乙型肝炎病毒和/或丙型肝炎病毒感染、过度饮酒、肝脂肪变性或代谢功能障碍相关性肝病、饮食中黄曲霉毒素B1的暴露、其他各种原因引起的肝硬化及有肝癌家族史等人群，尤其年龄＞40岁的男性。",ref:"附件5·三、肝癌风险人群",doc:6},
+ "淋巴结":{t:"淋巴结（浅表淋巴结）",d:"身体各处像“过滤器”一样的小结。感染时会肿大、疼痛；如果无痛、质地硬、还在逐渐变大，就需要查清原因。",q:"外科：皮肤、浅表淋巴结、头颈、甲状腺、乳腺（女性）、脊柱、四肢、关节、肛诊、外生殖器（男性）",ref:"附件2·体格检查—物理检查·外科",doc:3}
+};
+for(var _gk3 in GLOSSARY_MORE3){ GLOSSARY[_gk3]=GLOSSARY_MORE3[_gk3]; }
 TERMS = Object.keys(GLOSSARY).sort(function(a,b){ return b.length-a.length; });
 TERM_FIRST={};
 for(var _ti2=0;_ti2<TERMS.length;_ti2++){ var _t2=TERMS[_ti2].charAt(0); (TERM_FIRST[_t2]=TERM_FIRST[_t2]||[]).push(TERMS[_ti2]); }
@@ -1529,11 +1857,36 @@ function showTerm(k){
   if(refTxt) s+='<div class="tmref"><b>依据来源</b>'+esc(refTxt)+'</div>';
   if(g.doc){ var dd=DOCS[g.doc-1]; if(dd) s+='<button type="button" class="tmlink" onclick="hideTerm();openDoc('+g.doc+')">查看该文件原文 →</button>'; }
   else s+='<p style="color:var(--muted);font-size:calc(var(--fs) - 5px)">本项为原文件未列、由本工具依据其他公开依据补充。</p>';
+  s+='<div class="tmfoot"><button type="button" onclick="hideTerm()">✕ 看完了，关闭</button></div>';
   document.getElementById("tmtitle").textContent=g.t||k;
   document.getElementById("tmbd").innerHTML=s;
   document.getElementById("tm").classList.remove("hide");
 }
 function hideTerm(){ document.getElementById("tm").classList.add("hide"); }
+/* 轻提示：给「切换字号」「生成长图」这类操作一个明确反馈 */
+var _toastT=null;
+function toast(html,ms){
+  var t=document.getElementById("toast"); if(!t) return;
+  t.innerHTML=html; t.classList.remove("hide");
+  if(_toastT) clearTimeout(_toastT);
+  _toastT=setTimeout(function(){ t.classList.add("hide"); }, ms||4200);
+}
+/* 结果页目录：跳转时避开吸顶的页头 */
+function jumpSec(id){
+  var el=document.getElementById(id); if(!el) return;
+  var hd=document.querySelector("header");
+  var off=(hd?hd.offsetHeight:0)+12;
+  var top=el.getBoundingClientRect().top+(window.pageYOffset||document.documentElement.scrollTop||0)-off;
+  if(top<0) top=0;
+  try{ window.scrollTo({top:top,behavior:"smooth"}); }catch(e){ window.scrollTo(0,top); }
+}
+/* Esc 关闭弹窗（术语解释 / 长图预览） */
+document.addEventListener("keydown",function(ev){
+  if(ev.key!=="Escape"&&ev.keyCode!==27) return;
+  var tm=document.getElementById("tm"), ov=document.getElementById("ov");
+  if(tm && !tm.classList.contains("hide")){ hideTerm(); return; }
+  if(ov && !ov.classList.contains("hide")) closeOv();
+});
 function openDoc(n){
   setView("docs");
   var d=document.getElementById("doc-"+n);
@@ -2205,6 +2558,7 @@ function saveImage(mode){
     img.src=url; img.dataset.name="体检项目参考"+(mode==="brief"?"_精简版":"_完整版")+"_"+stamp+".png";
     var t=document.getElementById("ovt"); if(t) t.textContent=(mode==="brief"?"精简版长图（只含项目清单）":"完整版长图（含推荐理由与老年评估）");
     document.getElementById("ov").classList.remove("hide");
+    toast("✅ 长图已生成！<b>手机上长按图片</b>即可保存到相册；电脑上点「⬇ 下载图片到相册」。", 6000);
   }catch(e){ alert("生成图片失败："+e.message); }
 }
 function closeOv(){ document.getElementById("ov").classList.add("hide"); }
@@ -2241,6 +2595,7 @@ function heroHtml(){
   + '</div>'
   + '<p class="qerr hide" id="whoerr">还没有选择。请先点上面两个方框中的一个（「我自己填」或「帮家人填」），再点右下角的按钮。</p>'
   + '<div class="legend">💡 页面中<b>带黄色底纹的词</b>可以点击，查看<b>通俗解释</b>与<b>依据来源</b>　例：<span class="term">糖尿病</span> <span class="term">包年</span> <span class="term">林奇综合征</span></div>'
+  + '<p class="hint fshint">🔍 <b>字小看不清？</b>点右上角的 <b>字号 A+</b> 可以把整页字放大（A / A+ / A++ 三档，会记住）。</p>'
   + '<div class="srcbox"><h3>📚 本工具依据以下 '+SOURCES.length+' 份公开文件设计</h3><ol>'+srcList+'</ol><div class="citenote">'+CITE_NOTE_HTML+'</div>'
   + '<p style="text-align:center;margin:16px 0 0"><button type="button" class="openrd" onclick="openReader()">📖 看原文与下载</button></p></div>'
   + '<div class="note" style="margin-top:20px;text-align:left"><b>🔒 隐私与免责</b>全部计算在本机完成，不采集姓名、电话、证件号，不上传任何信息。'+HOST_LINE+'本工具给出的是<b>体检项目参考</b>，不是诊断，请与医生一起确认。</div>'
@@ -2436,9 +2791,10 @@ document.querySelectorAll(".fsbtn button").forEach(function(b){
   b.addEventListener("click",function(){
     var i=parseInt(b.dataset.fs,10);
     document.documentElement.style.setProperty("--fs",FS[i]+"px");
-    document.querySelectorAll(".fsbtn button").forEach(function(x){x.classList.remove("on");});
-    b.classList.add("on");
+    document.querySelectorAll(".fsbtn button").forEach(function(x){x.classList.remove("on"); x.setAttribute("aria-pressed","false");});
+    b.classList.add("on"); b.setAttribute("aria-pressed","true");
     try{ localStorage.setItem("tj_fs",String(i)); }catch(e){}
+    toast("🔍 已切换为 <b>"+FS_NAME[i]+"</b>（"+FS[i]+"px）。整页文字都会跟着变大，这个选择会记住，下次打开还是这么大。");
   });
 });
 function save(){ try{ localStorage.setItem("tj_ans",JSON.stringify(A)); }catch(e){} }
@@ -2474,7 +2830,7 @@ try{
   var raw=localStorage.getItem("tj_ans"); if(raw) A=JSON.parse(raw)||{};
   var f=localStorage.getItem("tj_fs"); if(f){ var fi=parseInt(f,10);
     document.documentElement.style.setProperty("--fs",FS[fi]+"px");
-    document.querySelectorAll(".fsbtn button").forEach(function(x,i){ x.classList.toggle("on", i===fi); }); }
+    document.querySelectorAll(".fsbtn button").forEach(function(x,i){ x.classList.toggle("on", i===fi); x.setAttribute("aria-pressed", i===fi?"true":"false"); }); }
 }catch(e){}
 render();
 /*==DOCPAYLOAD_START==*/
